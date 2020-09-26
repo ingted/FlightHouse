@@ -11,7 +11,7 @@ For the Fsi use case, I did some change to P2PNET to make it work fine with Fsi 
 
 # Auto recover
 
-Every node crashed would easily to rejoin with the welcome message. You can kill each process of each nodes and restart the program to see they found out each other and auto join again.
+Every node crashed would easily rejoin with the welcome message. You can kill each process of each nodes and restart the program to see they found out each other and auto join again.
 
 # Support
 
