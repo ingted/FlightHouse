@@ -1,0 +1,407 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Petabridge.Cmd.Host</name>
+    </assembly>
+    <members>
+        <member name="T:Petabridge.Cmd.Host.AkkaCmdController">
+            <summary>
+                INTERNAL API.
+                Manages the connection to a single client
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.AkkaCmdController.GetEndpoint">
+            <summary>
+                INTERNAL API.
+                Used to get the client's IP address.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.AkkaCmdListener">
+            <summary>
+                INTERNAL API
+                The actor used to process the inbound socket connections with an petabridge.cmd.Client
+                via Akka.IO.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.CommandHandlerActor">
+            <summary>
+                Convenience class for creating actors who handle <see cref="T:Petabridge.Cmd.Command" />s sent from a Petabridge.Cmd client.
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Host.CommandHandlerActor.Commands">
+            <summary>
+                The set of commands supported by this actor
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Host.CommandHandlerActor.Validator">
+            <summary>
+                Validates <see cref="T:Petabridge.Cmd.Command" /> input against the rules defined in <see cref="F:Petabridge.Cmd.Host.CommandHandlerActor.Commands" />.
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.Host.CommandHandlerActor.Process(System.String,System.Action{Petabridge.Cmd.Command})">
+            <summary>
+                Handles a <see cref="T:Petabridge.Cmd.Command" /> with the provided name and handler.
+                Executes command validation and fault-checking automatically.
+            </summary>
+            <param name="commandName">The name of the <see cref="T:Petabridge.Cmd.Command" /> that will be processed.</param>
+            <param name="handler">The handler for processing this command, provided that the <see cref="T:Petabridge.Cmd.Command" /> is valid.</param>
+        </member>
+        <member name="M:Petabridge.Cmd.Host.CommandHandlerActor.Process(System.String,System.Action{Petabridge.Cmd.Command,Petabridge.Cmd.Common.ParsedArguments})">
+            <summary>
+                Handles a <see cref="T:Petabridge.Cmd.Command" /> with the provided name and handler.
+                Executes command validation and fault-checking automatically.
+            </summary>
+            <param name="commandName">The name of the <see cref="T:Petabridge.Cmd.Command" /> that will be processed.</param>
+            <param name="handler">The handler for processing this command, provided that the <see cref="T:Petabridge.Cmd.Command" /> is valid.</param>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.CommandPaletteHandler">
+            <summary>
+                Used to register a <see cref="T:Petabridge.Cmd.CommandPalette" /> with a given <see cref="T:Akka.Actor.IActorRef" />.
+                Any <see cref="T:Petabridge.Cmd.Command" /> objects that are received by this host which are defined inside
+                <see cref="P:Petabridge.Cmd.Host.CommandPaletteHandler.Palette" /> will be routed to actor created via <see cref="P:Petabridge.Cmd.Host.CommandPaletteHandler.HandlerProps" />.
+                Any commands defined inside a different <see cref="T:Petabridge.Cmd.CommandPalette" /> will be routed to the appropriate
+                <see cref="T:Petabridge.Cmd.Host.CommandPaletteHandler" /> by the petabridge.cmd.Host.
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Host.CommandPaletteHandler.Palette">
+            <summary>
+                The set of defined commands handled by <see cref="P:Petabridge.Cmd.Host.CommandPaletteHandler.HandlerProps" />
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Host.CommandPaletteHandler.HandlerProps">
+            <summary>
+                The <see cref="T:Akka.Actor.Props" /> of the actor who will handle the messages.
+            </summary>
+            <remarks>
+                One instance of the <see cref="P:Petabridge.Cmd.Host.CommandPaletteHandler.HandlerProps" /> actor will be created per-connection.
+                The actor will be terminated when that connection is closed.
+            </remarks>
+        </member>
+        <member name="M:Petabridge.Cmd.Host.CommandPaletteHandler.OnRegister(Petabridge.Cmd.Host.PetabridgeCmd)">
+            <summary>
+                Called when registered by the <see cref="T:Petabridge.Cmd.Host.PetabridgeCmd" /> plugin.
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.Host.Configuration.DefaultPetabridgeCmdConfig.Default">
+            <summary>
+                Retrieves the default remote options that Akka.NET uses when no configuration has been defined.
+            </summary>
+            <returns>The configuration that contains default values for all remote options.</returns>
+        </member>
+        <member name="M:Petabridge.Cmd.Host.Configuration.DefaultPetabridgeCmdConfig.FromResource(System.String)">
+            <summary>
+                Retrieves a configuration defined in a resource of the current executing assembly.
+            </summary>
+            <param name="resourceName">The name of the resource that contains the configuration.</param>
+            <returns>The configuration defined in the current executing assembly.</returns>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Actor.ActorCmd">
+            <summary>
+                INTERNAL API
+                Provides all of the <see cref="T:Petabridge.Cmd.CommandDefinition" />s for the commands used for querying
+                individual actors or retrieving information about an existing actor hierarchy
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Actor.ActorCmdMsgs">
+            <summary>
+                INTERNAL API.
+                Defines all of the messages used for fulfiling <see cref="F:Petabridge.Cmd.Host.Default.Actor.ActorCmd.ActorCommands" />
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Actor.ActorCmdMsgs.StartTrace">
+            <summary>
+                Message used to launch a trace of an <see cref="T:Akka.Actor.ActorSystem" />
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Actor.ActorCommandPaletteHandler">
+            <summary>
+                INTERNAL API.
+                Used to register <see cref="F:Petabridge.Cmd.Host.Default.Actor.ActorCmd.ActorCommands" /> with <see cref="T:Petabridge.Cmd.Host.PetabridgeCmd" />.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Actor.ActorCommandRequestHandler">
+            <summary>
+                INTERNAL API
+                Used to process the <see cref="T:Petabridge.Cmd.Host.Default.Actor.ActorCmdMsgs" /> and produce <see cref="T:Petabridge.Cmd.CommandResponse" />s
+                for the downstream client.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Actor.ActorCommandRouter">
+            <summary>
+                INTERNAL API.
+                Used to execute <see cref="F:Petabridge.Cmd.Host.Default.Actor.ActorCmd.ActorCommands" />
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Host.Default.Actor.ActorCommandRouter.DefaultDepth">
+            <summary>
+                The default depth used if none are provided for actor hierarchy traces
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Actor.ActorGraphNode">
+            <summary>
+                Tree node for representing the actor hierarchy
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Host.Default.Actor.ActorGraphNode.Name">
+            <summary>
+                The name of the current node.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Actor.ActorTracer">
+            <summary>
+                INTERNAL API.
+                Actor responsible for tracing an actor hierarchy up to a configurable level of depth.
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Host.Default.Actor.ActorTracer.DefaultDepth">
+            <summary>
+                The default depth used in traversing an actor hierarchy
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Host.Default.Actor.ActorTracer.DefaultRootActorPath">
+            <summary>
+                The default root actor path.
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Host.Default.Actor.ActorTracer.TraversalTime">
+            <summary>
+                Indicates how long we should wait for replies at a particular stage before moving onto the next
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Actor.ActorTracer.RootTrace">
+            <summary>
+                Special case for starting the first trace.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Actor.ActorTracer.IncreaseTime">
+            <summary>
+                Used to increase the receive timeout time
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Actor.ActorTracer.EmptyTrace">
+            <summary>
+                Special case pattern. Used to indicate that the starting node did not exist, therefore
+                this trace could never be completed.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Connectivity.ConnectivityCmd">
+            <summary>
+                INTERNAL API.
+                Defines the <see cref="T:Petabridge.Cmd.CommandPalette" /> used for getting IP address information about the client
+                and uptime information about the host.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Connectivity.ConnectivityCmdMsgs">
+            <summary>
+                INTERNAL API.
+                Defines all of the messages used for fulfilling <see cref="F:Petabridge.Cmd.Host.Default.Connectivity.ConnectivityCmd.ConnectivityCommands" />.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Connectivity.ConnectivityCmdMsgs.WhatIsMyIp">
+            <summary>
+                Get the IP address of the currently connected client.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Connectivity.ConnectivityCmdMsgs.GetUptime">
+            <summary>
+                Get the current system uptime.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Connectivity.ConnectivityCommandHandler">
+            <summary>
+                INTERNAL API
+                Used to add all of the <see cref="F:Petabridge.Cmd.Host.Default.Connectivity.ConnectivityCmd.ConnectivityCommands" /> to <see cref="T:Petabridge.Cmd.Host.PetabridgeCmd" />
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Connectivity.ConnectivityHandlerActor">
+            <summary>
+                INTERNAL API.
+                Processes all connectivity commands.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Connectivity.IpActor">
+            <summary>
+                INTERNAL API.
+                Used to handle sending IP information back to clients.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Connectivity.UptimeMonitorActor">
+            <summary>
+                INTERNAL API
+                Monitors uptime for the <see cref="F:Petabridge.Cmd.Host.Default.Connectivity.ConnectivityCmd.UptimeDef" /> command.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Logging.LogCmd">
+            <summary>
+                INTERNAL API.
+                Defines the <see cref="T:Petabridge.Cmd.CommandPalette" /> used for all built-in logging mechanisms.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Logging.LogCmdMsgs">
+            <summary>
+                INTERNAL API
+                Defines message types for actors who handle logging commands
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Logging.LogCmdMsgs.Peek">
+            <summary>
+                View the most recent log, no parameters taken.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Logging.LogCmdMsgs.PeekN">
+            <summary>
+                View the most recent N logs at <see cref="P:Petabridge.Cmd.Host.Default.Logging.LogCmdMsgs.PeekN.LogLevel" /> or above.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Logging.LogCmdMsgs.LiveTail">
+            <summary>
+                Used to retrieve data for a live logging session
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Logging.LogCmdMsgs.CancelTail">
+            <summary>
+                Cancels a live tailing session
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Logging.LogCmdMsgs.WriteLog">
+            <summary>
+                Writes an item from a <see cref="T:Petabridge.Cmd.Command" /> into a given log.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Logging.LogCommandHandler">
+            <summary>
+                INTERNAL API
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Logging.LogCommandRouter">
+            <summary>
+                INTERNAL API.
+                Handles incoming <see cref="T:Petabridge.Cmd.Command" />s intended for working with log-related
+                commands and routes them to the appropriate actor for execution.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Logging.LogMemorizer">
+            <summary>
+                INTERNAL API
+            </summary>
+            <remarks>
+                Used by the default <see cref="T:Petabridge.Cmd.CommandPalette" /> to memorize logs which can be viewed via a tail call
+            </remarks>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.Logging.TailActor">
+            <summary>
+                INTERNAL API.
+                Actor responsible for tailing the log and delivering results to a downstream client.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.Default.NoLogEnvelope`1">
+            <summary>
+                INTERNAL API.
+                Used to prevent recursive logging during tails.
+            </summary>
+            <typeparam name="T">The type of message we won't log while writing to network.</typeparam>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.PetabridgeCmdExtension">
+            <summary>
+                INTERNAL API.
+                Defines the <see cref="T:Petabridge.Cmd.Host.PetabridgeCmd" /> plugin used directly be end-users.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.PetabridgeCmd">
+            <summary>
+                The petabridge.cmd host. Register <see cref="T:Petabridge.Cmd.CommandPalette" /> instances with this in order
+                to expose new capabilities with petabridge.cmd clients.
+            </summary>
+            <remarks>
+                Must call the <see cref="M:Petabridge.Cmd.Host.PetabridgeCmd.Start" /> method in order to turn on the host.
+            </remarks>
+        </member>
+        <member name="F:Petabridge.Cmd.Host.PetabridgeCmd.CmdListener">
+            <summary>
+            INTERNAL for testing purposes
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.Host.PetabridgeCmd.#ctor(Petabridge.Cmd.Host.PetabridgeCmdSettings,Akka.Actor.ExtendedActorSystem)">
+            <summary>
+                Creates a new <see cref="T:Petabridge.Cmd.Host.PetabridgeCmd" /> instance.
+            </summary>
+            <param name="settings">The settings for the petabridge.cmd host.</param>
+            <param name="system">The <see cref="T:Akka.Actor.ActorSystem" /> on which this petabridge.cmd host will run.</param>
+        </member>
+        <member name="P:Petabridge.Cmd.Host.PetabridgeCmd.IsBound">
+            <summary>
+                When <c>true</c>, indicates that the inbound listening socket is bound.
+            </summary>
+            <remarks>
+                You can locate the inbound endpoint via <see cref="P:Petabridge.Cmd.Host.PetabridgeCmd.BoundEndpoint" />
+            </remarks>
+        </member>
+        <member name="M:Petabridge.Cmd.Host.PetabridgeCmd.Get(Akka.Actor.ActorSystem)">
+            <summary>
+                Retrieves the instance of the <see cref="T:Petabridge.Cmd.Host.PetabridgeCmd" />
+                plugin for a given <see cref="T:Akka.Actor.ActorSystem" />.
+            </summary>
+            <param name="sys">The actor system that this petabridge.cmd host will run on.</param>
+            <returns>A singleton instance of the petabridge.cmd host.</returns>
+        </member>
+        <member name="M:Petabridge.Cmd.Host.PetabridgeCmd.Start">
+            <summary>
+                Turns on the petabridge.cmd host.
+                Safe to call multiple times. Will only start the host once.
+            </summary>
+            <remarks>
+                No more <see cref="T:Petabridge.Cmd.CommandPalette" />s can be added once this method is called!
+            </remarks>
+        </member>
+        <member name="M:Petabridge.Cmd.Host.PetabridgeCmd.RegisterCommandPalette(Petabridge.Cmd.Host.CommandPaletteHandler)">
+            <summary>
+                Registers a new set of commands defined inside a <see cref="T:Petabridge.Cmd.CommandPalette" />
+                for execution with the petabridge.cmd host.
+            </summary>
+            <param name="handler">The palette handler</param>
+            <returns><c>true</c> if the palette was successfully added. <c>false</c> otherwise.</returns>
+        </member>
+        <member name="T:Petabridge.Cmd.Host.PetabridgeCmdSettings">
+            <summary>
+                The connectivity settings for the petabridge.cmd host.
+                Depends on having an petabridge.cmd HOCON configuration section.
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Host.PetabridgeCmdSettings.Host">
+            <summary>
+                The host that will be used by <see cref="T:Akka.IO.Tcp" /> for receiving
+                connections from petabridge.cmd clients.
+            </summary>
+            <remarks>
+                Defaults to 127.0.0.1
+            </remarks>
+        </member>
+        <member name="P:Petabridge.Cmd.Host.PetabridgeCmdSettings.Port">
+            <summary>
+                The port number that will be used by <see cref="T:Akka.IO.Tcp" /> for receiving
+                connections from petabridge.cmd clients.
+            </summary>
+            <remarks>
+                Defaults to 9110.
+            </remarks>
+        </member>
+        <member name="P:Petabridge.Cmd.Host.PetabridgeCmdSettings.Endpoint">
+            <summary>
+                The fully structured endpoint made from <see cref="P:Petabridge.Cmd.Host.PetabridgeCmdSettings.Host" /> and <see cref="P:Petabridge.Cmd.Host.PetabridgeCmdSettings.Port" />
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Host.PetabridgeCmdSettings.LogPalettes">
+            <summary>
+                Logs the support palettes at startup when <c>true</c>.
+            </summary>
+            <remarks>
+                Defaults to <c>false</c>.
+            </remarks>
+        </member>
+        <member name="P:Petabridge.Cmd.Host.PetabridgeCmdSettings.Config">
+            <summary>
+                The HOCON used to populate the <see cref="T:Petabridge.Cmd.Host.PetabridgeCmdSettings" /> class.
+            </summary>
+        </member>
+    </members>
+</doc>

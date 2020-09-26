@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Akka.DistributedData.LightningDB</name>
+    </assembly>
+    <members>
+        <member name="T:Akka.DistributedData.LightningDB.LmdbDurableStore">
+            <summary>
+            An actor implementing the durable store for the Distributed Data <see cref="T:Akka.DistributedData.Replicator"/>
+            has to implement the protocol with the messages defined here.
+            
+            At startup the <see cref="T:Akka.DistributedData.Replicator"/> creates the durable store actor and sends the
+            <see cref="T:Akka.DistributedData.Durable.LoadAll"/> message to it. It must then reply with 0 or more <see cref="T:Akka.DistributedData.Durable.LoadData"/> messages
+            followed by one <see cref="T:Akka.DistributedData.Durable.LoadAllCompleted"/> message to the <see cref="P:Akka.Actor.IActorContext.Sender"/> (the <see cref="T:Akka.DistributedData.Replicator"/>).
+            
+            If the <see cref="T:Akka.DistributedData.Durable.LoadAll"/> fails it can throw <see cref="T:Akka.DistributedData.Durable.LoadFailedException"/> and the <see cref="T:Akka.DistributedData.Replicator"/> supervisor
+            will stop itself and the durable store.
+            
+            When the <see cref="T:Akka.DistributedData.Replicator"/> needs to store a value it sends a <see cref="T:Akka.DistributedData.Durable.Store"/> message
+            to the durable store actor, which must then reply with the <see cref="F:Akka.DistributedData.Durable.StoreReply.SuccessMessage"/> or
+            <see cref="F:Akka.DistributedData.Durable.StoreReply.FailureMessage"/> to the <see cref="F:Akka.DistributedData.Durable.StoreReply.ReplyTo"/>.
+            </summary>
+        </member>
+    </members>
+</doc>

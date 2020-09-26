@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+<assembly><name>Akkling.DistributedData</name></assembly>
+<members>
+<member name="M:Akkling.DistributedData.DData.op_LessMultiplyGreater``1(``0,``0)">
+<summary>
+ Merge operator - used to merge two CRDTs of the same type.
+</summary>
+</member>
+<member name="M:Akkling.DistributedData.DData.merge``1(``0,``0)">
+<summary>
+ Merges together two CRDTs of the same type.
+</summary>
+</member>
+</members>
+</doc>

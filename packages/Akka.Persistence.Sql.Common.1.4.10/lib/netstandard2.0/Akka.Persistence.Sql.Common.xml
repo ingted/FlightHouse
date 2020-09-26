@@ -1,0 +1,2053 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Akka.Persistence.Sql.Common</name>
+    </assembly>
+    <members>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.ReplayFilterSettings">
+            <summary>
+            Settings used for managing filter rules during event replay.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.ReplayFilterSettings.Mode">
+            <summary>
+            Mode used when detecting invalid events.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.ReplayFilterSettings.WindowSize">
+            <summary>
+            Size (in number of events) of the look ahead buffer used for analyzing the events.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.ReplayFilterSettings.MaxOldWriters">
+            <summary>
+            Maximum number of writerUuid to remember.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.ReplayFilterSettings.IsDebug">
+            <summary>
+            Determine if the debug logging is enabled for each replayed event.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.ReplayFilterSettings.IsEnabled">
+            <summary>
+            Determine if the replay filter feature is enabled
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.ReplayFilterSettings.#ctor(Akka.Configuration.Config)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Akka.Persistence.Sql.Common.Journal.ReplayFilterSettings" /> class.
+            </summary>
+            <param name="config">The configuration used to configure the replay filter.</param>
+            <exception cref="T:Akka.Configuration.ConfigurationException">
+            This exception is thrown when an invalid <c>replay-filter.mode</c> is read from the specified <paramref name="config"/>.
+            Acceptable <c>replay-filter.mode</c> values include: off | repair-by-discard-old | fail | warn
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            This exception is thrown when the specified <paramref name="config"/> is undefined.
+            </exception>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.ReplayFilterSettings.#ctor(Akka.Persistence.Journal.ReplayFilterMode,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Akka.Persistence.Sql.Common.Journal.ReplayFilterSettings" /> class.
+            </summary>
+            <param name="mode">The mode used when detecting invalid events.</param>
+            <param name="windowSize">The size of the replay filter's buffer.</param>
+            <param name="maxOldWriters">The maximum number of writerUuid to remember.</param>
+            <param name="isDebug">If set to <c>true</c>, debug logging is enabled for each replayed event.</param>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.CircuitBreakerSettings">
+            <summary>
+            Settings used by <see cref="T:Akka.Pattern.CircuitBreaker"/> used internally by
+            the batching journal when executing event batches.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.CircuitBreakerSettings.MaxFailures">
+            <summary>
+            Maximum number of failures that can happen before the circuit opens.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.CircuitBreakerSettings.CallTimeout">
+            <summary>
+            Maximum time available for operation to execute before 
+            <see cref="T:Akka.Pattern.CircuitBreaker"/> considers it a failure.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.CircuitBreakerSettings.ResetTimeout">
+            <summary>
+            Timeout that has to pass before <see cref="T:Akka.Pattern.CircuitBreaker"/>
+            moves into half-closed state, trying to eventually close 
+            after sampling an operation.
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.CircuitBreakerSettings.#ctor(Akka.Configuration.Config)">
+            <summary>
+            Creates a new instance of the <see cref="T:Akka.Persistence.Sql.Common.Journal.CircuitBreakerSettings"/> from provided HOCON <paramref name="config"/>.
+            </summary>
+            <param name="config">The configuration used to configure the circuit breaker.</param>
+            <exception cref="T:System.ArgumentNullException">
+            This exception is thrown when the specified <paramref name="config"/> is undefined.
+            </exception>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.CircuitBreakerSettings.#ctor(System.Int32,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Akka.Persistence.Sql.Common.Journal.CircuitBreakerSettings" /> class.
+            </summary>
+            <param name="maxFailures">The maximum number of failures that can happen before the circuit opens.</param>
+            <param name="callTimeout">
+            The maximum time available for operation to execute before <see cref="T:Akka.Pattern.CircuitBreaker"/> considers it a failure.
+            </param>
+            <param name="resetTimeout">
+            The amount of time before <see cref="T:Akka.Pattern.CircuitBreaker"/> moves into the half-closed state.
+            </param>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup">
+            <summary>
+            All settings that can be used by implementations of 
+            <see cref="T:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2"/>.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup.ConnectionString">
+            <summary>
+            Connection string to a SQL database.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup.MaxConcurrentOperations">
+            <summary>
+            Maximum number of batch operations allowed to be executed at the same time.
+            Each batch operation must acquire a <see cref="T:System.Data.Common.DbConnection"/>, so this setting
+            can be effectively used to limit the usage of ADO.NET connection pool by current journal.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup.MaxBatchSize">
+            <summary>
+            Maximum size of single batch of operations to be executed over a single <see cref="T:System.Data.Common.DbConnection"/>.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup.MaxBufferSize">
+            <summary>
+            Maximum size of requests stored in journal buffer. Once buffer will be surpassed, it will start
+            to apply <see cref="M:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.OnBufferOverflow(Akka.Persistence.IJournalMessage)"/> method to incoming requests.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup.AutoInitialize">
+            <summary>
+            If true, once created, journal will run all SQL scripts stored under 
+            <see cref="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.Initializers"/> collection
+            prior to starting executing any requests. In most implementation this is used 
+            to initialize necessary tables.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup.ConnectionTimeout">
+            <summary>
+            Maximum time given for executed <see cref="T:System.Data.Common.DbCommand"/> to complete.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup.IsolationLevel">
+            <summary>
+            Isolation level of transactions used during query execution.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup.CircuitBreakerSettings">
+            <summary>
+            Settings specific to <see cref="T:Akka.Pattern.CircuitBreaker"/>, which is used internally 
+            for executing request batches.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup.ReplayFilterSettings">
+            <summary>
+            Settings specific to replay filter rules used when replaying events from database
+            back to the persistent actors.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup.NamingConventions">
+            <summary>
+            Database specific naming conventions (table and column names) used to construct valid SQL statements.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup.DefaultSerializer">
+            <summary>
+            The default serializer used when not type override matching is found
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup.#ctor(Akka.Configuration.Config,Akka.Persistence.Sql.Common.Journal.QueryConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup" /> class.
+            </summary>
+            <param name="config">The configuration used to configure the journal.</param>
+            <param name="namingConventions">The naming conventions used by the database to construct valid SQL statements.</param>
+            <exception cref="T:Akka.Configuration.ConfigurationException">
+            This exception is thrown for a couple of reasons.
+            <ul>
+            <li>A connection string for the SQL event journal was not specified.</li>
+            <li>
+            An unknown <c>isolation-level</c> value was specified. Acceptable <c>isolation-level</c> values include:
+            chaos | read-committed | read-uncommitted | repeatable-read | serializable | snapshot | unspecified
+            </li>
+            </ul>
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            This exception is thrown when the specified <paramref name="config"/> is undefined.
+            </exception>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup.#ctor(System.String,System.Int32,System.Int32,System.Int32,System.Boolean,System.TimeSpan,System.Data.IsolationLevel,Akka.Persistence.Sql.Common.Journal.CircuitBreakerSettings,Akka.Persistence.Sql.Common.Journal.ReplayFilterSettings,Akka.Persistence.Sql.Common.Journal.QueryConfiguration,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup" /> class.
+            </summary>
+            <param name="connectionString">The connection string used to connect to the database.</param>
+            <param name="maxConcurrentOperations">The maximum number of batch operations allowed to be executed at the same time.</param>
+            <param name="maxBatchSize">The maximum size of single batch of operations to be executed over a single <see cref="T:System.Data.Common.DbConnection"/>.</param>
+            <param name="maxBufferSize">The maximum size of requests stored in journal buffer.</param>
+            <param name="autoInitialize">
+            If set to <c>true</c>, the journal executes all SQL scripts stored under the
+            <see cref="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.Initializers"/> collection prior
+            to starting executing any requests.
+            </param>
+            <param name="connectionTimeout">The maximum time given for executed <see cref="T:System.Data.Common.DbCommand"/> to complete.</param>
+            <param name="isolationLevel">The isolation level of transactions used during query execution.</param>
+            <param name="circuitBreakerSettings">
+            The settings used by the <see cref="T:Akka.Pattern.CircuitBreaker"/> when for executing request batches.
+            </param>
+            <param name="replayFilterSettings">The settings used when replaying events from database back to the persistent actors.</param>
+            <param name="namingConventions">The naming conventions used by the database to construct valid SQL statements.</param>
+            <param name="defaultSerializer">The serializer used when no specific type matching can be found.</param>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2">
+            <summary>
+            An abstract journal used by <see cref="T:Akka.Persistence.PersistentActor"/>s to read/write events to a database.
+            
+            This implementation uses horizontal batching to recycle usage of the <see cref="T:System.Data.Common.DbConnection"/> 
+            and to optimize writes made to a database. Batching journal is not going to acquire a new DB
+            connection on every request. Instead it will batch incoming requests and execute them only when
+            a previous operation batch has been completed. This means that requests coming from many 
+            actors at the same time will be executed in one batch.
+            
+            Maximum number of batches executed at the same time is defined by 
+            <see cref="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup.MaxConcurrentOperations"/> setting, while max allowed batch
+            size is defined by <see cref="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup.MaxBatchSize"/> setting.
+            
+            Batching journal also defines <see cref="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup.MaxBufferSize"/>, which defines
+            a maximum number of all requests stored at once in memory. Once that value is surpassed, journal
+            will start to apply <see cref="M:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.OnBufferOverflow(Akka.Persistence.IJournalMessage)"/> logic on each incoming requests, until a
+            buffer gets freed again. This may be used for overflow strategies, request denials or backpressure.
+            </summary>
+            <typeparam name="TConnection">A concrete implementation of <see cref="T:System.Data.Common.DbConnection"/> for targeted database provider.</typeparam>
+            <typeparam name="TCommand">A concrete implementation of <see cref="T:System.Data.Common.DbCommand"/> for targeted database provider.</typeparam>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.PersistenceIdIndex">
+            <summary>
+            Default index of <see cref="P:Akka.Persistence.IPersistentRepresentation.PersistenceId"/> 
+            column get from <see cref="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.ByPersistenceIdSql"/> query.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.SequenceNrIndex">
+            <summary>
+            Default index of <see cref="P:Akka.Persistence.IPersistentRepresentation.SequenceNr"/> 
+            column get from <see cref="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.ByPersistenceIdSql"/> query.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.IsDeletedIndex">
+            <summary>
+            Default index of <see cref="P:Akka.Persistence.IPersistentRepresentation.IsDeleted"/> 
+            column get from <see cref="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.ByPersistenceIdSql"/> query.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.ManifestIndex">
+            <summary>
+            Default index of <see cref="P:Akka.Persistence.IPersistentRepresentation.Manifest"/> 
+            column get from <see cref="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.ByPersistenceIdSql"/> query.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.PayloadIndex">
+            <summary>
+            Default index of <see cref="P:Akka.Persistence.IPersistentRepresentation.Payload"/> 
+            column get from <see cref="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.ByPersistenceIdSql"/> query.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.SerializerIdIndex">
+            <summary>
+            Default index of <see cref="P:Akka.Serialization.Serializer.Identifier"/>
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.OrderingIndex">
+            <summary>
+            Default index of tags column get from <see cref="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.ByTagSql"/> query.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.DeleteBatchSql">
+            <summary>
+            SQL query executed as result of <see cref="T:Akka.Persistence.DeleteMessagesTo"/> request to journal.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.HighestSequenceNrSql">
+            <summary>
+            SQL query executed as result of <see cref="M:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.ReadHighestSequenceNr(System.String,`1)"/> request to journal.
+            Also used under some conditions, when storing metadata upon <see cref="T:Akka.Persistence.DeleteMessagesTo"/> request.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.InsertEventSql">
+            <summary>
+            SQL statement executed as result of <see cref="T:Akka.Persistence.WriteMessages"/> request to journal.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.AllPersistenceIdsSql">
+            <summary>
+            SQL query executed as result of <see cref="T:Akka.Persistence.Sql.Common.Journal.SelectCurrentPersistenceIds"/> request to journal.
+            It's a part of persistence query protocol.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.UpdateSequenceNrSql">
+            <summary>
+            SQL statement executed as result of writing metadata, which is 
+            a possible effect of <see cref="T:Akka.Persistence.DeleteMessagesTo"/> request.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.ByPersistenceIdSql">
+            <summary>
+            SQL query executed as result of <see cref="T:Akka.Persistence.ReplayMessages"/> request to journal.
+            It's also part of persistence query protocol.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.ByTagSql">
+            <summary>
+            SQL query executed as result of <see cref="T:Akka.Persistence.Sql.Common.Journal.ReplayTaggedMessages"/> request to journal.
+            It's a part of persistence query protocol.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.AllEventsSql">
+            <summary>
+            SQL query executed as result of <see cref="T:Akka.Persistence.Sql.Common.Journal.ReplayAllEvents"/> request to journal.
+            It's a part of persistence query protocol.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.HighestOrderingSql">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.Initializers">
+            <summary>
+            A named collection of SQL statements to be executed once journal actor gets initialized
+            and the <see cref="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup.AutoInitialize"/> flag is set.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.Setup">
+            <summary>
+            All configurable settings defined for a current batching journal.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.HasPersistenceIdSubscribers">
+            <summary>
+            Flag determining if current journal has any subscribers for <see cref="T:Akka.Persistence.Sql.Common.Journal.EventAppended"/> events.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.HasTagSubscribers">
+            <summary>
+            Flag determining if current journal has any subscribers for <see cref="T:Akka.Persistence.Sql.Common.Journal.TaggedEventAppended"/> events.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.HasNewEventsSubscribers">
+            <summary>
+            Flag determining if current journal has any subscribers for <see cref="T:Akka.Persistence.Sql.Common.Journal.NewEventAppended"/> and 
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.CanPublish">
+            <summary>
+            Flag determining if incoming journal requests should be published in current actor system event stream.
+            Useful mostly for tests.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.Log">
+            <summary>
+            Logging adapter for current journal actor .
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.Buffer">
+            <summary>
+            Buffer for requests that are waiting to be served when next DB connection will be released.
+            This object access is NOT thread safe.
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.#ctor(Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2" /> class.
+            </summary>
+            <param name="setup">The settings used to configure the journal.</param>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.PreStart">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.Receive(System.Object)">
+            <summary>
+            TBD
+            </summary>
+            <param name="message">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.BatchRequest(Akka.Persistence.IJournalRequest)">
+            <summary>
+            Tries to add incoming <paramref name="message"/> to <see cref="F:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.Buffer"/>.
+            Also checks if any DB connection has been released and next batch can be processed.
+            </summary>
+            <param name="message">TBD</param>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.OnBufferOverflow(Akka.Persistence.IJournalMessage)">
+            <summary>
+            Method called, once given <paramref name="request"/> couldn't be added to <see cref="F:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.Buffer"/>
+            due to buffer overflow. Overflow is controlled by max buffer size and can be set using 
+            <see cref="P:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournalSetup.MaxBufferSize"/> setting.
+            </summary>
+            <param name="request">TBD</param>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.WriteEvent(`1,Akka.Persistence.IPersistentRepresentation,System.String)">
+            <summary>
+            Perform write of persistent event with specified <paramref name="tags"/> 
+            into database using given <paramref name="command"/>.
+            </summary>
+            <param name="command">Database command object used to store data.</param>
+            <param name="persistent">Persistent event representation.</param>
+            <param name="tags">Optional tags extracted from persistent event payload.</param>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.ReadEvent(System.Data.Common.DbDataReader)">
+            <summary>
+            Returns a persistent representation of an event read from a current row in the database.
+            </summary>
+            <param name="reader">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.CreateConnection(System.String)">
+            <summary>
+            Creates a new database connection from a given <paramref name="connectionString"/>.
+            </summary>
+            <param name="connectionString">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.BatchingSqlJournal`2.AddParameter(`1,System.String,System.Data.DbType,System.Object)">
+            <summary>
+            Helper method used to add a parameter to existing database <paramref name="command"/>.
+            </summary>
+            <param name="command"><see cref="T:System.Data.Common.DbCommand"/> used to define a parameter in.</param>
+            <param name="paramName">Query or procedure parameter name.</param>
+            <param name="dbType">Database type of a query or procedure parameter.</param>
+            <param name="value">Value of a query or procedure parameter.</param>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.JournalBufferOverflowException">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.JournalBufferOverflowException.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.JournalBufferOverflowException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Akka.Persistence.Sql.Common.Journal.JournalBufferOverflowException" /> class.
+            </summary>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.ITimestampProvider">
+            <summary>
+            Interface responsible for generation of timestamps for persisted messages in SQL-based journals.
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.ITimestampProvider.GenerateTimestamp(Akka.Persistence.IPersistentRepresentation)">
+            <summary>
+            Generates timestamp for provided <see cref="T:Akka.Persistence.IPersistentRepresentation"/> message.
+            </summary>
+            <param name="message">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.DefaultTimestampProvider">
+            <summary>
+            Default implementation of timestamp provider. Returns <see cref="P:System.DateTime.UtcNow"/> for any message.
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.DefaultTimestampProvider.GenerateTimestamp(Akka.Persistence.IPersistentRepresentation)">
+            <summary>
+            TBD
+            </summary>
+            <param name="message">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.JournalEntry">
+            <summary>
+            Class used for storing intermediate result of the <see cref="T:Akka.Persistence.IPersistentRepresentation"/>
+            in form which is ready to be stored directly in the SQL table.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.JournalEntry.PersistenceId">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.JournalEntry.SequenceNr">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.JournalEntry.IsDeleted">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.JournalEntry.Manifest">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.JournalEntry.Timestamp">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.JournalEntry.Payload">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.JournalEntry.#ctor(System.String,System.Int64,System.Boolean,System.String,System.DateTime,System.Object)">
+            <summary>
+            TBD
+            </summary>
+            <param name="persistenceId">TBD</param>
+            <param name="sequenceNr">TBD</param>
+            <param name="isDeleted">TBD</param>
+            <param name="manifest">TBD</param>
+            <param name="timestamp">TBD</param>
+            <param name="payload">TBD</param>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.EventId">
+            <summary>
+            Persisted event identifier returning set of keys used to map particular instance of an event to database row id.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.EventId.Id">
+            <summary>
+            Database row identifier.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.EventId.SequenceNr">
+            <summary>
+            Persistent event sequence number, monotonically increasing in scope of the same <see cref="F:Akka.Persistence.Sql.Common.Journal.EventId.PersistenceId"/>.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.EventId.PersistenceId">
+            <summary>
+            Id of persistent actor, used to recognize all events related to that actor.
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.EventId.#ctor(System.Int64,System.Int64,System.String)">
+            <summary>
+            TBD
+            </summary>
+            <param name="id">TBD</param>
+            <param name="sequenceNr">TBD</param>
+            <param name="persistenceId">TBD</param>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.WriteJournalBatch">
+            <summary>
+            Class used for storing whole intermediate set of write changes to be applied within single SQL transaction.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.WriteJournalBatch.EntryTags">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.WriteJournalBatch.#ctor(System.Collections.Generic.IDictionary{Akka.Persistence.IPersistentRepresentation,System.Collections.Immutable.IImmutableSet{System.String}})">
+            <summary>
+            TBD
+            </summary>
+            <param name="entryTags">TBD</param>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.AllPersistenceIds">
+            <summary>
+            Message type containing set of all <see cref="P:Akka.Persistence.Eventsourced.PersistenceId"/> received from the database.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.AllPersistenceIds.Ids">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.AllPersistenceIds.#ctor(System.Collections.Immutable.ImmutableArray{System.String})">
+            <summary>
+            TBD
+            </summary>
+            <param name="ids">TBD</param>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.MultiValueDictionaryExtensions">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.MultiValueDictionaryExtensions.AddItem``2(System.Collections.Generic.Dictionary{``0,System.Collections.Generic.HashSet{``1}},``0,``1)">
+            <summary>
+            TBD
+            </summary>
+            <typeparam name="TKey">TBD</typeparam>
+            <typeparam name="TVal">TBD</typeparam>
+            <param name="dictionary">TBD</param>
+            <param name="key">TBD</param>
+            <param name="item">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.MultiValueDictionaryExtensions.RemoveItem``2(System.Collections.Generic.Dictionary{``0,System.Collections.Generic.HashSet{``1}},``0,``1)">
+            <summary>
+            TBD
+            </summary>
+            <typeparam name="TKey">TBD</typeparam>
+            <typeparam name="TVal">TBD</typeparam>
+            <param name="dictionary">TBD</param>
+            <param name="key">TBD</param>
+            <param name="item">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.MultiValueDictionaryExtensions.RemoveItem``2(System.Collections.Generic.Dictionary{``0,System.Collections.Generic.HashSet{``1}},``1)">
+            <summary>
+            TBD
+            </summary>
+            <typeparam name="TKey">TBD</typeparam>
+            <typeparam name="TVal">TBD</typeparam>
+            <param name="dictionary">TBD</param>
+            <param name="item">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.ISubscriptionCommand">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.SubscribePersistenceId">
+            <summary>
+            Subscribe the `sender` to changes (appended events) for a specific `persistenceId`.
+            Used by query-side. The journal will send <see cref="T:Akka.Persistence.Sql.Common.Journal.EventAppended"/> messages to
+            the subscriber when <see cref="M:Akka.Persistence.Journal.AsyncWriteJournal.WriteMessagesAsync(System.Collections.Generic.IEnumerable{Akka.Persistence.AtomicWrite})"/> has been called.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.SubscribePersistenceId.PersistenceId">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.SubscribePersistenceId.#ctor(System.String)">
+            <summary>
+            TBD
+            </summary>
+            <param name="persistenceId">TBD</param>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.EventAppended">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.EventAppended.PersistenceId">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.EventAppended.#ctor(System.String)">
+            <summary>
+            TBD
+            </summary>
+            <param name="persistenceId">TBD</param>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.CurrentPersistenceIds">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.CurrentPersistenceIds.AllPersistenceIds">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.CurrentPersistenceIds.#ctor(System.Collections.Generic.IEnumerable{System.String},System.Int64)">
+            <summary>
+            TBD
+            </summary>
+            <param name="allPersistenceIds">TBD</param>
+            <param name="highestOrderingNumber">TBD</param>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.SubscribeNewEvents">
+            <summary>
+            Subscribe the `sender` to new appended events.
+            Used by query-side. The journal will send <see cref="T:Akka.Persistence.Sql.Common.Journal.NewEventAppended"/> messages to
+            the subscriber when `asyncWriteMessages` has been called.
+            </summary>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.SubscribeTag">
+            <summary>
+            Subscribe the `sender` to changes (appended events) for a specific `tag`.
+            Used by query-side. The journal will send <see cref="T:Akka.Persistence.Sql.Common.Journal.TaggedEventAppended"/> messages to
+            the subscriber when `asyncWriteMessages` has been called.
+            Events are tagged by wrapping in <see cref="T:Akka.Persistence.Journal.Tagged"/>
+            via an <see cref="T:Akka.Persistence.Journal.IEventAdapter"/>.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.SubscribeTag.Tag">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.SubscribeTag.#ctor(System.String)">
+            <summary>
+            TBD
+            </summary>
+            <param name="tag">TBD</param>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.TaggedEventAppended">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.TaggedEventAppended.Tag">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.TaggedEventAppended.#ctor(System.String)">
+            <summary>
+            TBD
+            </summary>
+            <param name="tag">TBD</param>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.ReplayAllEvents">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.ReplayAllEvents.FromOffset">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.ReplayAllEvents.ToOffset">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.ReplayAllEvents.Max">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.ReplayAllEvents.ReplyTo">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.ReplayAllEvents.#ctor(System.Int64,System.Int64,System.Int64,Akka.Actor.IActorRef)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Akka.Persistence.Sql.Common.Journal.ReplayAllEvents"/> class.
+            </summary>
+            <param name="fromOffset">TBD</param>
+            <param name="toOffset">TBD</param>
+            <param name="max">TBD</param>
+            <param name="replyTo">TBD</param>
+            <exception cref="T:System.ArgumentException">
+            This exception is thrown for a number of reasons. These include the following:
+            <ul>
+            <li>The specified <paramref name="fromOffset"/> is less than zero.</li>
+            <li>The specified <paramref name="toOffset"/> is less than or equal to zero.</li>
+            <li>The specified <paramref name="max"/> is less than or equal to zero.</li>
+            </ul>
+            </exception>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.ReplayedEvent">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.ReplayedEvent.Persistent">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.ReplayedEvent.Offset">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.ReplayedEvent.#ctor(Akka.Persistence.IPersistentRepresentation,System.Int64)">
+            <summary>
+            TBD
+            </summary>
+            <param name="persistent">TBD</param>
+            <param name="tag">TBD</param>
+            <param name="offset">TBD</param>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.EventReplaySuccess.HighestSequenceNr">
+            <summary>
+            Highest stored sequence number.
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.EventReplaySuccess.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.EventReplaySuccess.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.EventReplaySuccess.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.EventReplayFailure.Cause">
+            <summary>
+            Highest stored sequence number.
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.EventReplayFailure.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.EventReplayFailure.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.EventReplayFailure.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.ReplayTaggedMessages">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.ReplayTaggedMessages.FromOffset">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.ReplayTaggedMessages.ToOffset">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.ReplayTaggedMessages.Max">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.ReplayTaggedMessages.Tag">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.ReplayTaggedMessages.ReplyTo">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.ReplayTaggedMessages.#ctor(System.Int64,System.Int64,System.Int64,System.String,Akka.Actor.IActorRef)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Akka.Persistence.Sql.Common.Journal.ReplayTaggedMessages"/> class.
+            </summary>
+            <param name="fromOffset">TBD</param>
+            <param name="toOffset">TBD</param>
+            <param name="max">TBD</param>
+            <param name="tag">TBD</param>
+            <param name="replyTo">TBD</param>
+            <exception cref="T:System.ArgumentException">
+            This exception is thrown for a number of reasons. These include the following:
+            <ul>
+            <li>The specified <paramref name="fromOffset"/> is less than zero.</li>
+            <li>The specified <paramref name="toOffset"/> is less than or equal to zero.</li>
+            <li>The specified <paramref name="max"/> is less than or equal to zero.</li>
+            </ul>
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            This exception is thrown when the specified <paramref name="tag"/> is null or empty.
+            </exception>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.ReplayedTaggedMessage">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.ReplayedTaggedMessage.Persistent">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.ReplayedTaggedMessage.Tag">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.ReplayedTaggedMessage.Offset">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.ReplayedTaggedMessage.#ctor(Akka.Persistence.IPersistentRepresentation,System.String,System.Int64)">
+            <summary>
+            TBD
+            </summary>
+            <param name="persistent">TBD</param>
+            <param name="tag">TBD</param>
+            <param name="offset">TBD</param>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.IJournalQueryExecutor">
+            <summary>
+            SQL query builder used for generating queries required to perform journal's tasks.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.IJournalQueryExecutor.Configuration">
+            <summary>
+            Configuration settings for the current query executor.
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.IJournalQueryExecutor.SelectAllPersistenceIdsAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken,System.Int64)">
+            <summary>
+            Asynchronously returns all persistence Ids.
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <param name="offset">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.IJournalQueryExecutor.SelectByPersistenceIdAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken,System.String,System.Int64,System.Int64,System.Int64,System.Action{Akka.Persistence.IPersistentRepresentation})">
+            <summary>
+            Asynchronously replays a <paramref name="callback"/> on all selected events for provided
+            <paramref name="persistenceId"/>, within boundaries of <paramref name="fromSequenceNr"/>
+            and <paramref name="toSequenceNr"/> up to <paramref name="max"/> number of events.
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <param name="persistenceId">TBD</param>
+            <param name="fromSequenceNr">TBD</param>
+            <param name="toSequenceNr">TBD</param>
+            <param name="max">TBD</param>
+            <param name="callback">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.IJournalQueryExecutor.SelectByTagAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken,System.String,System.Int64,System.Int64,System.Int64,System.Action{Akka.Persistence.Sql.Common.Journal.ReplayedTaggedMessage})">
+            <summary>
+            Asynchronously replays <paramref name="callback"/> on all selected events, which have been tagged using
+            provided <paramref name="tag"/>, within boundaries of <paramref name="fromOffset"/> and
+            <paramref name="toOffset"/>, up to <paramref name="max"/> number of elements.
+            Returns highest sequence number from selected events.
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <param name="tag">TBD</param>
+            <param name="fromOffset">TBD</param>
+            <param name="toOffset">TBD</param>
+            <param name="max">TBD</param>
+            <param name="callback">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.IJournalQueryExecutor.SelectHighestSequenceNrAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken,System.String)">
+            <summary>
+            Asynchronously returns single number considered as the highest sequence number in current journal for the provided <paramref name="persistenceId"/>.
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <param name="persistenceId">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.IJournalQueryExecutor.InsertBatchAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken,Akka.Persistence.Sql.Common.Journal.WriteJournalBatch)">
+            <summary>
+            Asynchronously inserts a collection of events and theirs tags into a journal table.
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <param name="write">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.IJournalQueryExecutor.DeleteBatchAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken,System.String,System.Int64)">
+            <summary>
+            Asynchronously (permanently) deletes all events with given <paramref name="persistenceId"/>, up to provided <paramref name="toSequenceNr"/>.
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <param name="persistenceId">TBD</param>
+            <param name="toSequenceNr">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.IJournalQueryExecutor.CreateTablesAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously tries to create new event journal and metadata tables.
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.QueryConfiguration">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.QueryConfiguration.TagsColumnName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.QueryConfiguration.SchemaName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.QueryConfiguration.JournalEventsTableName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.QueryConfiguration.MetaTableName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.QueryConfiguration.PersistenceIdColumnName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.QueryConfiguration.SequenceNrColumnName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.QueryConfiguration.PayloadColumnName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.QueryConfiguration.ManifestColumnName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.QueryConfiguration.TimestampColumnName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.QueryConfiguration.IsDeletedColumnName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.QueryConfiguration.OrderingColumnName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.QueryConfiguration.SerializerIdColumnName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.QueryConfiguration.Timeout">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.QueryConfiguration.DefaultSerializer">
+            <summary>
+            The default serializer used when not type override matching is found
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.QueryConfiguration.UseSequentialAccess">
+            <summary>
+            Uses the CommandBehavior.SequentialAccess when creating the command, providing a performance improvement for reading large BLOBS.
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.QueryConfiguration.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.TimeSpan,System.String,System.Boolean)">
+            <summary>
+            TBD
+            </summary>
+            <param name="schemaName">TBD</param>
+            <param name="journalEventsTableName">TBD</param>
+            <param name="metaTableName">TBD</param>
+            <param name="persistenceIdColumnName">TBD</param>
+            <param name="sequenceNrColumnName">TBD</param>
+            <param name="payloadColumnName">TBD</param>
+            <param name="manifestColumnName">TBD</param>
+            <param name="timestampColumnName">TBD</param>
+            <param name="isDeletedColumnName">TBD</param>
+            <param name="tagsColumnName">TBD</param>
+            <param name="orderingColumnName">TBD</param>
+            <param name="serializerIdColumnName">TBD</param>
+            <param name="timeout">TBD</param>
+            <param name="defaultSerializer">The default serializer used when not type override matching is found</param>
+            <param name="useSequentialAccess">Uses the CommandBehavior.SequentialAccess when creating the command, providing a performance improvement for reading large BLOBS.</param>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.QueryConfiguration.FullJournalTableName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.QueryConfiguration.FullMetaTableName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.PersistenceIdIndex">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.SequenceNrIndex">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.TimestampIndex">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.IsDeletedIndex">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.ManifestIndex">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.PayloadIndex">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.SerializerIdIndex">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.OrderingIndex">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.LongTypeName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.Serialization">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.TimestampProvider">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.Configuration">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.#ctor(Akka.Persistence.Sql.Common.Journal.QueryConfiguration,Akka.Serialization.Serialization,Akka.Persistence.Sql.Common.Journal.ITimestampProvider)">
+            <summary>
+            TBD
+            </summary>
+            <param name="configuration">TBD</param>
+            <param name="serialization">TBD</param>
+            <param name="timestampProvider">TBD</param>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.AllPersistenceIdsSql">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.HighestSequenceNrSql">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.DeleteBatchSql">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.UpdateSequenceNrSql">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.ByPersistenceIdSql">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.HighestTagOrderingSql">
+            <summary>
+            Query to return the highest ordering number for a tag
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.ByTagSql">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.AllEventsSql">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.HighestOrderingSql">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.InsertEventSql">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.CreateEventsJournalSql">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.CreateMetaTableSql">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.QueryEventsSql">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.CreateCommand(System.Data.Common.DbConnection)">
+            <summary>
+            TBD
+            </summary>
+            <param name="connection">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.SelectAllPersistenceIdsAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken,System.Int64)">
+            <summary>
+            TBD
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <param name="offset">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.SelectByPersistenceIdAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken,System.String,System.Int64,System.Int64,System.Int64,System.Action{Akka.Persistence.IPersistentRepresentation})">
+            <summary>
+            TBD
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <param name="persistenceId">TBD</param>
+            <param name="fromSequenceNr">TBD</param>
+            <param name="toSequenceNr">TBD</param>
+            <param name="max">TBD</param>
+            <param name="callback">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.SelectByTagAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken,System.String,System.Int64,System.Int64,System.Int64,System.Action{Akka.Persistence.Sql.Common.Journal.ReplayedTaggedMessage})">
+            <summary>
+            TBD
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <param name="tag">TBD</param>
+            <param name="fromOffset">TBD</param>
+            <param name="toOffset">TBD</param>
+            <param name="max">TBD</param>
+            <param name="callback">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.SelectHighestSequenceNrAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken,System.String)">
+            <summary>
+            TBD
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <param name="persistenceId">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.InsertBatchAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken,Akka.Persistence.Sql.Common.Journal.WriteJournalBatch)">
+            <summary>
+            TBD
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <param name="write">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.DeleteBatchAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken,System.String,System.Int64)">
+            <summary>
+            TBD
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <param name="persistenceId">TBD</param>
+            <param name="toSequenceNr">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.CreateTablesAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken)">
+            <summary>
+            TBD
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.GetCommand(System.Data.Common.DbConnection,System.String)">
+            <summary>
+            TBD
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="sql">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.WriteEvent(System.Data.Common.DbCommand,Akka.Persistence.IPersistentRepresentation,System.Collections.Immutable.IImmutableSet{System.String})">
+            <summary>
+            TBD
+            </summary>
+            <param name="command">TBD</param>
+            <param name="e">TBD</param>
+            <param name="tags">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.ReadEvent(System.Data.Common.DbDataReader)">
+            <summary>
+            TBD
+            </summary>
+            <param name="reader">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.AbstractQueryExecutor.AddParameter(System.Data.Common.DbCommand,System.String,System.Data.DbType,System.Object)">
+            <summary>
+            TBD
+            </summary>
+            <param name="command">TBD</param>
+            <param name="parameterName">TBD</param>
+            <param name="parameterType">TBD</param>
+            <param name="value">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Journal.SqlJournal">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.SqlJournal.#ctor(Akka.Configuration.Config)">
+            <summary>
+            TBD
+            </summary>
+            <param name="journalConfig">TBD</param>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.SqlJournal.HasPersistenceIdSubscribers">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.SqlJournal.HasTagSubscribers">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.SqlJournal.HasNewEventSubscribers">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.SqlJournal.JournalConfigPath">
+            <summary>
+            Returns a HOCON config path to associated journal.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.SqlJournal.Log">
+            <summary>
+            System logger.
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.SqlJournal.CreateDbConnection(System.String)">
+            <summary>
+            Initializes a database connection.
+            </summary>
+            <param name="connectionString">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Journal.SqlJournal.QueryExecutor">
+            <summary>
+            Used for generating SQL commands for journal-related database operations.
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.SqlJournal.ReceivePluginInternal(System.Object)">
+            <summary>
+            TBD
+            </summary>
+            <param name="message">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.SqlJournal.WriteMessagesAsync(System.Collections.Generic.IEnumerable{Akka.Persistence.AtomicWrite})">
+            <summary>
+            Asynchronously writes all persistent <paramref name="messages"/> inside SQL Server database.
+            
+            Specific table used for message persistence may be defined through configuration within 
+            'akka.persistence.journal.sql-server' scope with 'schema-name' and 'table-name' keys.
+            </summary>
+            <param name="messages">TBD</param>
+            <exception cref="T:System.InvalidOperationException">TBD</exception>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.SqlJournal.ReplayTaggedMessagesAsync(Akka.Persistence.Sql.Common.Journal.ReplayTaggedMessages)">
+            <summary>
+            Replays all events with given tag withing provided boundaries from current database.
+            </summary>
+            <param name="replay">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.SqlJournal.ReplayMessagesAsync(Akka.Actor.IActorContext,System.String,System.Int64,System.Int64,System.Int64,System.Action{Akka.Persistence.IPersistentRepresentation})">
+            <summary>
+            TBD
+            </summary>
+            <param name="context">TBD</param>
+            <param name="persistenceId">TBD</param>
+            <param name="fromSequenceNr">TBD</param>
+            <param name="toSequenceNr">TBD</param>
+            <param name="max">TBD</param>
+            <param name="recoveryCallback">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.SqlJournal.PreStart">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.SqlJournal.PostStop">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.SqlJournal.WaitingForInitialization(System.Object)">
+            <summary>
+            TBD
+            </summary>
+            <param name="message">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.SqlJournal.CreateDbConnection">
+            <summary>
+            TBD
+            </summary>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.SqlJournal.RemoveSubscriber(Akka.Actor.IActorRef)">
+            <summary>
+            TBD
+            </summary>
+            <param name="subscriber">TBD</param>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.SqlJournal.AddTagSubscriber(Akka.Actor.IActorRef,System.String)">
+            <summary>
+            TBD
+            </summary>
+            <param name="subscriber">TBD</param>
+            <param name="tag">TBD</param>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.SqlJournal.AddPersistenceIdSubscriber(Akka.Actor.IActorRef,System.String)">
+            <summary>
+            TBD
+            </summary>
+            <param name="subscriber">TBD</param>
+            <param name="persistenceId">TBD</param>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.SqlJournal.DeleteMessagesToAsync(System.String,System.Int64)">
+            <summary>
+            Asynchronously deletes all persisted messages identified by provided <paramref name="persistenceId"/>
+            up to provided message sequence number (inclusive).
+            </summary>
+            <param name="persistenceId">TBD</param>
+            <param name="toSequenceNr">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.SqlJournal.ReadHighestSequenceNrAsync(System.String,System.Int64)">
+            <summary>
+            Asynchronously reads a highest sequence number of the event stream related with provided <paramref name="persistenceId"/>.
+            </summary>
+            <param name="persistenceId">TBD</param>
+            <param name="fromSequenceNr">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.SqlJournal.GetConnectionString">
+            <summary>
+            Returns connection string from either HOCON configuration or &lt;connectionStrings&gt; section of app.config.
+            </summary>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Journal.SqlJournal.GetTimestampProvider(System.String)">
+            <summary>
+            TBD
+            </summary>
+            <param name="typeName">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.JournalSettings">
+            <summary>
+            Configuration settings representation targeting Sql Server journal actor.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.JournalSettings.ConnectionString">
+            <summary>
+            Connection string used to access a persistent SQL Server instance.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.JournalSettings.ConnectionStringName">
+            <summary>
+            Name of the connection string stored in &lt;connectionStrings&gt; section of *.config file.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.JournalSettings.ConnectionTimeout">
+            <summary>
+            Connection timeout for SQL Server related operations.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.JournalSettings.JournalTableName">
+            <summary>
+            Name of the table corresponding to event journal.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.JournalSettings.SchemaName">
+            <summary>
+            Name of the schema, where journal table resides.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.JournalSettings.MetaTableName">
+            <summary>
+            Name of the table corresponding to event journal persistenceId and sequenceNr metadata.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.JournalSettings.TimestampProvider">
+            <summary>
+            Fully qualified type name for <see cref="T:Akka.Persistence.Sql.Common.Journal.ITimestampProvider"/> used to generate journal timestamps.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.JournalSettings.AutoInitialize">
+            <summary>
+            Flag determining in in case of event journal or metadata table missing, they should be automatically initialized.
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.JournalSettings.#ctor(Akka.Configuration.Config)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Akka.Persistence.Sql.Common.JournalSettings"/> class.
+            </summary>
+            <param name="config">The configuration used to configure the settings.</param>
+            <exception cref="T:System.ArgumentNullException">
+            This exception is thrown when the specified <paramref name="config"/> is undefined.
+            </exception>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.SnapshotStoreSettings">
+            <summary>
+            Configuration settings representation targeting Sql Server snapshot store actor.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.SnapshotStoreSettings.ConnectionString">
+            <summary>
+            Connection string used to access a persistent SQL Server instance.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.SnapshotStoreSettings.ConnectionStringName">
+            <summary>
+            Name of the connection string stored in &lt;connectionStrings&gt; section of *.config file.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.SnapshotStoreSettings.ConnectionTimeout">
+            <summary>
+            Connection timeout for SQL Server related operations.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.SnapshotStoreSettings.SchemaName">
+            <summary>
+            Schema name, where table corresponding to snapshot store is placed.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.SnapshotStoreSettings.TableName">
+            <summary>
+            Name of the table corresponding to snapshot store.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.SnapshotStoreSettings.AutoInitialize">
+            <summary>
+            Flag determining in in case of snapshot store table missing, they should be automatically initialized.
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.SnapshotStoreSettings.DefaultSerializer">
+            <summary>
+            The default serializer being used if no type match override is specified
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.SnapshotStoreSettings.#ctor(Akka.Configuration.Config)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Akka.Persistence.Sql.Common.SnapshotStoreSettings"/> class.
+            </summary>
+            <param name="config">The configuration used to configure the settings.</param>
+            <exception cref="T:System.ArgumentNullException">
+            This exception is thrown when the specified <paramref name="config"/> is undefined.
+            </exception>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.SnapshotStoreSettings.FullTableName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Snapshot.SnapshotEntry">
+            <summary>
+            Flattened and serialized snapshot object used as intermediate representation
+            before saving snapshot with metadata inside SQL Server database.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Snapshot.SnapshotEntry.PersistenceId">
+            <summary>
+            Persistence identifier of persistent actor, current snapshot relates to.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Snapshot.SnapshotEntry.SequenceNr">
+            <summary>
+            Sequence number used to identify snapshot in it's persistent actor scope.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Snapshot.SnapshotEntry.Timestamp">
+            <summary>
+            Timestamp used to specify date, when the snapshot has been made.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Snapshot.SnapshotEntry.Manifest">
+            <summary>
+            Stringified fully qualified CLR type name of the serialized object.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Snapshot.SnapshotEntry.Payload">
+            <summary>
+            Serialized object data.
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.SnapshotEntry.#ctor(System.String,System.Int64,System.DateTime,System.String,System.Object)">
+            <summary>
+            TBD
+            </summary>
+            <param name="persistenceId">TBD</param>
+            <param name="sequenceNr">TBD</param>
+            <param name="timestamp">TBD</param>
+            <param name="manifest">TBD</param>
+            <param name="payload">TBD</param>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Snapshot.QueryConfiguration">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Snapshot.QueryConfiguration.SchemaName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Snapshot.QueryConfiguration.SnapshotTableName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Snapshot.QueryConfiguration.PersistenceIdColumnName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Snapshot.QueryConfiguration.SequenceNrColumnName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Snapshot.QueryConfiguration.PayloadColumnName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Snapshot.QueryConfiguration.ManifestColumnName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Snapshot.QueryConfiguration.TimestampColumnName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Snapshot.QueryConfiguration.SerializerIdColumnName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Snapshot.QueryConfiguration.Timeout">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Snapshot.QueryConfiguration.DefaultSerializer">
+            <summary>
+            The default serializer used when not type override matching is found
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Snapshot.QueryConfiguration.UseSequentialAccess">
+            <summary>
+            Uses the CommandBehavior.SequentialAccess when creating the command, providing a performance improvement for reading large BLOBS.
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.QueryConfiguration.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.TimeSpan,System.String,System.Boolean)">
+            <summary>
+            TBD
+            </summary>
+            <param name="schemaName">TBD</param>
+            <param name="snapshotTableName">TBD</param>
+            <param name="persistenceIdColumnName">TBD</param>
+            <param name="sequenceNrColumnName">TBD</param>
+            <param name="payloadColumnName">TBD</param>
+            <param name="manifestColumnName">TBD</param>
+            <param name="timestampColumnName">TBD</param>
+            <param name="serializerIdColumnName">TBD</param>
+            <param name="timeout">TBD</param>
+            <param name="defaultSerializer">The default serializer used when not type override matching is found</param>
+            <param name="useSequentialAccess">Uses the CommandBehavior.SequentialAccess when creating the command, providing a performance improvement for reading large BLOBS.</param>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Snapshot.QueryConfiguration.FullSnapshotTableName">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Snapshot.ISnapshotQueryExecutor">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Snapshot.ISnapshotQueryExecutor.Configuration">
+            <summary>
+            Configuration settings for the current query executor.
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.ISnapshotQueryExecutor.DeleteAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken,System.String,System.Int64,System.Nullable{System.DateTime})">
+            <summary>
+            Deletes a single snapshot identified by it's persistent actor's <paramref name="persistenceId"/>,
+            <paramref name="sequenceNr"/> and <paramref name="timestamp"/>.
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <param name="persistenceId">TBD</param>
+            <param name="sequenceNr">TBD</param>
+            <param name="timestamp">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.ISnapshotQueryExecutor.DeleteBatchAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken,System.String,System.Int64,System.DateTime)">
+            <summary>
+            Deletes all snapshot matching persistent actor's <paramref name="persistenceId"/> as well as
+            upper (inclusive) bounds of the both <paramref name="maxSequenceNr"/> and <paramref name="maxTimestamp"/>.
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <param name="persistenceId">TBD</param>
+            <param name="maxSequenceNr">TBD</param>
+            <param name="maxTimestamp">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.ISnapshotQueryExecutor.InsertAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken,System.Object,Akka.Persistence.SnapshotMetadata)">
+            <summary>
+            Inserts a single snapshot represented by provided <see cref="T:Akka.Persistence.Sql.Common.Snapshot.SnapshotEntry"/> instance.
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <param name="snapshot">TBD</param>
+            <param name="metadata">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.ISnapshotQueryExecutor.SelectSnapshotAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken,System.String,System.Int64,System.DateTime)">
+            <summary>
+            Selects a single snapshot identified by persistent actor's <paramref name="persistenceId"/>,
+            matching upper (inclusive) bounds of both <paramref name="maxSequenceNr"/> and <paramref name="maxTimestamp"/>.
+            In case, when more than one snapshot matches specified criteria, one with the highest sequence number will be selected.
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <param name="persistenceId">TBD</param>
+            <param name="maxSequenceNr">TBD</param>
+            <param name="maxTimestamp">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.ISnapshotQueryExecutor.CreateTableAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken)">
+            <summary>
+            TBD
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.Serialization">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.SelectSnapshotSql">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.DeleteSnapshotSql">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.DeleteSnapshotRangeSql">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.InsertSnapshotSql">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.CreateSnapshotTableSql">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.#ctor(Akka.Persistence.Sql.Common.Snapshot.QueryConfiguration,Akka.Serialization.Serialization)">
+            <summary>
+            TBD
+            </summary>
+            <param name="configuration">TBD</param>
+            <param name="serialization">TBD</param>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.Configuration">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.SetTimestampParameter(System.DateTime,System.Data.Common.DbCommand)">
+            <summary>
+            TBD
+            </summary>
+            <param name="timestamp">TBD</param>
+            <param name="command">TBD</param>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.SetSequenceNrParameter(System.Int64,System.Data.Common.DbCommand)">
+            <summary>
+            TBD
+            </summary>
+            <param name="sequenceNr">TBD</param>
+            <param name="command">TBD</param>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.SetPersistenceIdParameter(System.String,System.Data.Common.DbCommand)">
+            <summary>
+            TBD
+            </summary>
+            <param name="persistenceId">TBD</param>
+            <param name="command">TBD</param>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.SetPayloadParameter(System.Object,System.Data.Common.DbCommand)">
+            <summary>
+            TBD
+            </summary>
+            <param name="snapshot">TBD</param>
+            <param name="command">TBD</param>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.SetManifestParameters(System.Object,System.Data.Common.DbCommand)">
+            <summary>
+            TBD
+            </summary>
+            <param name="snapshot">TBD</param>
+            <param name="command">TBD</param>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.DeleteAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken,System.String,System.Int64,System.Nullable{System.DateTime})">
+            <summary>
+            TBD
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <param name="persistenceId">TBD</param>
+            <param name="sequenceNr">TBD</param>
+            <param name="timestamp">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.DeleteBatchAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken,System.String,System.Int64,System.DateTime)">
+            <summary>
+            TBD
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <param name="persistenceId">TBD</param>
+            <param name="maxSequenceNr">TBD</param>
+            <param name="maxTimestamp">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.InsertAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken,System.Object,Akka.Persistence.SnapshotMetadata)">
+            <summary>
+            TBD
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <param name="snapshot">TBD</param>
+            <param name="metadata">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.SelectSnapshotAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken,System.String,System.Int64,System.DateTime)">
+            <summary>
+            TBD
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <param name="persistenceId">TBD</param>
+            <param name="maxSequenceNr">TBD</param>
+            <param name="maxTimestamp">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.CreateTableAsync(System.Data.Common.DbConnection,System.Threading.CancellationToken)">
+            <summary>
+            TBD
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="cancellationToken">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.GetCommand(System.Data.Common.DbConnection,System.String)">
+            <summary>
+            TBD
+            </summary>
+            <param name="connection">TBD</param>
+            <param name="sql">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.AddParameter(System.Data.Common.DbCommand,System.String,System.Data.DbType,System.Object)">
+            <summary>
+            TBD
+            </summary>
+            <param name="command">TBD</param>
+            <param name="parameterName">TBD</param>
+            <param name="parameterType">TBD</param>
+            <param name="value">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.CreateCommand(System.Data.Common.DbConnection)">
+            <summary>
+            TBD
+            </summary>
+            <param name="connection">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.ReadSnapshot(System.Data.Common.DbDataReader)">
+            <summary>
+            TBD
+            </summary>
+            <param name="reader">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.AbstractQueryExecutor.GetSnapshot(System.Data.Common.DbDataReader)">
+            <summary>
+            TBD
+            </summary>
+            <param name="reader">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Persistence.Sql.Common.Snapshot.SqlSnapshotStore">
+            <summary>
+            Abstract snapshot store implementation, customized to work with SQL-based persistence providers.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.Sql.Common.Snapshot.SqlSnapshotStore._pendingRequestsCancellation">
+            <summary>
+            List of cancellation tokens for all pending asynchronous database operations.
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.SqlSnapshotStore.#ctor(Akka.Configuration.Config)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Akka.Persistence.Sql.Common.Snapshot.SqlSnapshotStore"/> class.
+            </summary>
+            <param name="config">The configuration used to configure the snapshot store.</param>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Snapshot.SqlSnapshotStore.Log">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Snapshot.SqlSnapshotStore.Stash">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Persistence.Sql.Common.Snapshot.SqlSnapshotStore.QueryExecutor">
+            <summary>
+            Query executor used to convert snapshot store related operations into corresponding SQL queries.
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.SqlSnapshotStore.CreateDbConnection(System.String)">
+            <summary>
+            Returns a new instance of database connection.
+            </summary>
+            <param name="connectionString">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.SqlSnapshotStore.CreateDbConnection">
+            <summary>
+            Returns a new instance of database connection.
+            </summary>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.SqlSnapshotStore.PreStart">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.SqlSnapshotStore.PostStop">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.SqlSnapshotStore.GetConnectionString">
+            <summary>
+            TBD
+            </summary>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.SqlSnapshotStore.LoadAsync(System.String,Akka.Persistence.SnapshotSelectionCriteria)">
+            <summary>
+            Asynchronously loads snapshot with the highest sequence number for a persistent actor/view matching specified criteria.
+            </summary>
+            <param name="persistenceId">TBD</param>
+            <param name="criteria">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.SqlSnapshotStore.SaveAsync(Akka.Persistence.SnapshotMetadata,System.Object)">
+            <summary>
+            Asynchronously stores a snapshot with metadata as record in SQL table.
+            </summary>
+            <param name="metadata">TBD</param>
+            <param name="snapshot">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.SqlSnapshotStore.DeleteAsync(Akka.Persistence.SnapshotMetadata)">
+            <summary>
+            TBD
+            </summary>
+            <param name="metadata">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Persistence.Sql.Common.Snapshot.SqlSnapshotStore.DeleteAsync(System.String,Akka.Persistence.SnapshotSelectionCriteria)">
+            <summary>
+            TBD
+            </summary>
+            <param name="persistenceId">TBD</param>
+            <param name="criteria">TBD</param>
+            <returns>TBD</returns>
+        </member>
+    </members>
+</doc>

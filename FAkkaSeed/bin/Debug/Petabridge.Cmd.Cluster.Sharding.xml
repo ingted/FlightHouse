@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Petabridge.Cmd.Cluster.Sharding</name>
+    </assembly>
+    <members>
+        <member name="T:Petabridge.Cmd.Cluster.Sharding.ClusterShardingCmd">
+            <summary>
+                INTERNAL API.
+                The set of Sharding commands supported by Petabridge.Cmd.Cluster.Sharding.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.Sharding.ClusterShardingCmdMsgs">
+            <summary>
+                INTERNAL API.
+                Used to execute internal sharding commands.
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Cluster.Sharding.ClusterShardingCmdMsgs.GetAllRegionStats.Verbose">
+            <summary>
+            When set to <c>true</c>, also prints out all of the shardIds and their entity counts for each node.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.Sharding.ClusterShardingCmdRouter">
+            <summary>
+                INTERNAL API.
+                Used to execute <see cref="F:Petabridge.Cmd.Cluster.Sharding.ClusterShardingCmd.ClusterShardingCommandPalette" />
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.Sharding.AgeComparer">
+            <summary>
+                INTERNAL API - copied over from Akka.NET since these members are all marked as internal for some reason
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.Cluster.Sharding.AgeComparer.Compare(Akka.Cluster.Member,Akka.Cluster.Member)">
+            <inheritdoc cref="M:System.Collections.Generic.IComparer`1.Compare(`0,`0)" />
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.Sharding.ClusterShardingCommandProcessor">
+            <summary>
+                INTERNAL API.
+                Actor responsible for carrying out <see cref="T:Petabridge.Cmd.Cluster.Sharding.ClusterShardingCmdMsgs" />
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.Sharding.ClusterShardingCommands">
+            <summary>
+                Provides a set of commands for working with <see cref="T:Akka.Cluster.Sharding.ClusterSharding" />
+                on the current node.
+            </summary>
+            <remarks>
+                NOTE: these commands will only work as expected on nodes that have started ShardRegions and have access
+                to a live, running <see cref="T:Akka.Cluster.Sharding.ClusterSharding" /> instance.
+            </remarks>
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.ClusterMemberFormatter">
+            <summary>
+                Class for pretty-printing information about <see cref="T:Akka.Cluster.Member" />
+            </summary>
+        </member>
+    </members>
+</doc>

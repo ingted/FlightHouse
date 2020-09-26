@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+<assembly><name>Akkling.Cluster.Sharding</name></assembly>
+<members>
+<member name="M:Akkling.Cluster.Singleton.spawnSingletonProxy``1(Akka.Actor.ActorSystem,System.String,System.String)">
+ <summary>
+ Spawns an actor working as a proxy to cluster singleton provided by <paramref name="singletonPath"/>.
+ </summary>
+ <param name="system">Actor system used to spawn an actor</param>
+ <param name="name">Actor proxy name</param>
+ <param name="singletonPath">Relative path to cluster singleton actor manager</param>
+</member>
+<member name="M:Akkling.Cluster.Singleton.spawnSingleton``1(System.Object,Akka.Actor.ActorSystem,System.String,Akkling.Props.Props{``0})">
+ <summary>
+ Spawns an actor in cluster singleton mode.
+ </summary>
+ <param name="stopMessage">Message used to stop an actor</param>
+ <param name="factory">Actor system used to spawn an actor</param>
+ <param name="name">Actor singleton name.</param>
+ <param name="props">Props used to build an actor.</param>
+</member>
+<member name="M:Akkling.Cluster.ClusterClient.clusterClient(Akka.Actor.ActorSystem)">
+ <summary>
+ Returns actor reference to cluster client, allowing you to send messages to cluster.
+ </summary>
+</member>
+<member name="M:Akkling.Cluster.ClusterClient.receptionist(Akka.Actor.ActorSystem)">
+ <summary>
+ Returns cluster client receptionist, allowing actors to register themselves to be visible outside the cluster.
+ </summary>
+</member>
+<member name="P:Akkling.Cluster.Sharding.IEntityRef`1.TypeName">
+<summary>
+ Type name for a local shard region. It must be started in order to use this object.
+</summary>
+</member>
+<member name="P:Akkling.Cluster.Sharding.IEntityRef`1.ShardId">
+ <summary>
+ Shard identifier. Entities are managed in shards. Entities sharing the same <see cref="TypeName"/> and
+ <see cref="ShardId"/> are always guaranteed to live on the same machine.
+ </summary>
+</member>
+<member name="P:Akkling.Cluster.Sharding.IEntityRef`1.EntityId">
+ <summary>
+ Unique entity identifier in scope of the shard. Along with <see cref="TypeName"/> and <see cref="ShardId"/> 
+ is a globaly distinct identifier of a target entity, persisted between its incarnations and rebalancing between nodes.
+ </summary>
+</member>
+<member name="T:Akkling.Cluster.Sharding.IEntityRef`1">
+ <summary>
+ A typed reference for a sharded entity, which lifecycle and placement is managed by cluster sharding plugin.
+ It may be serialized and used to route a message to an entity (even after rebalancing) or to create it ad-hoc
+ if it didn't exist yet. IEntityRef cannot be used on nodes which have not started shard regions for a 
+ corresponding <see cref="TypeName"/>.
+ </summary>
+</member>
+<member name="M:Akkling.Cluster.Sharding.EntityRefs.entityRefExtractor``1(Akkling.Cluster.Sharding.ShardEnvelope)">
+ <summary>
+ Returns an entity message extractor prepared to work with <see cref="IEntityRef{T}"/>.
+ </summary>
+ <param name="env"></param>
+</member>
+<member name="M:Akkling.Cluster.Sharding.ClusterSharding.passivate``2(``0)">
+ <summary>
+ Returns an actor effect causing actor to send passivation request to it's shard. 
+ Afterwards shard will send <see cref="PoisonPill"/> message back to actor to stop it.
+ </summary>
+</member>
+<member name="M:Akkling.Cluster.Sharding.ClusterSharding.spawnShardedProxyAsync``2(Microsoft.FSharp.Core.FSharpFunc{``0,System.Tuple{System.String,System.String,``1}},Akka.Actor.ActorSystem,System.String,Microsoft.FSharp.Core.FSharpOption{System.String})">
+ <summary>
+ Creates an Async returning cluster shard proxy used for routing messages to shards on external nodes without hosting any shards by itself.
+ Extractor is a function returning tuple of ShardId*EntityId*Message used to determine routing path of message to the destination actor.
+ </summary>
+</member>
+<member name="M:Akkling.Cluster.Sharding.ClusterSharding.spawnShardedProxy``2(Microsoft.FSharp.Core.FSharpFunc{``0,System.Tuple{System.String,System.String,``1}},Akka.Actor.ActorSystem,System.String,Microsoft.FSharp.Core.FSharpOption{System.String})">
+ <summary>
+ Creates a cluster shard proxy used for routing messages to shards on external nodes without hosting any shards by itself.
+ Extractor is a function returning tuple of ShardId*EntityId*Message used to determine routing path of message to the destination actor.
+ </summary>
+</member>
+<member name="M:Akkling.Cluster.Sharding.ClusterSharding.entityFactoryFor``1(Akka.Actor.ActorSystem,System.String,Akkling.Props.Props{``0})">
+ <summary>
+ Creates a shard region and returns a factory function which for a given `shardId` and `entityId` returns a <see cref="IEntityRef{T}"/> representing
+ a serializable entity reference to a created sharded actor. This ref can be passed as message payload and will always point to a correct entity location
+ even after rebalancing.
+ </summary>
+ <param name="system"></param>
+ <param name="name"></param>
+ <param name="props"></param>
+</member>
+<member name="M:Akkling.Cluster.Sharding.ClusterSharding.spawnShardedAsync``2(Microsoft.FSharp.Core.FSharpFunc{``0,System.Tuple{System.String,System.String,``1}},Akka.Actor.ActorSystem,System.String,Akkling.Props.Props{``1})">
+ <summary>
+ Creates an Async returning shard region responsible for managing shards located on the current cluster node as well as routing messages to shards on external nodes.
+ Extractor is a function returning tuple of ShardId*EntityId*Message used to determine routing path of message to the destination actor.
+ </summary>
+</member>
+<member name="M:Akkling.Cluster.Sharding.ClusterSharding.spawnSharded``2(Microsoft.FSharp.Core.FSharpFunc{``0,System.Tuple{System.String,System.String,``1}},Akka.Actor.ActorSystem,System.String,Akkling.Props.Props{``1})">
+ <summary>
+ Creates a shard region responsible for managing shards located on the current cluster node as well as routing messages to shards on external nodes.
+ Extractor is a function returning tuple of ShardId*EntityId*Message used to determine routing path of message to the destination actor.
+ </summary>
+</member>
+</members>
+</doc>

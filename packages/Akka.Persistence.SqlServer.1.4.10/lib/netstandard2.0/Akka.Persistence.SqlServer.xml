@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Akka.Persistence.SqlServer</name>
+    </assembly>
+    <members>
+        <member name="T:Akka.Persistence.SqlServer.SqlServerPersistence">
+            <summary>
+                An actor system extension initializing support for SQL Server persistence layer.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.SqlServer.SqlServerPersistence.DefaultJournalConfig">
+            <summary>
+                Journal-related settings loaded from HOCON configuration.
+            </summary>
+        </member>
+        <member name="F:Akka.Persistence.SqlServer.SqlServerPersistence.DefaultSnapshotConfig">
+            <summary>
+                Snapshot store related settings loaded from HOCON configuration.
+            </summary>
+        </member>
+        <member name="M:Akka.Persistence.SqlServer.SqlServerPersistence.DefaultConfiguration">
+            <summary>
+                Returns a default configuration for akka persistence SQLite-based journals and snapshot stores.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Akka.Persistence.SqlServer.SqlServerPersistenceProvider">
+            <summary>
+                Singleton class used to setup SQL Server backend for akka persistence plugin.
+            </summary>
+        </member>
+    </members>
+</doc>

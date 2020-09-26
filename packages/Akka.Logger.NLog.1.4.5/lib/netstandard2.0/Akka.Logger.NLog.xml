@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Akka.Logger.NLog</name>
+    </assembly>
+    <members>
+        <member name="T:Akka.Logger.NLog.NLogLogger">
+            <summary>
+            This class is used to receive log events and sends them to
+            the configured NLog logger. The following log events are
+            recognized: <see cref="T:Akka.Event.Debug"/>, <see cref="T:Akka.Event.Info"/>,
+            <see cref="T:Akka.Event.Warning"/> and <see cref="T:Akka.Event.Error"/>.
+            </summary>
+        </member>
+        <member name="M:Akka.Logger.NLog.NLogLogger.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Akka.Logger.NLog.NLogLogger"/> class.
+            </summary>
+        </member>
+        <member name="T:Akka.Logger.NLog.NLogMessageFormatter">
+            <inheritdoc />
+            <summary>
+            This class contains methods used to convert MessageTemplated messages
+            into normal text messages.
+            </summary>
+        </member>
+        <member name="M:Akka.Logger.NLog.NLogMessageFormatter.Format(System.String,System.Object[])">
+            <summary>
+            Converts the specified template string to a text string using the specified
+            token array to match replacements.
+            </summary>
+            <param name="format">The template string used in the conversion.</param>
+            <param name="args">The array that contains values to replace in the template.</param>
+            <returns>
+            A text string where the template placeholders have been replaced with
+            their corresponding values.
+            </returns>
+        </member>
+    </members>
+</doc>

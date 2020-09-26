@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Petabridge.Cmd.Cluster</name>
+    </assembly>
+    <members>
+        <member name="T:Petabridge.Cmd.Cluster.ClusterCmd">
+            <summary>
+                INTERNAL API.
+                The set of cluster commands supported by Petabridge.Cmd.Cluster
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.ClusterCmdMsgs">
+            <summary>
+                INTERNAL API.
+                Message classes for all Petabridge.Cmd.Cluster commands.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.ClusterCmdMsgs.GetMemberStatus">
+            <summary>
+                Get the <see cref="T:Akka.Cluster.MemberStatus" /> for the current node.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.ClusterCmdMsgs.GetLeader">
+            <summary>
+                Get the current leader of the cluster.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.ClusterCmdMsgs.ShowCluster">
+            <summary>
+                Describe the <see cref="T:Akka.Cluster.ClusterEvent.CurrentClusterState" /> for the client.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.ClusterCmdMsgs.ExecuteJoin">
+            <summary>
+                Join one or more nodes.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.ClusterCmdMsgs.ExecuteDownByAddress">
+            <summary>
+                Down one or more nodes.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.ClusterCmdMsgs.ExecuteDownAllUnreachable">
+            <summary>
+                Down all nodes in the cluster who are currently unreachable
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.ClusterCmdMsgs.ExecuteLeave">
+            <summary>
+                Have the specified node leave the cluster
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.ClusterCmdMsgs.ExecuteTail">
+            <summary>
+            Tail all of the live <see cref="T:Akka.Cluster.ClusterEvent.IClusterDomainEvent"/>s occuring inside the cluster.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.ClusterCommandRouter">
+            <summary>
+                INTERNAL API
+                Used to translate <see cref="T:Petabridge.Cmd.Command" />s related to <see cref="T:Akka.Cluster.Cluster" />
+                into discrete, handle-able messages.
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.Cluster.ClusterCommandRouter.#ctor(Akka.Actor.IActorRef)">
+            <summary>
+            For unit-testing purposes only.
+            </summary>
+            <param name="clusterStateManager"></param>
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.ClusterCommands">
+            <summary>
+                Used to register all <see cref="T:Akka.Cluster.Cluster" /> management commands with a given
+                <see cref="T:Petabridge.Cmd.Host.PetabridgeCmd" /> extension
+                via the <see cref="M:Petabridge.Cmd.Host.PetabridgeCmd.RegisterCommandPalette(Petabridge.Cmd.Host.CommandPaletteHandler)" /> method.
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Cluster.ClusterCommands.Instance">
+            <summary>
+                Singleton instance of this palette
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.ClusterMemberFormatter">
+            <summary>
+                Class for pretty-printing information about <see cref="T:Akka.Cluster.Member" />
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.ClusterStateManager">
+            <summary>
+                INTERNAL API.
+                Actor responsible for carrying out <see cref="T:Petabridge.Cmd.Cluster.ClusterCmdMsgs" />.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.ClusterStateManager.GetState">
+            <summary>
+                INTERNAL API.
+                For testing purposes.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Cluster.ClusterTailActor">
+            <summary>
+            INTERNAL API.
+            
+            Used to execute the <see cref="T:Petabridge.Cmd.Cluster.ClusterCmdMsgs.ExecuteTail"/> command and
+            stream results back to the original requestor.
+            </summary>
+        </member>
+    </members>
+</doc>

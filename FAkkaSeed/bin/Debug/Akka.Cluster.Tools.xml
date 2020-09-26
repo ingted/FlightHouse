@@ -1,0 +1,3059 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Akka.Cluster.Tools</name>
+    </assembly>
+    <members>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterClient">
+            <summary>
+            This actor is intended to be used on an external node that is not member
+            of the cluster. It acts like a gateway for sending messages to actors
+            somewhere in the cluster. From the initial contact points it will establish
+            a connection to a <see cref="T:Akka.Cluster.Tools.Client.ClusterReceptionist"/> somewhere in the cluster. It will
+            monitor the connection to the receptionist and establish a new connection if
+            the link goes down. When looking for a new receptionist it uses fresh contact
+            points retrieved from previous establishment, or periodically refreshed
+            contacts, i.e. not necessarily the initial contact points.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterClient.Send">
+            <summary>
+            The message will be delivered to one recipient with a matching path, if any such
+            exists. If several entries match the path the message will be delivered
+            to one random destination. The sender of the message can specify that local
+            affinity is preferred, i.e. the message is sent to an actor in the same local actor
+            system as the used receptionist actor, if any such exists, otherwise random to any other
+            matching entry.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClient.Send.Path">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClient.Send.Message">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClient.Send.LocalAffinity">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClient.Send.#ctor(System.String,System.Object,System.Boolean)">
+            <summary>
+            TBD
+            </summary>
+            <param name="path">TBD</param>
+            <param name="message">TBD</param>
+            <param name="localAffinity">TBD</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterClient.SendToAll">
+            <summary>
+            The message will be delivered to all recipients with a matching path.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClient.SendToAll.Path">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClient.SendToAll.Message">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClient.SendToAll.#ctor(System.String,System.Object)">
+            <summary>
+            TBD
+            </summary>
+            <param name="path">TBD</param>
+            <param name="message">TBD</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterClient.Publish">
+            <summary>
+            The message will be delivered to all recipients Actors that have been registered as subscribers to
+            to the named topic.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClient.Publish.Topic">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClient.Publish.Message">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClient.Publish.#ctor(System.String,System.Object)">
+            <summary>
+            TBD
+            </summary>
+            <param name="topic">TBD</param>
+            <param name="message">TBD</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterClient.RefreshContactsTick">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClient.RefreshContactsTick.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterClient.HeartbeatTick">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClient.HeartbeatTick.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterClient.ReconnectTimeout">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClient.ReconnectTimeout.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClient.Props(Akka.Cluster.Tools.Client.ClusterClientSettings)">
+            <summary>
+            Factory method for <see cref="T:Akka.Cluster.Tools.Client.ClusterClient"/> <see cref="T:Akka.Actor.Props"/>.
+            </summary>
+            <param name="settings">TBD</param>
+            <exception cref="T:System.ArgumentNullException">
+            This exception is thrown when the specified <paramref name="settings"/> is undefined.
+            </exception>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClient.#ctor(Akka.Cluster.Tools.Client.ClusterClientSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Akka.Cluster.Tools.Client.ClusterClient" /> class.
+            </summary>
+            <param name="settings">The settings used to configure the client.</param>
+            <exception cref="T:System.ArgumentException">
+            This exception is thrown when the settings contains no initial contacts.
+            </exception>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClient.PostStop">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClient.Receive(System.Object)">
+            <summary>
+            TBD
+            </summary>
+            <param name="message">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.IContactPointChange">
+            <summary>
+            Declares a super type for all events emitted by the `ClusterClient`
+            in relation to contact points being added or removed.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.IContactPointChange.ContactPoint">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ContactPointAdded">
+            <summary>
+            Emitted to a subscriber when contact points have been
+            received by the <see cref="T:Akka.Cluster.Tools.Client.ClusterClient"/> and a new one has been added.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ContactPointAdded.#ctor(Akka.Actor.ActorPath)">
+            <summary>
+            TBD
+            </summary>
+            <param name="contactPoint">TBD</param>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ContactPointAdded.ContactPoint">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ContactPointRemoved">
+            <summary>
+            Emitted to a subscriber when contact points have been
+            received by the <see cref="T:Akka.Cluster.Tools.Client.ClusterClient"/> and a new one has been added.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ContactPointRemoved.#ctor(Akka.Actor.ActorPath)">
+            <summary>
+            TBD
+            </summary>
+            <param name="contactPoint">TBD</param>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ContactPointRemoved.ContactPoint">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ISubscribeContactPoints">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.SubscribeContactPoints">
+            <summary>
+            Subscribe to a cluster client's contact point changes where
+            it is guaranteed that a sender receives the initial state
+            of contact points prior to any events in relation to them
+            changing.
+            The sender will automatically become unsubscribed when it
+            terminates.
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.Client.SubscribeContactPoints.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.IUnsubscribeContactPoints">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.UnsubscribeContactPoints">
+            <summary>
+            Explicitly unsubscribe from contact point change events.
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.Client.UnsubscribeContactPoints.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.IGetContactPoints">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.GetContactPoints">
+            <summary>
+            Get the contact points known to this client. A <see cref="T:Akka.Cluster.Tools.Client.ContactPoints"/> message
+            will be replied.
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.Client.GetContactPoints.Instance">
+            <summary>
+            The singleton instance of this message.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ContactPoints">
+            <summary>
+            The reply to <see cref="T:Akka.Cluster.Tools.Client.GetContactPoints"/>.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ContactPoints.#ctor(System.Collections.Immutable.IImmutableSet{Akka.Actor.ActorPath})">
+            <summary>
+            TBD
+            </summary>
+            <param name="contactPoints">TBD</param>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ContactPoints.ContactPointsList">
+            <summary>
+            The set of actor paths contacted by this <see cref="T:Akka.Cluster.Tools.Client.ClusterClient"/>.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterClientReceptionist">
+            <summary>
+            Extension that starts <see cref="T:Akka.Cluster.Tools.Client.ClusterReceptionist"/> and accompanying <see cref="T:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubMediator"/>
+            with settings defined in config section "akka.cluster.client.receptionist".
+            The <see cref="T:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubMediator"/> is started by the <see cref="T:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSub"/> extension.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClientReceptionist.DefaultConfig">
+            <summary>
+            TBD
+            </summary>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClientReceptionist.Get(Akka.Actor.ActorSystem)">
+            <summary>
+            TBD
+            </summary>
+            <param name="system">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClientReceptionist.#ctor(Akka.Actor.ExtendedActorSystem)">
+            <summary>
+            TBD
+            </summary>
+            <param name="system">TBD</param>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClientReceptionist.IsTerminated">
+            <summary>
+            Returns true if this member is not tagged with the role configured for the receptionist.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClientReceptionist.PubSubMediator">
+            <summary>
+            Register the actors that should be reachable for the clients in this <see cref="T:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubMediator"/>.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClientReceptionist.RegisterService(Akka.Actor.IActorRef)">
+            <summary>
+            Register an actor that should be reachable for the clients. The clients can send messages to this actor with
+            <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Send"/> or <see cref="T:Akka.Cluster.Tools.PublishSubscribe.SendToAll"/> using the path elements 
+            of the <see cref="T:Akka.Actor.IActorRef"/>, e.g. "/user/myservice".
+            </summary>
+            <param name="actorRef">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClientReceptionist.UnregisterService(Akka.Actor.IActorRef)">
+            <summary>
+            A registered actor will be automatically unregistered when terminated, 
+            but it can also be explicitly unregistered before termination.
+            </summary>
+            <param name="actorRef">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClientReceptionist.RegisterSubscriber(System.String,Akka.Actor.IActorRef)">
+            <summary>
+            Register an actor that should be reachable for the clients to a named topic.
+            Several actors can be registered to the same topic name, and all will receive
+            published messages.
+            The client can publish messages to this topic with <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Publish"/>.
+            </summary>
+            <param name="topic">TBD</param>
+            <param name="actorRef">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClientReceptionist.UnregisterSubscriber(System.String,Akka.Actor.IActorRef)">
+            <summary>
+            A registered subscriber will be automatically unregistered when terminated, 
+            but it can also be explicitly unregistered before termination.
+            </summary>
+            <param name="topic">TBD</param>
+            <param name="actorRef">TBD</param>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClientReceptionist.Underlying">
+            <summary>
+            Returns the underlying receptionist actor, particularly so that its
+            events can be observed via subscribe/unsubscribe.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterClientReceptionistExtensionProvider">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClientReceptionistExtensionProvider.CreateExtension(Akka.Actor.ExtendedActorSystem)">
+            <summary>
+            TBD
+            </summary>
+            <param name="system">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterClientSettings">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClientSettings.Create(Akka.Actor.ActorSystem)">
+            <summary>
+            Create settings from the default configuration 'akka.cluster.client'.
+            </summary>
+            <param name="system">TBD</param>
+            <exception cref="T:System.ArgumentException">TBD</exception>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClientSettings.Create(Akka.Configuration.Config)">
+            <summary>
+            Create settings from a configuration with the same layout as the default configuration 'akka.cluster.client'.
+            </summary>
+            <param name="config">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClientSettings.InitialContacts">
+            <summary>
+            Actor paths of the <see cref="T:Akka.Cluster.Tools.Client.ClusterReceptionist"/> actors on the servers (cluster nodes) that the client will try to contact initially.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClientSettings.EstablishingGetContactsInterval">
+            <summary>
+            Interval at which the client retries to establish contact with one of ClusterReceptionist on the servers (cluster nodes)
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClientSettings.RefreshContactsInterval">
+            <summary>
+            Interval at which the client will ask the <see cref="T:Akka.Cluster.Tools.Client.ClusterReceptionist"/> for new contact points to be used for next reconnect.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClientSettings.HeartbeatInterval">
+            <summary>
+            How often failure detection heartbeat messages for detection of failed connections should be sent.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClientSettings.AcceptableHeartbeatPause">
+            <summary>
+            Number of potentially lost/delayed heartbeats that will be accepted before considering it to be an anomaly. 
+            The ClusterClient is using the <see cref="T:Akka.Remote.DeadlineFailureDetector"/>, which will trigger if there are 
+            no heartbeats within the duration <see cref="P:Akka.Cluster.Tools.Client.ClusterClientSettings.HeartbeatInterval"/> + <see cref="P:Akka.Cluster.Tools.Client.ClusterClientSettings.AcceptableHeartbeatPause"/>.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClientSettings.BufferSize">
+            <summary>
+            If connection to the receptionist is not established the client will buffer this number of messages and deliver 
+            them the connection is established. When the buffer is full old messages will be dropped when new messages are sent via the client. 
+            Use 0 to disable buffering, i.e. messages will be dropped immediately if the location of the receptionist is unavailable.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClientSettings.ReconnectTimeout">
+            <summary>
+            If the connection to the receptionist is lost and cannot
+            be re-established within this duration the cluster client will be stopped. This makes it possible
+            to watch it from another actor and possibly acquire a new list of InitialContacts from some
+            external service registry
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClientSettings.#ctor(System.Collections.Immutable.IImmutableSet{Akka.Actor.ActorPath},System.TimeSpan,System.TimeSpan,System.TimeSpan,System.TimeSpan,System.Int32,System.Nullable{System.TimeSpan})">
+            <summary>
+            TBD
+            </summary>
+            <param name="initialContacts">TBD</param>
+            <param name="establishingGetContactsInterval">TBD</param>
+            <param name="refreshContactsInterval">TBD</param>
+            <param name="heartbeatInterval">TBD</param>
+            <param name="acceptableHeartbeatPause">TBD</param>
+            <param name="bufferSize">TBD</param>
+            <param name="reconnectTimeout">TBD</param>
+            <exception cref="T:System.ArgumentException">TBD</exception>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClientSettings.WithInitialContacts(System.Collections.Immutable.IImmutableSet{Akka.Actor.ActorPath})">
+            <summary>
+            TBD
+            </summary>
+            <param name="initialContacts">TBD</param>
+            <exception cref="T:System.ArgumentException">TBD</exception>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClientSettings.WithEstablishingGetContactsInterval(System.TimeSpan)">
+            <summary>
+            TBD
+            </summary>
+            <param name="value">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClientSettings.WithRefreshContactsInterval(System.TimeSpan)">
+            <summary>
+            TBD
+            </summary>
+            <param name="value">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClientSettings.WithHeartbeatInterval(System.TimeSpan)">
+            <summary>
+            TBD
+            </summary>
+            <param name="value">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClientSettings.WithBufferSize(System.Int32)">
+            <summary>
+            TBD
+            </summary>
+            <param name="bufferSize">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClientSettings.WithReconnectTimeout(System.Nullable{System.TimeSpan})">
+            <summary>
+            TBD
+            </summary>
+            <param name="reconnectTimeout">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.IClusterClientMessage">
+            <summary>
+            Marker trait for remote messages with special serializer.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.IClusterClientInteraction">
+            <summary>
+            Declares a super type for all events emitted by the <see cref="T:Akka.Cluster.Tools.Client.ClusterClientReceptionist"/>
+            in relation to cluster clients being interacted with.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.IClusterClientInteraction.ClusterClient">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterClientUp">
+            <summary>
+            Emitted to the Akka event stream when a cluster client has interacted with
+            a receptionist.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClientUp.#ctor(Akka.Actor.IActorRef)">
+            <summary>
+            TBD
+            </summary>
+            <param name="clusterClient">TBD</param>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClientUp.ClusterClient">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterClientUnreachable">
+            <summary>
+            Emitted to the Akka event stream when a cluster client was previously connected
+            but then not seen for some time.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClientUnreachable.#ctor(Akka.Actor.IActorRef)">
+            <summary>
+            TBD
+            </summary>
+            <param name="clusterClient">TBD</param>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClientUnreachable.ClusterClient">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.SubscribeClusterClients">
+            <summary>
+            Subscribe to a cluster receptionist's client interactions where
+            it is guaranteed that a sender receives the initial state
+            of contact points prior to any events in relation to them
+            changing.
+            The sender will automatically become unsubscribed when it
+            terminates.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.SubscribeClusterClients.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.UnsubscribeClusterClients">
+            <summary>
+            Explicitly unsubscribe from client interaction events.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.UnsubscribeClusterClients.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.GetClusterClients">
+            <summary>
+            Get the cluster clients known to this receptionist. A <see cref="T:Akka.Cluster.Tools.Client.ClusterClients"/> message
+            will be replied.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.GetClusterClients.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterClients">
+            <summary>
+            The reply to <see cref="T:Akka.Cluster.Tools.Client.GetClusterClients"/>
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterClients.#ctor(System.Collections.Immutable.IImmutableSet{Akka.Actor.IActorRef})">
+            <summary>
+            The reply to <see cref="T:Akka.Cluster.Tools.Client.GetClusterClients"/>
+            </summary>
+            <param name="clusterClientsList">The presently known list of cluster clients.</param>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterClients.ClusterClientsList">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterReceptionist">
+            <summary>
+            <para>
+            <see cref="T:Akka.Cluster.Tools.Client.ClusterClient"/> connects to this actor to retrieve. The <see cref="T:Akka.Cluster.Tools.Client.ClusterReceptionist"/> is
+            supposed to be started on all nodes, or all nodes with specified role, in the cluster.
+            The receptionist can be started with the <see cref="M:Akka.Cluster.Tools.Client.ClusterClientReceptionist.Get(Akka.Actor.ActorSystem)"/> or as an
+            ordinary actor (use the factory method <see cref="M:Akka.Cluster.Tools.Client.ClusterReceptionist.Props(Akka.Actor.IActorRef,Akka.Cluster.Tools.Client.ClusterReceptionistSettings)"/>).
+            </para>
+            <para>
+            The receptionist forwards messages from the client to the associated <see cref="T:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubMediator"/>,
+            i.e. the client can send messages to any actor in the cluster that is registered in the
+            <see cref="T:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubMediator"/>. Messages from the client are wrapped in <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Send"/>, <see cref="T:Akka.Cluster.Tools.PublishSubscribe.SendToAll"/>
+            or <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Publish"/> with the semantics described in distributed publish/subscribe.
+            </para>
+            <para>
+            Response messages from the destination actor are tunneled via the receptionist
+            to avoid inbound connections from other cluster nodes to the client, i.e.
+            the <see cref="P:Akka.Actor.ActorBase.Sender"/>, as seen by the destination actor, is not the client itself.
+            The <see cref="P:Akka.Actor.ActorBase.Sender"/> of the response messages, as seen by the client, is preserved
+            as the original sender, so the client can choose to send subsequent messages
+            directly to the actor in the cluster.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterReceptionist.GetContacts">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterReceptionist.GetContacts.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterReceptionist.Contacts">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterReceptionist.Contacts.ContactPoints">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterReceptionist.Contacts.#ctor(System.Collections.Immutable.ImmutableList{System.String})">
+            <summary>
+            TBD
+            </summary>
+            <param name="contactPoints">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterReceptionist.Contacts.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterReceptionist.Contacts.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterReceptionist.Heartbeat">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterReceptionist.Heartbeat.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterReceptionist.HeartbeatRsp">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterReceptionist.HeartbeatRsp.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterReceptionist.Ping">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterReceptionist.Ping.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterReceptionist.CheckDeadlines">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterReceptionist.CheckDeadlines.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterReceptionist.ReceptionistShutdown">
+             <summary>
+             INTERNAL API.
+            
+             Used to signal that a <see cref="T:Akka.Cluster.Tools.Client.ClusterClientReceptionist"/> we've connected to
+             has terminated.
+             </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterReceptionist.Props(Akka.Actor.IActorRef,Akka.Cluster.Tools.Client.ClusterReceptionistSettings)">
+            <summary>
+            Factory method for <see cref="T:Akka.Cluster.Tools.Client.ClusterReceptionist"/> <see cref="T:Akka.Actor.Props"/>.
+            </summary>
+            <param name="pubSubMediator">TBD</param>
+            <param name="settings">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterReceptionist.RingOrdering">
+            <summary>
+            INTERNAL API
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterReceptionist.RingOrdering.Instance">
+            <summary>
+            The singleton instance of this comparer
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterReceptionist.RingOrdering.HashFor(Akka.Actor.Address)">
+            <summary>
+            Generates a hash for the node address.
+            </summary>
+            <param name="node">The node being added to the hash ring.</param>
+            <exception cref="T:Akka.Pattern.IllegalStateException">
+            This exception is thrown when the specified <paramref name="node"/> has a host/port that is undefined.
+            </exception>
+            <returns>A stable hashcode for the address.</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterReceptionist.RingOrdering.Compare(Akka.Actor.Address,Akka.Actor.Address)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterReceptionist.#ctor(Akka.Actor.IActorRef,Akka.Cluster.Tools.Client.ClusterReceptionistSettings)">
+            <summary>
+            TBD
+            </summary>
+            <param name="pubSubMediator">TBD</param>
+            <param name="settings">TBD</param>
+            <exception cref="T:System.ArgumentException">TBD</exception>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterReceptionist.Receive(System.Object)">
+            <summary>
+            TBD
+            </summary>
+            <param name="message">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClientResponseTunnel">
+            <summary>
+            Replies are tunneled via this actor, child of the receptionist, to avoid inbound connections from other cluster nodes to the client.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClientResponseTunnel.#ctor(Akka.Actor.IActorRef,System.TimeSpan)">
+            <summary>
+            TBD
+            </summary>
+            <param name="client">TBD</param>
+            <param name="timeout">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClientResponseTunnel.Receive(System.Object)">
+            <summary>
+            TBD
+            </summary>
+            <param name="message">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.ClusterReceptionistSettings">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterReceptionistSettings.Create(Akka.Actor.ActorSystem)">
+            <summary>
+            Create settings from the default configuration "akka.cluster.client.receptionist".
+            </summary>
+            <param name="system">TBD</param>
+            <exception cref="T:System.ArgumentException">TBD</exception>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterReceptionistSettings.Create(Akka.Configuration.Config)">
+            <summary>
+            Create settings from a configuration with the same layout as the default configuration "akka.cluster.client.receptionist".
+            </summary>
+            <param name="config">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterReceptionistSettings.Role">
+            <summary>
+            Start the receptionist on members tagged with this role. All members are used if undefined.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterReceptionistSettings.NumberOfContacts">
+            <summary>
+            The receptionist will send this number of contact points to the client.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterReceptionistSettings.ResponseTunnelReceiveTimeout">
+            <summary>
+            The actor that tunnel response messages to the client will be stopped after this time of inactivity.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterReceptionistSettings.HeartbeatInterval">
+            <summary>
+            How often failure detection heartbeat messages should be received for each ClusterClient
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterReceptionistSettings.AcceptableHeartbeatPause">
+            <summary>
+            Number of potentially lost/delayed heartbeats that will be
+            accepted before considering it to be an anomaly.
+            The ClusterReceptionist is using the akka.remote.DeadlineFailureDetector, which
+            will trigger if there are no heartbeats within the duration
+            heartbeat-interval + acceptable-heartbeat-pause, i.e. 15 seconds with
+            the default settings.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.ClusterReceptionistSettings.FailureDetectionInterval">
+            <summary>
+            Failure detection checking interval for checking all ClusterClients
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterReceptionistSettings.#ctor(System.String,System.Int32,System.TimeSpan,System.TimeSpan,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            TBD
+            </summary>
+            <param name="role">TBD</param>
+            <param name="numberOfContacts">TBD</param>
+            <param name="responseTunnelReceiveTimeout">TBD</param>
+            <param name="heartbeatInterval">TBD</param>
+            <param name="acceptableHeartbeatPause">TBD</param>
+            <param name="failureDetectionInterval">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterReceptionistSettings.WithRole(System.String)">
+            <summary>
+            TBD
+            </summary>
+            <param name="role">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterReceptionistSettings.WithoutRole">
+            <summary>
+            TBD
+            </summary>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterReceptionistSettings.WithNumberOfContacts(System.Int32)">
+            <summary>
+            TBD
+            </summary>
+            <param name="numberOfContacts">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterReceptionistSettings.WithResponseTunnelReceiveTimeout(System.TimeSpan)">
+            <summary>
+            TBD
+            </summary>
+            <param name="responseTunnelReceiveTimeout">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.ClusterReceptionistSettings.WithHeartbeat(System.TimeSpan,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            TBD
+            </summary>
+            <param name="heartbeatInterval">TBD</param>
+            <param name="acceptableHeartbeatPause">TBD</param>
+            <param name="failureDetectionInterval">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.Serialization.ClusterClientMessageSerializer">
+             <summary>
+             INTERNAL API.
+            
+             Serializer used to translate all of the <see cref="T:Akka.Cluster.Tools.Client.ClusterClient"/> and <see cref="T:Akka.Cluster.Tools.Client.ClusterClientReceptionist"/>
+             messages that can be passed back-and-forth between client and receptionist.
+             </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.Serialization.ClusterClientMessageSerializer.#ctor(Akka.Actor.ExtendedActorSystem)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Akka.Cluster.Tools.Client.Serialization.ClusterClientMessageSerializer"/> class.
+            </summary>
+            <param name="system">The actor system to associate with this serializer.</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.Serialization.ClusterClientMessageSerializer.ToBinary(System.Object)">
+            <summary>
+            Serializes the given object into a byte array
+            </summary>
+            <param name="obj">The object to serialize</param>
+            <exception cref="T:System.ArgumentException">
+            This exception is thrown when the specified <paramref name="obj"/> is of an unknown type.
+            Acceptable values include:
+            <see cref="T:Akka.Cluster.Tools.Client.ClusterReceptionist.Contacts"/> | <see cref="T:Akka.Cluster.Tools.Client.ClusterReceptionist.GetContacts"/> | <see cref="T:Akka.Cluster.Tools.Client.ClusterReceptionist.Heartbeat"/> | <see cref="T:Akka.Cluster.Tools.Client.ClusterReceptionist.HeartbeatRsp"/>
+            </exception>
+            <returns>A byte array containing the serialized object</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.Serialization.ClusterClientMessageSerializer.FromBinary(System.Byte[],System.String)">
+            <summary>
+            Deserializes a byte array into an object using an optional <paramref name="manifest" /> (type hint).
+            </summary>
+            <param name="bytes">The array containing the serialized object</param>
+            <param name="manifest">The type hint used to deserialize the object contained in the array.</param>
+            <exception cref="T:System.ArgumentException">
+            This exception is thrown when the specified <paramref name="bytes"/>cannot be deserialized using the specified <paramref name="manifest"/>.
+            </exception>
+            <returns>The object contained in the array</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Client.Serialization.ClusterClientMessageSerializer.Manifest(System.Object)">
+            <summary>
+            Returns the manifest (type hint) that will be provided in the <see cref="M:Akka.Cluster.Tools.Client.Serialization.ClusterClientMessageSerializer.FromBinary(System.Byte[],System.String)" /> method.
+            <note>
+            This method returns <see cref="F:System.String.Empty" /> if a manifest is not needed.
+            </note>
+            </summary>
+            <param name="o">The object for which the manifest is needed.</param>
+            <exception cref="T:System.ArgumentException">
+            This exception is thrown when the specified <paramref name="o"/> does not have an associated manifest.
+            </exception>
+            <returns>The manifest needed for the deserialization of the specified <paramref name="o" />.</returns>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Client.Serialization.Proto.Msg.ClusterClientMessagesReflection">
+            <summary>Holder for reflection information generated from ClusterClientMessages.proto</summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Client.Serialization.Proto.Msg.ClusterClientMessagesReflection.Descriptor">
+            <summary>File descriptor for ClusterClientMessages.proto</summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.Client.Serialization.Proto.Msg.Contacts.ContactPointsFieldNumber">
+            <summary>Field number for the "contactPoints" field.</summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Put">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Put.Ref">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Put.#ctor(Akka.Actor.IActorRef)">
+            <summary>
+            TBD
+            </summary>
+            <param name="ref">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Put.Equals(Akka.Cluster.Tools.PublishSubscribe.Put)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Put.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Put.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Put.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Remove">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Remove.Path">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Remove.#ctor(System.String)">
+            <summary>
+            TBD
+            </summary>
+            <param name="path">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Remove.Equals(Akka.Cluster.Tools.PublishSubscribe.Remove)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Remove.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Remove.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Remove.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Subscribe">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Subscribe.Topic">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Subscribe.Group">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Subscribe.Ref">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Subscribe.#ctor(System.String,Akka.Actor.IActorRef,System.String)">
+            <summary>
+            TBD
+            </summary>
+            <param name="topic">TBD</param>
+            <param name="ref">TBD</param>
+            <param name="group">TBD</param>
+            <exception cref="T:System.ArgumentException">
+            This exception is thrown when the specified <paramref name="topic"/> is undefined.
+            </exception>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Subscribe.Equals(Akka.Cluster.Tools.PublishSubscribe.Subscribe)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Subscribe.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Subscribe.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Subscribe.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Unsubscribe">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Unsubscribe.Topic">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Unsubscribe.Group">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Unsubscribe.Ref">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Unsubscribe.#ctor(System.String,Akka.Actor.IActorRef,System.String)">
+            <summary>
+            TBD
+            </summary>
+            <param name="topic">TBD</param>
+            <param name="ref">TBD</param>
+            <param name="group">TBD</param>
+            <exception cref="T:System.ArgumentException">
+            This exception is thrown when the specified <paramref name="topic"/> is undefined.
+            </exception>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Unsubscribe.Equals(Akka.Cluster.Tools.PublishSubscribe.Unsubscribe)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Unsubscribe.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Unsubscribe.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Unsubscribe.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.SubscribeAck">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.SubscribeAck.Subscribe">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.SubscribeAck.#ctor(Akka.Cluster.Tools.PublishSubscribe.Subscribe)">
+            <summary>
+            TBD
+            </summary>
+            <param name="subscribe">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.SubscribeAck.Equals(Akka.Cluster.Tools.PublishSubscribe.SubscribeAck)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.SubscribeAck.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.SubscribeAck.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.SubscribeAck.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.UnsubscribeAck">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.UnsubscribeAck.Unsubscribe">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.UnsubscribeAck.#ctor(Akka.Cluster.Tools.PublishSubscribe.Unsubscribe)">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.UnsubscribeAck.Equals(Akka.Cluster.Tools.PublishSubscribe.UnsubscribeAck)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.UnsubscribeAck.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.UnsubscribeAck.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.UnsubscribeAck.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Publish">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Publish.Topic">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Publish.Message">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Publish.SendOneMessageToEachGroup">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Publish.#ctor(System.String,System.Object,System.Boolean)">
+            <summary>
+            TBD
+            </summary>
+            <param name="topic">TBD</param>
+            <param name="message">TBD</param>
+            <param name="sendOneMessageToEachGroup">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Publish.Equals(Akka.Cluster.Tools.PublishSubscribe.Publish)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Publish.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Publish.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Publish.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Send">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Send.Path">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Send.Message">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Send.LocalAffinity">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Send.#ctor(System.String,System.Object,System.Boolean)">
+            <summary>
+            TBD
+            </summary>
+            <param name="path">TBD</param>
+            <param name="message">TBD</param>
+            <param name="localAffinity">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Send.Equals(Akka.Cluster.Tools.PublishSubscribe.Send)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Send.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Send.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Send.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.SendToAll">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.SendToAll.Path">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.SendToAll.Message">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.SendToAll.ExcludeSelf">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.SendToAll.#ctor(System.String,System.Object,System.Boolean)">
+            <summary>
+            TBD
+            </summary>
+            <param name="path">TBD</param>
+            <param name="message">TBD</param>
+            <param name="excludeSelf">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.SendToAll.Equals(Akka.Cluster.Tools.PublishSubscribe.SendToAll)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.SendToAll.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.SendToAll.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.SendToAll.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.GetTopics">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.GetTopics.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.CurrentTopics">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.CurrentTopics.Topics">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.CurrentTopics.#ctor(System.Collections.Immutable.IImmutableSet{System.String})">
+            <summary>
+            TBD
+            </summary>
+            <param name="topics">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.CurrentTopics.Equals(Akka.Cluster.Tools.PublishSubscribe.CurrentTopics)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.CurrentTopics.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.CurrentTopics.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.CurrentTopics.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.IDistributedPubSubMessage">
+            <summary>
+            Marker trait for remote messages with special serializer.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubExtensionProvider">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubExtensionProvider.CreateExtension(Akka.Actor.ExtendedActorSystem)">
+            <summary>
+            TBD
+            </summary>
+            <param name="system">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSub">
+            <summary>
+            Extension that starts a <see cref="T:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubMediator"/> actor with settings 
+            defined in config section `akka.cluster.pub-sub`.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSub.Get(Akka.Actor.ActorSystem)">
+            <summary>
+            TBD
+            </summary>
+            <param name="system">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSub.DefaultConfig">
+            <summary>
+            TBD
+            </summary>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSub.#ctor(Akka.Actor.ExtendedActorSystem)">
+            <summary>
+            TBD
+            </summary>
+            <param name="system">TBD</param>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSub.IsTerminated">
+            <summary>
+            Returns true if this member is not tagged with the role configured for the mediator.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSub.Mediator">
+            <summary>
+            The <see cref="T:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubMediator"/> actor reference.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubMediator">
+            <summary>
+            <para>
+            This actor manages a registry of actor references and replicates
+            the entries to peer actors among all cluster nodes or a group of nodes
+            tagged with a specific role.
+            </para>
+            <para>
+            The <see cref="T:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubMediator"/> is supposed to be started on all nodes,
+            or all nodes with specified role, in the cluster. The mediator can be
+            started with the <see cref="T:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSub"/> extension or as an ordinary actor.
+            </para>
+            <para>
+            Changes are only performed in the own part of the registry and those changes
+            are versioned. Deltas are disseminated in a scalable way to other nodes with
+            a gossip protocol. The registry is eventually consistent, i.e. changes are not
+            immediately visible at other nodes, but typically they will be fully replicated
+            to all other nodes after a few seconds.
+            </para>
+            <para>
+            You can send messages via the mediator on any node to registered actors on
+            any other node. There is three modes of message delivery.
+            </para>
+            <para>
+            1. <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Send"/> -
+            The message will be delivered to one recipient with a matching path, if any such
+            exists in the registry. If several entries match the path the message will be sent
+            via the supplied `routingLogic` (default random) to one destination. The sender of the
+            message can specify that local affinity is preferred, i.e. the message is sent to an actor
+            in the same local actor system as the used mediator actor, if any such exists, otherwise
+            route to any other matching entry. A typical usage of this mode is private chat to one
+            other user in an instant messaging application. It can also be used for distributing
+            tasks to registered workers, like a cluster aware router where the routees dynamically
+            can register themselves.
+            </para>
+            <para>
+            2. <see cref="T:Akka.Cluster.Tools.PublishSubscribe.SendToAll"/> -
+            The message will be delivered to all recipients with a matching path. Actors with
+            the same path, without address information, can be registered on different nodes.
+            On each node there can only be one such actor, since the path is unique within one
+            local actor system. Typical usage of this mode is to broadcast messages to all replicas
+            with the same path, e.g. 3 actors on different nodes that all perform the same actions,
+            for redundancy.
+            </para>
+            <para>
+            3. <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Publish"/> -
+            Actors may be registered to a named topic instead of path. This enables many subscribers
+            on each node. The message will be delivered to all subscribers of the topic. For
+            efficiency the message is sent over the wire only once per node (that has a matching topic),
+            and then delivered to all subscribers of the local topic representation. This is the
+            true pub/sub mode. A typical usage of this mode is a chat room in an instant messaging
+            application.
+            </para>
+            <para>
+            4. <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Publish"/> with sendOneMessageToEachGroup -
+            Actors may be subscribed to a named topic with an optional property `group`.
+            If subscribing with a group name, each message published to a topic with the
+            `sendOneMessageToEachGroup` flag is delivered via the supplied `routingLogic`
+            (default random) to one actor within each subscribing group.
+            If all the subscribed actors have the same group name, then this works just like
+            <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Send"/> and all messages are delivered to one subscribe.
+            If all the subscribed actors have different group names, then this works like normal
+            <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Publish"/> and all messages are broadcast to all subscribers.
+            </para>
+            <para>
+            You register actors to the local mediator with <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Put"/> or
+            <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Subscribe"/>. `Put` is used together with `Send` and
+            `SendToAll` message delivery modes. The `ActorRef` in `Put` must belong to the same
+            local actor system as the mediator. `Subscribe` is used together with `Publish`.
+            Actors are automatically removed from the registry when they are terminated, or you
+            can explicitly remove entries with <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Remove"/> or
+            <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Unsubscribe"/>.
+            </para>
+            <para>
+            Successful `Subscribe` and `Unsubscribe` is acknowledged with
+            <see cref="T:Akka.Cluster.Tools.PublishSubscribe.SubscribeAck"/> and <see cref="T:Akka.Cluster.Tools.PublishSubscribe.UnsubscribeAck"/>
+            replies.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubMediator.Props(Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubSettings)">
+            <summary>
+            TBD
+            </summary>
+            <param name="settings">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubMediator.Log">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubMediator.OwnVersions">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubMediator.#ctor(Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubSettings)">
+            <summary>
+            TBD
+            </summary>
+            <param name="settings">TBD</param>
+            <exception cref="T:System.ArgumentException">TBD</exception>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubMediator.PreStart">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubMediator.PostStop">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubSettings">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubSettings.Create(Akka.Actor.ActorSystem)">
+            <summary>
+            Creates cluster publish/subscribe settings from the default configuration `akka.cluster.pub-sub`.
+            </summary>
+            <param name="system">TBD</param>
+            <exception cref="T:System.ArgumentException">TBD</exception>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubSettings.Create(Akka.Configuration.Config)">
+            <summary>
+            Creates cluster publish subscribe settings from provided configuration with the same layout as `akka.cluster.pub-sub`.
+            </summary>
+            <param name="config">TBD</param>
+            <exception cref="T:System.ArgumentException">TBD</exception>
+            <returns>TBD</returns>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubSettings.Role">
+            <summary>
+            The mediator starts on members tagged with this role. Uses all if undefined.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubSettings.RoutingLogic">
+            <summary>
+            The routing logic to use for <see cref="!:DistributedPubSubMediator.Send"/>.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubSettings.GossipInterval">
+            <summary>
+            How often the <see cref="T:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubMediator"/> should send out gossip information
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubSettings.RemovedTimeToLive">
+            <summary>
+            Removed entries are pruned after this duration.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubSettings.MaxDeltaElements">
+            <summary>
+            Maximum number of elements to transfer in one message when synchronizing the registries. 
+            Next chunk will be transferred in next round of gossip.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubSettings.#ctor(System.String,Akka.Routing.RoutingLogic,System.TimeSpan,System.TimeSpan,System.Int32)">
+            <summary>
+            Creates a new instance of the <see cref="T:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubSettings" />.
+            </summary>
+            <param name="role">TBD</param>
+            <param name="routingLogic">TBD</param>
+            <param name="gossipInterval">TBD</param>
+            <param name="removedTimeToLive">TBD</param>
+            <param name="maxDeltaElements">TBD</param>
+            <exception cref="T:System.ArgumentException">TBD</exception>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubSettings.WithRole(System.String)">
+            <summary>
+            TBD
+            </summary>
+            <param name="role">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubSettings.WithRoutingLogic(Akka.Routing.RoutingLogic)">
+            <summary>
+            TBD
+            </summary>
+            <param name="routingLogic">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubSettings.WithGossipInterval(System.TimeSpan)">
+            <summary>
+            TBD
+            </summary>
+            <param name="gossipInterval">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubSettings.WithRemovedTimeToLive(System.TimeSpan)">
+            <summary>
+            TBD
+            </summary>
+            <param name="removedTtl">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.DistributedPubSubSettings.WithMaxDeltaElements(System.Int32)">
+            <summary>
+            TBD
+            </summary>
+            <param name="maxDeltaElements">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.Prune">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.Prune.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.Count">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.Count.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.CountSubscribers">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.Bucket">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.Bucket.Owner">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.Bucket.Version">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.Bucket.Content">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Bucket.#ctor(Akka.Actor.Address)">
+            <summary>
+            TBD
+            </summary>
+            <param name="owner">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Bucket.#ctor(Akka.Actor.Address,System.Int64,System.Collections.Immutable.IImmutableDictionary{System.String,Akka.Cluster.Tools.PublishSubscribe.Internal.ValueHolder})">
+            <summary>
+            TBD
+            </summary>
+            <param name="owner">TBD</param>
+            <param name="version">TBD</param>
+            <param name="content">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Bucket.Equals(Akka.Cluster.Tools.PublishSubscribe.Internal.Bucket)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Bucket.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Bucket.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.ValueHolder">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.ValueHolder.Version">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.ValueHolder.Ref">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.ValueHolder.#ctor(System.Int64,Akka.Actor.IActorRef)">
+            <summary>
+            TBD
+            </summary>
+            <param name="version">TBD</param>
+            <param name="ref">TBD</param>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.ValueHolder.Routee">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.ValueHolder.Equals(Akka.Cluster.Tools.PublishSubscribe.Internal.ValueHolder)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.ValueHolder.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.ValueHolder.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.Status">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Status.#ctor(System.Collections.Generic.IDictionary{Akka.Actor.Address,System.Int64},System.Boolean)">
+            <summary>
+            TBD
+            </summary>
+            <param name="versions">TBD</param>
+            <param name="isReplyToStatus">TBD</param>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.Status.Versions">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.Status.IsReplyToStatus">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Status.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Status.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.Delta">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.Delta.Buckets">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Delta.#ctor(Akka.Cluster.Tools.PublishSubscribe.Internal.Bucket[])">
+            <summary>
+            TBD
+            </summary>
+            <param name="buckets">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Delta.Equals(Akka.Cluster.Tools.PublishSubscribe.Internal.Delta)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Delta.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Delta.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.DeltaCount">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Internal.DeltaCount.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.GossipTick">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.GossipTick.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.RegisterTopic">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.RegisterTopic.TopicRef">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.RegisterTopic.#ctor(Akka.Actor.IActorRef)">
+            <summary>
+            TBD
+            </summary>
+            <param name="topicRef">TBD</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.Subscribed">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.Subscribed.Ack">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.Subscribed.Subscriber">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Subscribed.#ctor(Akka.Cluster.Tools.PublishSubscribe.SubscribeAck,Akka.Actor.IActorRef)">
+            <summary>
+            TBD
+            </summary>
+            <param name="ack">TBD</param>
+            <param name="subscriber">TBD</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.Unsubscribed">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.Unsubscribed.Ack">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.Unsubscribed.Subscriber">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Unsubscribed.#ctor(Akka.Cluster.Tools.PublishSubscribe.UnsubscribeAck,Akka.Actor.IActorRef)">
+            <summary>
+            TBD
+            </summary>
+            <param name="ack">TBD</param>
+            <param name="subscriber">TBD</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.SendToOneSubscriber">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.SendToOneSubscriber.Message">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.SendToOneSubscriber.#ctor(System.Object)">
+            <summary>
+            TBD
+            </summary>
+            <param name="message">TBD</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.IChildActorTerminationProtocol">
+            <summary>
+            Messages used to encode protocol to make sure that we do not send Subscribe/Unsubscribe message to
+            child (mediator -&gt; topic, topic -&gt; group) during a period of transition. Protects from situations like:
+            Sending Subscribe/Unsubscribe message to child actor after child has been terminated
+            but Terminate message did not yet arrive to parent.
+            Sending Subscribe/Unsubscribe message to child actor that has Prune message queued and pruneDeadline set.
+            In both of those situation parent actor still thinks that child actor is alive and forwards messages to it resulting in lost ACKs.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.NoMoreSubscribers">
+            <summary>
+            Passivate-like message sent from child to parent, used to signal that sender has no subscribers and no child actors.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.NoMoreSubscribers.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.TerminateRequest">
+            <summary>
+            Sent from parent to child actor to signalize that messages are being buffered. When received by child actor
+            if no <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Subscribe"/> message has been received after sending <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Internal.NoMoreSubscribers"/> message child actor will stop itself.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.TerminateRequest.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.NewSubscriberArrived">
+            <summary>
+            Sent from child to parent actor as response to <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Internal.TerminateRequest"/> in case <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Subscribe"/> message arrived
+            after sending <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Internal.NoMoreSubscribers"/> but before receiving <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Internal.TerminateRequest"/>.
+            When received by the parent buffered messages will be forwarded to child actor for processing.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Internal.NewSubscriberArrived.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.MediatorRouterEnvelope">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.MediatorRouterEnvelope.#ctor(System.Object)">
+            <summary>
+            TBD
+            </summary>
+            <param name="message">TBD</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.TopicLike">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Internal.TopicLike.PruneInterval">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Internal.TopicLike.PruneCancelable">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Internal.TopicLike.Subscribers">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Internal.TopicLike.EmptyTimeToLive">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Internal.TopicLike.PruneDeadline">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.TopicLike.#ctor(System.TimeSpan)">
+            <summary>
+            TBD
+            </summary>
+            <param name="emptyTimeToLive">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.TopicLike.PostStop">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.TopicLike.DefaultReceive(System.Object)">
+            <summary>
+            TBD
+            </summary>
+            <param name="message">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.TopicLike.Business(System.Object)">
+            <summary>
+            TBD
+            </summary>
+            <param name="message">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.TopicLike.Receive(System.Object)">
+            <summary>
+            TBD
+            </summary>
+            <param name="message">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.Topic">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Topic.#ctor(System.TimeSpan,Akka.Routing.RoutingLogic)">
+            <summary>
+            TBD
+            </summary>
+            <param name="emptyTimeToLive">TBD</param>
+            <param name="routingLogic">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Topic.Business(System.Object)">
+            <summary>
+            TBD
+            </summary>
+            <param name="message">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.Group">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Group.#ctor(System.TimeSpan,Akka.Routing.RoutingLogic)">
+            <summary>
+            TBD
+            </summary>
+            <param name="emptyTimeToLive">TBD</param>
+            <param name="routingLogic">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Group.Business(System.Object)">
+            <summary>
+            TBD
+            </summary>
+            <param name="message">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Internal.Utils">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Utils.WrapIfNeeded(System.Object)">
+            <summary>
+            <para>
+            Mediator uses <see cref="T:Akka.Routing.Router"/> to send messages to multiple destinations, Router in general
+            unwraps messages from <see cref="T:Akka.Routing.RouterEnvelope"/> and sends the contents to <see cref="T:Akka.Routing.Routee"/>s.
+            </para>
+            <para>
+            Using mediator services should not have an undesired effect of unwrapping messages
+            out of <see cref="T:Akka.Routing.RouterEnvelope"/>. For this reason user messages are wrapped in
+            <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Internal.MediatorRouterEnvelope"/> which will be unwrapped by the <see cref="T:Akka.Routing.Router"/> leaving original
+            user message.
+            </para>
+            </summary>
+            <param name="message">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Utils.MakeKey(Akka.Actor.IActorRef)">
+            <summary>
+            TBD
+            </summary>
+            <param name="actorRef">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Utils.EncodeName(System.String)">
+            <summary>
+            TBD
+            </summary>
+            <param name="name">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Internal.Utils.MakeKey(Akka.Actor.ActorPath)">
+            <summary>
+            TBD
+            </summary>
+            <param name="path">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.PerGroupingBuffer">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.PerGroupingBuffer.BufferOr(System.String,System.Object,Akka.Actor.IActorRef,System.Action)">
+            <summary>
+            TBD
+            </summary>
+            <param name="grouping">TBD</param>
+            <param name="message">TBD</param>
+            <param name="originalSender">TBD</param>
+            <param name="action">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.PerGroupingBuffer.RecreateAndForwardMessagesIfNeeded(System.String,System.Func{Akka.Actor.IActorRef})">
+            <summary>
+            TBD
+            </summary>
+            <param name="grouping">TBD</param>
+            <param name="recipient">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.PerGroupingBuffer.ForwardMessages(System.String,Akka.Actor.IActorRef)">
+            <summary>
+            TBD
+            </summary>
+            <param name="grouping">TBD</param>
+            <param name="recipient">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.PerGroupingBuffer.InitializeGrouping(System.String)">
+            <summary>
+            TBD
+            </summary>
+            <param name="grouping">TBD</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Serialization.DistributedPubSubMessageSerializer">
+            <summary>
+            Protobuf serializer of DistributedPubSubMediator messages.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Serialization.DistributedPubSubMessageSerializer.#ctor(Akka.Actor.ExtendedActorSystem)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Serialization.DistributedPubSubMessageSerializer"/> class.
+            </summary>
+            <param name="system">The actor system to associate with this serializer.</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Serialization.DistributedPubSubMessageSerializer.ToBinary(System.Object)">
+            <summary>
+            Serializes the given object into a byte array
+            </summary>
+            <param name="obj">The object to serialize</param>
+            <exception cref="T:System.ArgumentException">
+            This exception is thrown when the specified <paramref name="obj"/> is of an unknown type.
+            Acceptable types include:
+            <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Internal.Status"/> | <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Internal.Delta"/> | <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Send"/> | <see cref="T:Akka.Cluster.Tools.PublishSubscribe.SendToAll"/> | <see cref="T:Akka.Cluster.Tools.PublishSubscribe.Publish"/>
+            </exception>
+            <returns>A byte array containing the serialized object</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Serialization.DistributedPubSubMessageSerializer.FromBinary(System.Byte[],System.String)">
+            <summary>
+            Deserializes a byte array into an object using an optional <paramref name="manifest" /> (type hint).
+            </summary>
+            <param name="bytes">The array containing the serialized object</param>
+            <param name="manifest">The type hint used to deserialize the object contained in the array.</param>
+            <exception cref="T:System.ArgumentException">
+            This exception is thrown when the specified <paramref name="bytes"/>cannot be deserialized using the specified <paramref name="manifest"/>.
+            </exception>
+            <returns>The object contained in the array</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.PublishSubscribe.Serialization.DistributedPubSubMessageSerializer.Manifest(System.Object)">
+            <summary>
+            Returns the manifest (type hint) that will be provided in the <see cref="M:Akka.Cluster.Tools.PublishSubscribe.Serialization.DistributedPubSubMessageSerializer.FromBinary(System.Byte[],System.String)" /> method.
+            <note>
+            This method returns <see cref="F:System.String.Empty" /> if a manifest is not needed.
+            </note>
+            </summary>
+            <param name="o">The object for which the manifest is needed.</param>
+            <exception cref="T:System.ArgumentException">
+            This exception is thrown when the specified <paramref name="o"/> does not have an associated manifest.
+            </exception>
+            <returns>The manifest needed for the deserialization of the specified <paramref name="o" />.</returns>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.DistributedPubSubMessagesReflection">
+            <summary>Holder for reflection information generated from DistributedPubSubMessages.proto</summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.DistributedPubSubMessagesReflection.Descriptor">
+            <summary>File descriptor for DistributedPubSubMessages.proto</summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.Status.VersionsFieldNumber">
+            <summary>Field number for the "versions" field.</summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.Status.ReplyToStatusFieldNumber">
+            <summary>Field number for the "replyToStatus" field.</summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.Status.Types">
+            <summary>Container for nested types declared in the Status message type.</summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.Status.Types.Version.AddressFieldNumber">
+            <summary>Field number for the "address" field.</summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.Status.Types.Version.TimestampFieldNumber">
+            <summary>Field number for the "timestamp" field.</summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.Delta.BucketsFieldNumber">
+            <summary>Field number for the "buckets" field.</summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.Delta.Types">
+            <summary>Container for nested types declared in the Delta message type.</summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.Delta.Types.ValueHolder.VersionFieldNumber">
+            <summary>Field number for the "version" field.</summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.Delta.Types.ValueHolder.RefFieldNumber">
+            <summary>Field number for the "ref" field.</summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.Delta.Types.Bucket.OwnerFieldNumber">
+            <summary>Field number for the "owner" field.</summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.Delta.Types.Bucket.VersionFieldNumber">
+            <summary>Field number for the "version" field.</summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.Delta.Types.Bucket.ContentFieldNumber">
+            <summary>Field number for the "content" field.</summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.Send">
+            <summary>
+            Send normally local, but it is also used by the ClusterClient.
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.Send.PathFieldNumber">
+            <summary>Field number for the "path" field.</summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.Send.LocalAffinityFieldNumber">
+            <summary>Field number for the "localAffinity" field.</summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.Send.PayloadFieldNumber">
+            <summary>Field number for the "payload" field.</summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.SendToAll">
+            <summary>
+            SendToAll normally local, but it is also used by the ClusterClient.
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.SendToAll.PathFieldNumber">
+            <summary>Field number for the "path" field.</summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.SendToAll.AllButSelfFieldNumber">
+            <summary>Field number for the "allButSelf" field.</summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.SendToAll.PayloadFieldNumber">
+            <summary>Field number for the "payload" field.</summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.Publish">
+            <summary>
+            Publish normally local, but it is also used by the ClusterClient.
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.Publish.TopicFieldNumber">
+            <summary>Field number for the "topic" field.</summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.Publish.PayloadFieldNumber">
+            <summary>Field number for the "payload" field.</summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.SendToOneSubscriber">
+            <summary>
+            Send a message to only one subscriber of a group.
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.PublishSubscribe.Serialization.Proto.Msg.SendToOneSubscriber.PayloadFieldNumber">
+            <summary>Field number for the "payload" field.</summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.IClusterSingletonMessage">
+            <summary>
+            Control messages used for the cluster singleton
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.HandOverToMe">
+            <summary>
+            Sent from new oldest to previous oldest to initiate the
+            hand-over process. <see cref="T:Akka.Cluster.Tools.Singleton.HandOverInProgress"/>  and <see cref="T:Akka.Cluster.Tools.Singleton.HandOverDone"/>
+            are expected replies.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.HandOverToMe.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.HandOverInProgress">
+            <summary>
+            Confirmation by the previous oldest that the hand
+            over process, shut down of the singleton actor, has
+            started.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.HandOverInProgress.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.HandOverDone">
+            <summary>
+            Confirmation by the previous oldest that the singleton
+            actor has been terminated and the hand-over process is
+            completed.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.HandOverDone.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.TakeOverFromMe">
+            <summary>
+            TBD
+            Sent from from previous oldest to new oldest to
+            initiate the normal hand-over process.
+            Especially useful when new node joins and becomes
+            oldest immediately, without knowing who was previous
+            oldest.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.TakeOverFromMe.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.Cleanup">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.Cleanup.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.StartOldestChangedBuffer">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.StartOldestChangedBuffer.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.HandOverRetry">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.HandOverRetry.Count">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.HandOverRetry.#ctor(System.Int32)">
+            <summary>
+            TBD
+            </summary>
+            <param name="count">TBD</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.TakeOverRetry">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.TakeOverRetry.Count">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.TakeOverRetry.#ctor(System.Int32)">
+            <summary>
+            TBD
+            </summary>
+            <param name="count">TBD</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.LeaseRetry">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.LeaseRetry.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.IClusterSingletonData">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.Uninitialized">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.Uninitialized.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.YoungerData">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.YoungerData.Oldest">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.YoungerData.#ctor(System.Collections.Generic.List{Akka.Cluster.UniqueAddress})">
+            <summary>
+            TBD
+            </summary>
+            <param name="oldest">TBD</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.BecomingOldestData">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.BecomingOldestData.PreviousOldest">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.BecomingOldestData.#ctor(System.Collections.Generic.List{Akka.Cluster.UniqueAddress})">
+            <summary>
+            TBD
+            </summary>
+            <param name="previousOldest">TBD</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.OldestData">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.OldestData.Singleton">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.OldestData.#ctor(Akka.Actor.IActorRef)">
+            <summary>
+            TBD
+            </summary>
+            <param name="singleton">TBD</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.WasOldestData">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.WasOldestData.Singleton">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.WasOldestData.NewOldest">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.WasOldestData.#ctor(Akka.Actor.IActorRef,Akka.Cluster.UniqueAddress)">
+            <summary>
+            TBD
+            </summary>
+            <param name="singleton">TBD</param>
+            <param name="newOldest">TBD</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.HandingOverData">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.HandingOverData.Singleton">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.HandingOverData.HandOverTo">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.HandingOverData.#ctor(Akka.Actor.IActorRef,Akka.Actor.IActorRef)">
+            <summary>
+            TBD
+            </summary>
+            <param name="singleton">TBD</param>
+            <param name="handOverTo">TBD</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.StoppingData">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.StoppingData.Singleton">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.StoppingData.#ctor(Akka.Actor.IActorRef)">
+            <summary>
+            TBD
+            </summary>
+            <param name="singleton">TBD</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.EndData">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.EndData.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.AcquiringLeaseData">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.AcquiringLeaseData.LeaseRequestInProgress">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.AcquiringLeaseData.Singleton">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.AcquiringLeaseData.#ctor(System.Boolean,Akka.Actor.IActorRef)">
+            <summary>
+            TBD
+            </summary>
+            <param name="leaseRequestInProgress">TBD</param>
+            <param name="singleton">TBD</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.DelayedMemberRemoved">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.DelayedMemberRemoved.Member">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.DelayedMemberRemoved.#ctor(Akka.Cluster.Member)">
+            <summary>
+            TBD
+            </summary>
+            <param name="member">TBD</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.SelfExiting">
+             <summary>
+             INTERNAL API
+            
+             Used for graceful termination as part of <see cref="T:Akka.Actor.CoordinatedShutdown"/>.
+             </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.SelfExiting.Instance">
+            <summary>
+            Singleton instance
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.ClusterSingletonState">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.Singleton.ClusterSingletonState.Start">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.Singleton.ClusterSingletonState.AcquiringLease">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.Singleton.ClusterSingletonState.Oldest">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.Singleton.ClusterSingletonState.Younger">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.Singleton.ClusterSingletonState.BecomingOldest">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.Singleton.ClusterSingletonState.WasOldest">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.Singleton.ClusterSingletonState.HandingOver">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.Singleton.ClusterSingletonState.TakeOver">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.Singleton.ClusterSingletonState.Stopping">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.Singleton.ClusterSingletonState.End">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerIsStuckException">
+            <summary>
+            Thrown when a consistent state can't be determined within the defined retry limits.
+            Eventually it will reach a stable state and can continue, and that is simplified
+            by starting over with a clean state. Parent supervisor should typically restart the actor, i.e. default decision.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerIsStuckException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerIsStuckException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.ClusterSingletonManager">
+            <summary>
+            <para>
+            Manages singleton actor instance among all cluster nodes or a group of nodes tagged with a specific role.
+            At most one singleton instance is running at any point in time.
+            </para>
+            <para>
+            The ClusterSingletonManager is supposed to be started on all nodes, or all nodes with specified role,
+            in the cluster with <see cref="M:Akka.Actor.ActorSystem.ActorOf(Akka.Actor.Props,System.String)"/>. The actual singleton is started on the oldest node
+            by creating a child actor from the supplied `singletonProps`.
+            </para>
+            <para>
+            The singleton actor is always running on the oldest member with specified role. The oldest member is determined
+            by <see cref="M:Akka.Cluster.Member.IsOlderThan(Akka.Cluster.Member)"/>. This can change when removing members. A graceful hand over can normally
+            be performed when current oldest node is leaving the cluster. Be aware that there is a short time period when
+            there is no active singleton during the hand-over process.
+            </para>
+            <para>
+            The cluster failure detector will notice when oldest node becomes unreachable due to things like CLR crash,
+            hard shut down, or network failure. When the crashed node has been removed (via down) from the cluster then
+            a new oldest node will take over and a new singleton actor is created.For these failure scenarios there
+            will not be a graceful hand-over, but more than one active singletons is prevented by all reasonable means.
+            Some corner cases are eventually resolved by configurable timeouts.
+            </para>
+            <para>
+            You access the singleton actor with <see cref="T:Akka.Cluster.Tools.Singleton.ClusterSingletonProxy"/>. Alternatively the singleton actor may
+            broadcast its existence when it is started.
+            </para>
+            <para>
+            Use one of the factory methods <see cref="M:Akka.Cluster.Tools.Singleton.ClusterSingletonManager.Props(Akka.Actor.Props,Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings)">ClusterSingletonManager.Props</see> to create the <see cref="T:Akka.Actor.Props"/> for the actor.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonManager.DefaultConfig">
+            <summary>
+            Returns default HOCON configuration for the cluster singleton.
+            </summary>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonManager.Props(Akka.Actor.Props,Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings)">
+            <summary>
+            Creates props for the current cluster singleton manager using <see cref="T:Akka.Actor.PoisonPill"/>
+            as the default termination message.
+            </summary>
+            <param name="singletonProps"><see cref="T:Akka.Actor.Props"/> of the singleton actor instance.</param>
+            <param name="settings">Cluster singleton manager settings.</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonManager.Props(Akka.Actor.Props,System.Object,Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings)">
+            <summary>
+            Creates props for the current cluster singleton manager.
+            </summary>
+            <param name="singletonProps"><see cref="T:Akka.Actor.Props"/> of the singleton actor instance.</param>
+            <param name="terminationMessage">
+            When handing over to a new oldest node this <paramref name="terminationMessage"/> is sent to the singleton actor
+            to tell it to finish its work, close resources, and stop. The hand-over to the new oldest node
+            is completed when the singleton actor is terminated. Note that <see cref="T:Akka.Actor.PoisonPill"/> is a
+            perfectly fine <paramref name="terminationMessage"/> if you only need to stop the actor.
+            </param>
+            <param name="settings">Cluster singleton manager settings.</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonManager.#ctor(Akka.Actor.Props,System.Object,Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings)">
+            <summary>
+            TBD
+            </summary>
+            <param name="singletonProps">TBD</param>
+            <param name="terminationMessage">TBD</param>
+            <param name="settings">TBD</param>
+            <exception cref="T:System.ArgumentException">TBD</exception>
+            <exception cref="T:Akka.Configuration.ConfigurationException">TBD</exception>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonManager.PreStart">
+            <inheritdoc cref="M:Akka.Actor.ActorBase.PreStart"/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonManager.PostStop">
+            <inheritdoc cref="M:Akka.Actor.ActorBase.PostStop"/>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings">
+            <summary>
+            The settings used for the <see cref="T:Akka.Cluster.Tools.Singleton.ClusterSingletonManager"/>
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings.Create(Akka.Actor.ActorSystem)">
+            <summary>
+            Creates a new <see cref="T:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings"/> instance.
+            </summary>
+            <param name="system">The <see cref="T:Akka.Actor.ActorSystem"/> to which this singleton manager belongs.</param>
+            <exception cref="T:Akka.Configuration.ConfigurationException">Thrown if no "akka.cluster.singleton" section is defined.</exception>
+            <returns>The requested settings.</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings.Create(Akka.Configuration.Config)">
+            <summary>
+            Creates a new <see cref="T:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings"/> instance.
+            </summary>
+            <param name="config">The HOCON configuration used to create the settings.</param>
+            <returns>The requested settings.</returns>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings.SingletonName">
+            <summary>
+            The actor name of the child singleton actor.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings.Role">
+            <summary>
+            Singleton among the nodes tagged with specified role.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings.RemovalMargin">
+            <summary>
+            Margin until the singleton instance that belonged to a downed/removed partition is created in surviving partition.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings.HandOverRetryInterval">
+            <summary>
+            When a node is becoming oldest it sends hand-over request to previous oldest, that might be leaving the cluster.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings.LeaseSettings">
+            <summary>
+            LeaseSettings for acquiring before creating the singleton actor
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings.#ctor(System.String,System.String,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            Creates a new instance of the <see cref="T:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings"/>.
+            </summary>
+            <param name="singletonName">The actor name of the child singleton actor.</param>
+            <param name="role">
+            Singleton among the nodes tagged with specified role. If the role is not specified
+            it's a singleton among all nodes in the cluster.
+            </param>
+            <param name="removalMargin">
+            Margin until the singleton instance that belonged to a downed/removed partition is
+            created in surviving partition. The purpose of  this margin is that in case of
+            a network partition the singleton actors  in the non-surviving partitions must
+            be stopped before corresponding actors are started somewhere else.
+            This is especially important for persistent actors.
+            </param>
+            <param name="handOverRetryInterval">
+            When a node is becoming oldest it sends hand-over
+            request to previous oldest, that might be leaving the cluster. This is
+            retried with this interval until the previous oldest confirms that the hand
+            over has started or the previous oldest member is removed from the cluster
+            (+ <paramref name="removalMargin"/>).
+            </param>
+            <exception cref="T:System.ArgumentException">TBD</exception>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings.#ctor(System.String,System.String,System.TimeSpan,System.TimeSpan,Akka.Coordination.LeaseUsageSettings)">
+            <summary>
+            Creates a new instance of the <see cref="T:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings"/>.
+            </summary>
+            <param name="singletonName">The actor name of the child singleton actor.</param>
+            <param name="role">
+            Singleton among the nodes tagged with specified role. If the role is not specified
+            it's a singleton among all nodes in the cluster.
+            </param>
+            <param name="removalMargin">
+            Margin until the singleton instance that belonged to a downed/removed partition is
+            created in surviving partition. The purpose of  this margin is that in case of
+            a network partition the singleton actors  in the non-surviving partitions must
+            be stopped before corresponding actors are started somewhere else.
+            This is especially important for persistent actors.
+            </param>
+            <param name="handOverRetryInterval">
+            When a node is becoming oldest it sends hand-over
+            request to previous oldest, that might be leaving the cluster. This is
+            retried with this interval until the previous oldest confirms that the hand
+            over has started or the previous oldest member is removed from the cluster
+            (+ <paramref name="removalMargin"/>).
+            </param>
+            <param name="leaseSettings">LeaseSettings for acquiring before creating the singleton actor</param>
+            <exception cref="T:System.ArgumentException">TBD</exception>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings.WithSingletonName(System.String)">
+            <summary>
+            Create a singleton manager with specified singleton name.
+            </summary>
+            <param name="singletonName">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings.WithRole(System.String)">
+            <summary>
+            Create a singleton manager with specified singleton role.
+            </summary>
+            <param name="role">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings.WithRemovalMargin(System.TimeSpan)">
+            <summary>
+            Create a singleton manager with specified singleton removal margin.
+            </summary>
+            <param name="removalMargin">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings.WithHandOverRetryInterval(System.TimeSpan)">
+            <summary>
+            Create a singleton manager with specified singleton removal margin hand-over retry interval.
+            </summary>
+            <param name="handOverRetryInterval">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonManagerSettings.WithLeaseSettings(Akka.Coordination.LeaseUsageSettings)">
+            <summary>
+            Create a singleton manager with specified singleton lease settings.
+            </summary>
+            <param name="leaseSettings">TBD</param>
+            <returns></returns>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.ClusterSingletonProxy">
+            <summary>
+            <para>
+            The <see cref="T:Akka.Cluster.Tools.Singleton.ClusterSingletonProxy"/> works together with the <see cref="T:Akka.Cluster.Tools.Singleton.ClusterSingletonManager"/> to provide a
+            distributed proxy to the singleton actor.
+            </para>
+            <para>
+            The proxy can be started on every node where the singleton needs to be reached and used as if it were the singleton
+            itself. It will then act as a router to the currently running singleton instance. If the singleton is not currently
+            available, e.g., during hand off or startup, the proxy will buffer the messages sent to the singleton and then deliver
+            them when the singleton is finally available. The size of the buffer is configurable and it can be disabled by using
+            a buffer size of 0. When the buffer is full old messages will be dropped when new messages are sent via the proxy.
+            </para>
+            <para>
+            The proxy works by keeping track of the oldest cluster member. When a new oldest member is identified, e.g. because
+            the older one left the cluster, or at startup, the proxy will try to identify the singleton on the oldest member by
+            periodically sending an <see cref="T:Akka.Actor.Identify"/> message until the singleton responds with its <see cref="T:Akka.Actor.ActorIdentity"/>.
+            </para>
+            <remarks>
+            Note that this is a best effort implementation: messages can always be lost due to the distributed nature of the actors involved.
+            </remarks>
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.ClusterSingletonProxy.TryToIdentifySingleton">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.ClusterSingletonProxy.TryToIdentifySingleton.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonProxy.DefaultConfig">
+            <summary>
+            Returns default HOCON configuration for the cluster singleton.
+            </summary>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonProxy.Props(System.String,Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings)">
+            <summary>
+            Factory method for <see cref="T:Akka.Cluster.Tools.Singleton.ClusterSingletonProxy"/> <see cref="T:Akka.Actor.Props"/>.
+            </summary>
+            <param name="singletonManagerPath">
+            The logical path of the singleton manager, e.g. `/user/singletonManager`,
+            which ends with the name you defined in `actorOf` when creating the <see cref="T:Akka.Cluster.Tools.Singleton.ClusterSingletonManager"/>.
+            </param>
+            <param name="settings">Cluster singleton proxy settings.</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonProxy.#ctor(System.String,Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings)">
+            <summary>
+            TBD
+            </summary>
+            <param name="singletonManagerPath">TBD</param>
+            <param name="settings">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonProxy.PreStart">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonProxy.PostStop">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings">
+            <summary>
+            Create settings from the default configuration
+            `akka.cluster.singleton-proxy`.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings.Create(Akka.Actor.ActorSystem)">
+            <summary>
+            TBD
+            </summary>
+            <param name="system">TBD</param>
+            <exception cref="T:Akka.Configuration.ConfigurationException">TBD</exception>
+            <returns>TBD</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings.Create(Akka.Configuration.Config)">
+            <summary>
+            Create settings from a configuration with the same layout as
+            the default configuration `akka.cluster.singleton-proxy`.
+            </summary>
+            <param name="config">TBD</param>
+            <returns>TBD</returns>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings.SingletonName">
+            <summary>
+            The actor name of the singleton actor that is started by the <see cref="T:Akka.Cluster.Tools.Singleton.ClusterSingletonManager"/>.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings.Role">
+            <summary>
+            The role of the cluster nodes where the singleton can be deployed.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings.SingletonIdentificationInterval">
+            <summary>
+            Interval at which the proxy will try to resolve the singleton instance.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings.BufferSize">
+            <summary>
+            If the location of the singleton is unknown the proxy will buffer this number of messages and deliver them when the singleton is identified.
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings.#ctor(System.String,System.String,System.TimeSpan,System.Int32)">
+            <summary>
+            Creates new instance of the <see cref="T:Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings"/>.
+            </summary>
+            <param name="singletonName">The actor name of the singleton actor that is started by the <see cref="T:Akka.Cluster.Tools.Singleton.ClusterSingletonManager"/>.</param>
+            <param name="role">The role of the cluster nodes where the singleton can be deployed. If None, then any node will do.</param>
+            <param name="singletonIdentificationInterval">Interval at which the proxy will try to resolve the singleton instance.</param>
+            <param name="bufferSize">
+            If the location of the singleton is unknown the proxy will buffer this number of messages and deliver them
+            when the singleton is identified.When the buffer is full old messages will be dropped when new messages
+            are sent via the proxy. Use 0 to disable buffering, i.e.messages will be dropped immediately if the location
+            of the singleton is unknown.
+            </param>
+            <exception cref="T:System.ArgumentException">
+            This exception is thrown when either the specified <paramref name="singletonIdentificationInterval"/>
+            or <paramref name="bufferSize"/> is less than or equal to zero.
+            </exception>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings.WithSingletonName(System.String)">
+            <summary>
+            Creates a new <see cref="T:Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings" /> setting with the specified <paramref name="singletonName"/>.
+            <note>
+            This method is immutable and returns a new instance of the setting.
+            </note>
+            </summary>
+            <param name="singletonName">The name of the singleton actor used by the <see cref="T:Akka.Cluster.Tools.Singleton.ClusterSingletonManager"/>.</param>
+            <returns>A new setting with the provided <paramref name="singletonName" />.</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings.WithRole(System.String)">
+            <summary>
+            Creates a new <see cref="T:Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings" /> setting with the specified <paramref name="role"/>
+            from the <c>akka.cluster.role</c> in the configuration used. The <paramref name="role"/> specifies the nodes
+            on which the targeted singleton can run.
+            <note>
+            This method is immutable and returns a new instance of the setting.
+            </note>
+            </summary>
+            <param name="role">The role of the singleton proxy.</param>
+            <returns>A new setting with the provided <paramref name="role" />.</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings.WithSingletonIdentificationInterval(System.String)">
+            <summary>
+            Creates a new <see cref="T:Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings" /> setting with the specified <paramref name="singletonIdentificationInterval"/>.
+            <note>
+            This method is immutable and returns a new instance of the setting.
+            </note>
+            </summary>
+            <param name="singletonIdentificationInterval">The identification level of the singleton proxy.</param>
+            <returns>A new setting with the provided <paramref name="singletonIdentificationInterval" />.</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings.WithSingletonIdentificationInterval(System.TimeSpan)">
+            <summary>
+            Creates a new <see cref="T:Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings" /> setting with the specified <paramref name="singletonIdentificationInterval"/>.
+            <note>
+            This method is immutable and returns a new instance of the setting.
+            </note>
+            </summary>
+            <param name="singletonIdentificationInterval">The identification level of the singleton proxy.</param>
+            <returns>A new setting with the provided <paramref name="singletonIdentificationInterval" />.</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings.WithBufferSize(System.Int32)">
+            <summary>
+            Creates a new <see cref="T:Akka.Cluster.Tools.Singleton.ClusterSingletonProxySettings" /> setting with the specified <paramref name="bufferSize"/>.
+            <note>
+            This method is immutable and returns a new instance of the setting.
+            </note>
+            </summary>
+            <param name="bufferSize">The buffer size of the singleton proxy.</param>
+            <returns>A new setting with the provided <paramref name="bufferSize" />.</returns>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.MemberAgeOrdering">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.MemberAgeOrdering.Compare(Akka.Cluster.Member,Akka.Cluster.Member)">
+            <inheritdoc/>
+        </member>
+        <member name="F:Akka.Cluster.Tools.Singleton.MemberAgeOrdering.Ascending">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="F:Akka.Cluster.Tools.Singleton.MemberAgeOrdering.Descending">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.OldestChangedBuffer">
+            <summary>
+            Notifications of member events that track oldest member is tunneled
+            via this actor (child of ClusterSingletonManager) to be able to deliver
+            one change at a time. Avoiding simultaneous changes simplifies
+            the process in ClusterSingletonManager. ClusterSingletonManager requests
+            next event with <see cref="T:Akka.Cluster.Tools.Singleton.OldestChangedBuffer.GetNext"/> when it is ready for it. Only one outstanding
+            <see cref="T:Akka.Cluster.Tools.Singleton.OldestChangedBuffer.GetNext"/> request is allowed. Incoming events are buffered and delivered
+            upon <see cref="T:Akka.Cluster.Tools.Singleton.OldestChangedBuffer.GetNext"/> request.
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.OldestChangedBuffer.GetNext">
+            <summary>
+            Request to deliver one more event.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.OldestChangedBuffer.GetNext.Instance">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.OldestChangedBuffer.InitialOldestState">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.OldestChangedBuffer.InitialOldestState.Oldest">
+            <summary>
+            The first event, corresponding to CurrentClusterState.
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.OldestChangedBuffer.InitialOldestState.SafeToBeOldest">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.OldestChangedBuffer.InitialOldestState.#ctor(System.Collections.Generic.List{Akka.Cluster.UniqueAddress},System.Boolean)">
+            <summary>
+            TBD
+            </summary>
+            <param name="oldest">TBD</param>
+            <param name="safeToBeOldest">TBD</param>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.OldestChangedBuffer.OldestChanged">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="P:Akka.Cluster.Tools.Singleton.OldestChangedBuffer.OldestChanged.Oldest">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.OldestChangedBuffer.OldestChanged.#ctor(Akka.Cluster.UniqueAddress)">
+            <summary>
+            TBD
+            </summary>
+            <param name="oldest">TBD</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.OldestChangedBuffer.#ctor(System.String)">
+            <summary>
+            Creates a new instance of the <see cref="T:Akka.Cluster.Tools.Singleton.OldestChangedBuffer"/>.
+            </summary>
+            <param name="role">The role for which we're watching for membership changes.</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.OldestChangedBuffer.SetupCoordinatedShutdown">
+             <summary>
+             It's a delicate difference between <see cref="F:Akka.Actor.CoordinatedShutdown.PhaseClusterExiting"/> and <see cref="T:Akka.Cluster.ClusterEvent.MemberExited"/>.
+            
+             MemberExited event is published immediately (leader may have performed that transition on other node),
+             and that will trigger run of <see cref="T:Akka.Actor.CoordinatedShutdown"/>, while PhaseClusterExiting will happen later.
+             Using PhaseClusterExiting in the singleton because the graceful shutdown of sharding region
+             should preferably complete before stopping the singleton sharding coordinator on same node.
+             </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.OldestChangedBuffer.PreStart">
+            <inheritdoc cref="M:Akka.Actor.ActorBase.PreStart"/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.OldestChangedBuffer.PostStop">
+            <inheritdoc cref="M:Akka.Actor.ActorBase.PostStop"/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.OldestChangedBuffer.OnReceive(System.Object)">
+            <inheritdoc cref="M:Akka.Actor.UntypedActor.OnReceive(System.Object)"/>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.OldestChangedBuffer.OnDeliverNext(System.Object)">
+            <summary>
+            The buffer was empty when GetNext was received, deliver next event immediately.
+            </summary>
+            <param name="message">The message to handle.</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.OldestChangedBuffer.Unhandled(System.Object)">
+            <inheritdoc cref="M:Akka.Actor.ActorBase.Unhandled(System.Object)"/>
+        </member>
+        <member name="T:Akka.Cluster.Tools.Singleton.Serialization.ClusterSingletonMessageSerializer">
+            <summary>
+            TBD
+            </summary>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.Serialization.ClusterSingletonMessageSerializer.#ctor(Akka.Actor.ExtendedActorSystem)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Akka.Cluster.Tools.Singleton.Serialization.ClusterSingletonMessageSerializer"/> class.
+            </summary>
+            <param name="system">The actor system to associate with this serializer.</param>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.Serialization.ClusterSingletonMessageSerializer.ToBinary(System.Object)">
+            <summary>
+            Serializes the given object into a byte array
+            </summary>
+            <param name="obj">The object to serialize</param>
+            <exception cref="T:System.ArgumentException">
+            This exception is thrown when the specified <paramref name="obj"/> is of an unknown type.
+            Acceptable values include: <see cref="T:Akka.Cluster.Tools.Singleton.HandOverToMe"/> | <see cref="T:Akka.Cluster.Tools.Singleton.HandOverInProgress"/> | <see cref="T:Akka.Cluster.Tools.Singleton.HandOverDone"/> | <see cref="T:Akka.Cluster.Tools.Singleton.TakeOverFromMe"/>
+            </exception>
+            <returns>A byte array containing the serialized object</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.Serialization.ClusterSingletonMessageSerializer.FromBinary(System.Byte[],System.String)">
+            <summary>
+            Deserializes a byte array into an object using an optional <paramref name="manifest" /> (type hint).
+            </summary>
+            <param name="bytes">The array containing the serialized object</param>
+            <param name="manifest">The type hint used to deserialize the object contained in the array.</param>
+            <exception cref="T:System.ArgumentException">
+            This exception is thrown when the specified <paramref name="bytes"/>cannot be deserialized using the specified <paramref name="manifest"/>.
+            </exception>
+            <returns>The object contained in the array</returns>
+        </member>
+        <member name="M:Akka.Cluster.Tools.Singleton.Serialization.ClusterSingletonMessageSerializer.Manifest(System.Object)">
+            <summary>
+            Returns the manifest (type hint) that will be provided in the <see cref="M:Akka.Cluster.Tools.Singleton.Serialization.ClusterSingletonMessageSerializer.FromBinary(System.Byte[],System.String)" /> method.
+            <note>
+            This method returns <see cref="F:System.String.Empty" /> if a manifest is not needed.
+            </note>
+            </summary>
+            <param name="o">The object for which the manifest is needed.</param>
+            <exception cref="T:System.ArgumentException">
+            This exception is thrown when the specified <paramref name="o"/> does not have an associated manifest.
+            </exception>
+            <returns>The manifest needed for the deserialization of the specified <paramref name="o" />.</returns>
+        </member>
+    </members>
+</doc>

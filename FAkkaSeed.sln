@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.98
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FAkkaSeed", "FAkkaSeed\FAkkaSeed.fsproj", "{1ADE9683-3E00-478B-B7E3-DF61555F608C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P2PNET2", "P2PNET2\P2PNET2.csproj", "{FE595163-B883-44A0-A269-1B12754DA20F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1ADE9683-3E00-478B-B7E3-DF61555F608C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ADE9683-3E00-478B-B7E3-DF61555F608C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ADE9683-3E00-478B-B7E3-DF61555F608C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ADE9683-3E00-478B-B7E3-DF61555F608C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE595163-B883-44A0-A269-1B12754DA20F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE595163-B883-44A0-A269-1B12754DA20F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE595163-B883-44A0-A269-1B12754DA20F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE595163-B883-44A0-A269-1B12754DA20F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BDB402B8-4062-44B3-91E6-2DD979797D78}
+	EndGlobalSection
+EndGlobal

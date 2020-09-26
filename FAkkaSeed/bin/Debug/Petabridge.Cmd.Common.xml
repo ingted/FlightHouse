@@ -1,0 +1,978 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Petabridge.Cmd.Common</name>
+    </assembly>
+    <members>
+        <member name="T:Petabridge.Cmd.Common.ArgumentsExtractor">
+            <summary>
+                Utility class for simplifying the process of extracting <see cref="T:Petabridge.Cmd.CommandArgument" />s
+                from a <see cref="T:Petabridge.Cmd.Command" /> received by the server.
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.Common.ArgumentsExtractor.ExtractArgs(Petabridge.Cmd.CommandDefinition,Petabridge.Cmd.Command)">
+            <summary>
+                For a given <see cref="T:Petabridge.Cmd.CommandDefinition" />, extract all of the arguments from a <see cref="T:Petabridge.Cmd.Command" />
+                of the same type and return them into an easily accessible <see cref="T:Petabridge.Cmd.Common.ParsedArguments" /> collection.
+            </summary>
+            <param name="definition">The command definition.</param>
+            <param name="cmd">The command of the same type as <see cref="!:definition" />.</param>
+            <returns>A <see cref="T:Petabridge.Cmd.Common.ParsedArguments" /> collection.</returns>
+        </member>
+        <member name="T:Petabridge.Cmd.Common.ParsedArguments">
+            <summary>
+                A set of parsed arguments from a <see cref="T:Petabridge.Cmd.Command" /> given its <see cref="T:Petabridge.Cmd.CommandDefinition" />.
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.Common.ParsedArguments.IsArgumentSet(System.String)">
+            <summary>
+                Check to see if this argument was set.
+            </summary>
+            <param name="argumentName">The name of the argument.</param>
+            <returns><c>true</c> if this argument was set at all, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:Petabridge.Cmd.Common.ParsedArguments.ArgumentValues(System.String)">
+            <summary>
+                Retrieve the values for the provided argument.
+            </summary>
+            <param name="argumentName">The name of the argument.</param>
+            <returns>If the argument was not set by this <see cref="T:Petabridge.Cmd.Command" />, we will return an empty <see cref="T:System.Collections.Generic.List`1" />.</returns>
+        </member>
+        <member name="T:Petabridge.Cmd.Common.Serialization.Msg.CommandFormatsReflection">
+            <summary>Holder for reflection information generated from CommandFormats.proto</summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Common.Serialization.Msg.CommandFormatsReflection.Descriptor">
+            <summary>File descriptor for CommandFormats.proto</summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Common.Serialization.Msg.Schema">
+            <summary>
+            Uses a schema to describe the type of data included in a response
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.Schema.Text">
+            <summary>
+            defaults to what we had in PBM v0.2.2
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.Schema.Tabular">
+            <summary>
+            tabular data pretty-printed into a grid
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.Schema.Metric">
+            <summary>
+            metric data used to represent samples of values
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Common.Serialization.Msg.MetricType">
+            <summary>
+            The type of metric
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Common.Serialization.Msg.PbmEnvelope">
+            <summary>
+            Generalized envelope class
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.PbmEnvelope.CommandDefFieldNumber">
+            <summary>Field number for the "command_def" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.PbmEnvelope.CommandFieldNumber">
+            <summary>Field number for the "command" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.PbmEnvelope.ResponseFieldNumber">
+            <summary>Field number for the "response" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.PbmEnvelope.AllPalettesFieldNumber">
+            <summary>Field number for the "all_palettes" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.PbmEnvelope.SinglePaletteFieldNumber">
+            <summary>Field number for the "single_palette" field.</summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Common.Serialization.Msg.CommandDefinition">
+            <summary>
+            Defines a command that can be transmitted over the wire
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandDefinition.IdFieldNumber">
+            <summary>Field number for the "id" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandDefinition.NameFieldNumber">
+            <summary>Field number for the "name" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandDefinition.DescriptionFieldNumber">
+            <summary>Field number for the "description" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandDefinition.TypeFieldNumber">
+            <summary>Field number for the "type" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandDefinition.ArgumentsFieldNumber">
+            <summary>Field number for the "arguments" field.</summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Common.Serialization.Msg.CommandDefinition.Arguments">
+            <summary>
+            the set of arguments
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandDefinition.TableDefFieldNumber">
+            <summary>Field number for the "table_def" field.</summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Common.Serialization.Msg.CommandDefinition.TableDef">
+            <summary>
+            If this is tabular data, define the columns here
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandDefinition.MetricDefFieldNumber">
+            <summary>Field number for the "metric_def" field.</summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Common.Serialization.Msg.CommandDefinition.MetricDef">
+            <summary>
+            If this is metric data, define the type here
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Common.Serialization.Msg.AllPalettes">
+            <summary>
+            Represents an IEnumerable&lt;CommandPalette>
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.AllPalettes.PalettesFieldNumber">
+            <summary>Field number for the "palettes" field.</summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Common.Serialization.Msg.CommandPalette">
+            <summary>
+            Defines a command palette
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandPalette.ModuleNameFieldNumber">
+            <summary>Field number for the "module_name" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandPalette.CommandsFieldNumber">
+            <summary>Field number for the "commands" field.</summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Common.Serialization.Msg.TableDefinition">
+            <summary>
+            Defines the schema of a table
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.TableDefinition.ColumnsFieldNumber">
+            <summary>Field number for the "columns" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.MetricDefinition.MetricNameFieldNumber">
+            <summary>Field number for the "metric_name" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.MetricDefinition.TypeFieldNumber">
+            <summary>Field number for the "type" field.</summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Common.Serialization.Msg.CommandArgumentDefinition">
+            <summary>
+            Defines an argument for a command
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandArgumentDefinition.NameFieldNumber">
+            <summary>Field number for the "name" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandArgumentDefinition.DescriptionFieldNumber">
+            <summary>Field number for the "description" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandArgumentDefinition.SwitchesFieldNumber">
+            <summary>Field number for the "switches" field.</summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Common.Serialization.Msg.CommandArgumentDefinition.Switches">
+            <summary>
+            the set of switches, ala "-s", "-S"
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandArgumentDefinition.IsMandatoryFieldNumber">
+            <summary>Field number for the "is_mandatory" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandArgumentDefinition.IsFlagFieldNumber">
+            <summary>Field number for the "is_flag" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandArgumentDefinition.AllowMultipleFieldNumber">
+            <summary>Field number for the "allow_multiple" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandArgumentDefinition.DefaultValuesFieldNumber">
+            <summary>Field number for the "default_values" field.</summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Common.Serialization.Msg.CommandArgumentDefinition.DefaultValues">
+            <summary>
+            , the set of repeated values
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Common.Serialization.Msg.CommandResponse">
+            <summary>
+            Defines a response to a command
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandResponse.IdFieldNumber">
+            <summary>Field number for the "id" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandResponse.IsErrorFieldNumber">
+            <summary>Field number for the "is_error" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandResponse.EndFieldNumber">
+            <summary>Field number for the "end" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandResponse.TypeFieldNumber">
+            <summary>Field number for the "type" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandResponse.StructuredDataFieldNumber">
+            <summary>Field number for the "structured_data" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandResponse.TextDataFieldNumber">
+            <summary>Field number for the "text_data" field.</summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Common.Serialization.Msg.CommandResponse.TextData">
+            <summary>
+            populated only if this message is a TEXT type
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandResponse.TblDataFieldNumber">
+            <summary>Field number for the "tbl_data" field.</summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Common.Serialization.Msg.CommandResponse.TblData">
+            <summary>
+            populated only if this message is a TABULAR type
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandResponse.MetricDataFieldNumber">
+            <summary>Field number for the "metric_data" field.</summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Common.Serialization.Msg.CommandResponse.MetricData">
+            <summary>
+            populated only if message is a METRIC type
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Common.Serialization.Msg.CommandResponse.Types">
+            <summary>Container for nested types declared in the CommandResponse message type.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandResponse.Types.DataItem.KeyFieldNumber">
+            <summary>Field number for the "key" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandResponse.Types.DataItem.ValuesFieldNumber">
+            <summary>Field number for the "values" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.TextData.MsgFieldNumber">
+            <summary>Field number for the "msg" field.</summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Common.Serialization.Msg.TextData.Msg">
+            <summary>
+            the text-based message
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.TabularData.RowsFieldNumber">
+            <summary>Field number for the "rows" field.</summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Common.Serialization.Msg.TabularData.Types">
+            <summary>Container for nested types declared in the TabularData message type.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.TabularData.Types.TabularDataRow.ColumnsFieldNumber">
+            <summary>Field number for the "columns" field.</summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Common.Serialization.Msg.MetricData">
+            <summary>
+            The metric payload
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.MetricData.TypeFieldNumber">
+            <summary>Field number for the "type" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.MetricData.TimestampFieldNumber">
+            <summary>Field number for the "timestamp" field.</summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Common.Serialization.Msg.MetricData.Timestamp">
+            <summary>
+            used for timer types
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.MetricData.CounterValueFieldNumber">
+            <summary>Field number for the "counter_value" field.</summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Common.Serialization.Msg.MetricData.CounterValue">
+            <summary>
+            used for counter types
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.MetricData.GaugeValueFieldNumber">
+            <summary>Field number for the "gauge_value" field.</summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Common.Serialization.Msg.MetricData.GaugeValue">
+            <summary>
+            used for gauge types
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Common.Serialization.Msg.Command">
+            <summary>
+            Invokes a command over the network
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.Command.ModuleFieldNumber">
+            <summary>Field number for the "module" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.Command.NameFieldNumber">
+            <summary>Field number for the "name" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.Command.ArgumentsFieldNumber">
+            <summary>Field number for the "arguments" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandArgument.SwitchFieldNumber">
+            <summary>Field number for the "switch" field.</summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Common.Serialization.Msg.CommandArgument.ValueFieldNumber">
+            <summary>Field number for the "value" field.</summary>
+        </member>
+        <member name="T:Petabridge.Cmd.HelpCommand">
+            <summary>
+                Special case. Used to print help instructions for the specified command
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Command">
+            <summary>
+                A command to be sent to the server for processing
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Command.Empty">
+            <summary>
+                Special case for unparseable commands
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.Command.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}})">
+            <summary>
+                Creates a new instance of a command for processing.
+            </summary>
+            <param name="module">The module (or palette) that defines this command.</param>
+            <param name="name">The command name itself.</param>
+            <param name="arguments">The set of provided arguments.</param>
+        </member>
+        <member name="P:Petabridge.Cmd.Command.Module">
+            <summary>
+                The name of the command palette for this argument.
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Command.Name">
+            <summary>
+                The name of the command being executed.
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Command.Arguments">
+            <summary>
+                The set of arguments associated with this command.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.CommandBuilder">
+            <summary>
+                Fluent DSL for building <see cref="T:Petabridge.Cmd.Command" /> objects.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.CommandDefinition">
+            <summary>
+                Describes the lexical structure of a command.
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.CommandDefinition.BuiltIn">
+            <summary>
+                INTERNAL API.
+                Used to signal that this is a built-in command,
+                which receives special case treatment from the parsing,
+                help, and validation systems.
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.CommandDefinition.WhiteSpaceDetector">
+            <summary>
+                INTERNAL API.
+                Used to validate that there's no whitespace in any command names, per
+                https://github.com/petabridge/petabridge.cmd-issues/issues/14
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.CommandDefinition.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{Petabridge.Cmd.CommandArgument})">
+            <summary>
+                Creates a new command definition.
+            </summary>
+            <param name="name">The name of the command.</param>
+            <param name="description">The human-readable description of the command.</param>
+            <param name="arguments">The arguments provided.</param>
+        </member>
+        <member name="T:Petabridge.Cmd.CommandArgument">
+            <summary>
+                Defines an argument for a <see cref="T:Petabridge.Cmd.CommandDefinition" />
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.CommandArgument.#ctor(System.String,System.String[],System.String,System.Boolean,System.Boolean,System.Boolean,System.String[])">
+            <summary>
+                Creates a new <see cref="T:Petabridge.Cmd.CommandArgument" />.
+            </summary>
+            <param name="name">The human friendly name of the command argument.</param>
+            <param name="switches">The set of switches used for command on the commandline itself.</param>
+            <param name="description">Human friendly description of the commandline argument.</param>
+            <param name="mandatory">Determines if this is a required argument or not.</param>
+            <param name="allowMultiple">Determiens if there can be mulitple instances of this argument or not.</param>
+            <param name="isFlag">Indicates of this argument requires a value or not. If not, then this is treated as a flag.</param>
+            <param name="defaultValues">Optional. The set of default values that can be provided to an argument.</param>
+        </member>
+        <member name="P:Petabridge.Cmd.CommandArgument.Mandatory">
+            <summary>
+                If <c>true</c>, then the <see cref="T:Petabridge.Cmd.Command" /> who depends on this will fail if this value is not provided.
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.CommandArgument.Name">
+            <summary>
+                Human-readable property name
+            </summary>
+            <example>
+                address
+                host
+            </example>
+        </member>
+        <member name="P:Petabridge.Cmd.CommandArgument.Switch">
+            <summary>
+                The switches used to identify the command on the commandline itself.
+            </summary>
+            <example>
+                -a | -A
+            </example>
+            <remarks>This can be <c>null</c> if the command is mandatory.</remarks>
+        </member>
+        <member name="P:Petabridge.Cmd.CommandArgument.AllowMultiple">
+            <summary>
+                If <c>true</c>, allows this argument to be used multiple times.
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.CommandArgument.Description">
+            <summary>
+                The description for this command. Will be printed out during HELP commands.
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.CommandArgument.DefaultValues">
+            <summary>
+                Optional. Represents a range of possible default values. Mostly used by tab autocompletion.
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.CommandArgument.IsFlag">
+            <summary>
+                If <c>true</c>, then this argument requires a value. If not, then this argument acts just like a flag.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.ArgumentDefinitionBuilder">
+            <summary>
+                Fluent DSL used for creating arguments for Akka commands we're defining.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.CommandDefinitionBuilder">
+            <summary>
+                Fluent DSL for creating new <see cref="T:Petabridge.Cmd.CommandDefinition" />s.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.CommandHelp">
+            <summary>
+                Prints out help information for a <see cref="T:Petabridge.Cmd.CommandPalette" />
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.CommandHelp.Palette">
+            <summary>
+                The palette for this <see cref="T:Petabridge.Cmd.CommandHelp" />
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.CommandPalette">
+            <summary>
+                The range of commands supported by a given module.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.CommandParser">
+            <summary>
+                Parses a space-delimited string into a structured <see cref="T:Petabridge.Cmd.Command" /> object
+                for a specific <see cref="T:Petabridge.Cmd.CommandPalette" />.
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.CommandParser.Palette">
+            <summary>
+                The set of commands supported by this parser.
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.CommandParser.Validator">
+            <summary>
+                The validator for this parser.
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.CommandParser.Parse(System.String)">
+            <summary>
+            Parses a full command-line argument into its resultant parts.
+            </summary>
+            <param name="commandLine">The commandline to tokenize.</param>
+            <returns>
+                A <see cref="T:Petabridge.Cmd.ParseResult" /> structure indicating if the object was
+                correctly formed into a valid, recognizable <see cref="T:Petabridge.Cmd.Command" />
+                belonging to this <see cref="T:Petabridge.Cmd.CommandPalette" />.
+            </returns>
+        </member>
+        <member name="M:Petabridge.Cmd.CommandParser.Parse(System.String[])">
+            <summary>
+                Parses an incoming string into a <see cref="T:Petabridge.Cmd.Command" /> belonging to <see cref="P:Petabridge.Cmd.CommandParser.Palette" />.
+            </summary>
+            <param name="args">Tokenized commandline arguments</param>
+            <returns>
+                A <see cref="T:Petabridge.Cmd.ParseResult" /> structure indicating if the object was
+                correctly formed into a valid, recognizable <see cref="T:Petabridge.Cmd.Command" />
+                belonging to this <see cref="T:Petabridge.Cmd.CommandPalette" />.
+            </returns>
+        </member>
+        <member name="T:Petabridge.Cmd.ErroredCommandResponse">
+            <summary>
+                Special case for error messages.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.CommandResponse">
+            <summary>
+                Message sent in response to a <see cref="T:Petabridge.Cmd.Command" /> by an petabridge.cmd host.
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.CommandResponse.Empty">
+            <summary>
+                Special case. Used to terminate a response stream.
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.CommandResponse.EmptyStructuredData">
+            <summary>
+                A default, empty value for structured data.
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.CommandResponse.#ctor(System.String,System.Boolean,System.Collections.Generic.IReadOnlyDictionary{System.String,System.String[]})">
+            <summary>
+                Creates a new command response object.
+            </summary>
+            <param name="msg">The message from the server.</param>
+            <param name="final">If <c>true</c>, indicates that the server is done sending responses for this particular request.</param>
+            <param name="structuredData">Semantic data that can be used by the client for other types of rich response formatting.</param>
+        </member>
+        <member name="P:Petabridge.Cmd.CommandResponse.CommandType">
+            <summary>
+                Defines the schema used for the formatting of this command
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.CommandResponse.Msg">
+            <summary>
+                The raw message that will be printed back onto the console
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.CommandResponse.StructuredData">
+            <summary>
+                Optional. A string dictionary containing structured data that can be formatted and used by clients
+                in more semantically-friendly ways.
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.CommandResponse.Final">
+            <summary>
+                For streaming responses, indicates that this is the final message in the stream
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.CommandResponse.IsSpecial">
+            <summary>
+                Indicates that this is a special message which has built-in handlers on the client.
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.CommandResponse.IsError">
+            <summary>
+                Indicates that this is an error message
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.CommandSwitch">
+            <summary>
+                Used to indicate the different ways a command can be called on the commandline.
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.CommandSwitch.Empty">
+            <summary>
+                An empty <see cref="T:Petabridge.Cmd.CommandSwitch" /> instance.
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.CommandSwitch.#ctor(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+                Creates a new <see cref="T:Petabridge.Cmd.CommandSwitch" /> based on a list of provided switches.
+            </summary>
+            <param name="switches">The set of provided switches.</param>
+        </member>
+        <member name="M:Petabridge.Cmd.CommandSwitch.#ctor(System.Collections.Generic.HashSet{System.String})">
+            <summary>
+                Creates a new <see cref="T:Petabridge.Cmd.CommandSwitch" /> based on a list of provided switches.
+            </summary>
+            <param name="switches">The set of provided switches.</param>
+        </member>
+        <member name="P:Petabridge.Cmd.CommandSwitch.Switches">
+            <summary>
+                The set of switches supported by this command.
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.CommandSwitch.Contains(System.String)">
+            <summary>
+                Check to see if this <see cref="T:Petabridge.Cmd.CommandSwitch" /> contains an individual switch value.
+            </summary>
+            <param name="s">The switch value to check.</param>
+            <returns><c>true</c> if this switch is contained.</returns>
+        </member>
+        <member name="M:Petabridge.Cmd.CommandSwitch.Overlap(Petabridge.Cmd.CommandSwitch)">
+            <summary>
+                Check to see if two switches overlap with each other.
+            </summary>
+            <param name="other">The other <see cref="T:Petabridge.Cmd.CommandSwitch" /> to check.</param>
+            <returns>The set of overlapping values.</returns>
+        </member>
+        <member name="T:Petabridge.Cmd.CommandType">
+            <summary>
+                Defines the output response type produced when invoking a particular <see cref="T:Petabridge.Cmd.Command" />
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.ParsePart">
+            <summary>
+                INTERNAL API.
+                Used by the parser to determine which stage it's at in the course
+                of parsing a command string.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.ParseResult">
+            <summary>
+                The result of a parsing operation.
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.ParseResult.Parts">
+            <summary>
+                Internal API. Lists the semantic parts of the string as they were parsed.
+            </summary>
+            <remarks>
+                Used by autocomplete.
+            </remarks>
+        </member>
+        <member name="T:Petabridge.Cmd.Serialization.MessageEncoder">
+            <summary>
+                INTERNAL API. Used for framing outgoing messages.
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Serialization.MessageEncoder.MessageLengthHeaderSize">
+            <summary>
+                We use a 4 byte header
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.Serialization.MessageEncoder.Encode(System.Byte[])">
+            <summary>
+                Frame a single message
+            </summary>
+            <param name="bytes">The raw message bytes.</param>
+            <returns>A bytestring with length frame headers.</returns>
+        </member>
+        <member name="M:Petabridge.Cmd.Serialization.MessageEncoder.Decode(Akka.IO.ByteString)">
+            <summary>
+                Decode an incoming message and produce 0 or more messages depending on header values.
+            </summary>
+            <param name="byteString">The incoming data.</param>
+            <returns>0 or more individually framed messages.</returns>
+        </member>
+        <member name="T:Petabridge.Cmd.Util.CircularBuffer`1">
+            <summary>
+                Base class for working with circular buffers
+            </summary>
+            <typeparam name="T">The type being stored in the circular buffer</typeparam>
+        </member>
+        <member name="F:Petabridge.Cmd.Util.CircularBuffer`1._head">
+            <summary>
+                Front of the buffer
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Util.CircularBuffer`1._tail">
+            <summary>
+                Back of the buffer
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Util.CircularBuffer`1.Buffer">
+            <summary>
+                The buffer itself
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Util.CircularBuffer`1.Head">
+            <summary>
+                FOR TESTING PURPOSES ONLY
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Util.CircularBuffer`1.Tail">
+            <summary>
+                FOR TESTING PURPOSES ONLY
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.CircularBuffer`1.CopyTo(`0[])">
+            <summary>
+                Copies the contents of the Circular Buffer into a new array
+            </summary>
+            <param name="array">The destination array for the copy</param>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.CircularBuffer`1.CopyTo(`0[],System.Int32)">
+            <summary>
+                Copies the contents of the Circular Buffer into a new array
+            </summary>
+            <param name="array">The destination array for the copy</param>
+            <param name="index">The starting index for copying in the destination array</param>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.CircularBuffer`1.CopyTo(`0[],System.Int32,System.Int32)">
+            <summary>
+                Copies the contents of the Circular Buffer into a new array
+            </summary>
+            <param name="array">The destination array for the copy</param>
+            <param name="index">The starting index for copying in the destination array</param>
+            <param name="count">The number of items to copy from the current buffer (max value = current Size of buffer)</param>
+        </member>
+        <member name="T:Petabridge.Cmd.Util.CircularIterator`1">
+            <summary>
+                INTERNAL API
+                Used to iterate in a circular fashion around an <see cref="T:System.Collections.Generic.IEnumerable`1" />
+            </summary>
+            <remarks>
+                Used for circular tab autocomplete.
+            </remarks>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.CircularIterator`1.MoveBack">
+            <summary>
+                Allows the iterator to move backwards all the way back to its starting position
+            </summary>
+            <returns><c>true</c> if we're able to move backwards, <c>false</c> otherwise</returns>
+        </member>
+        <member name="T:Petabridge.Cmd.Util.ConsoleExtensions">
+            <summary>
+                INTERNAL API
+            </summary>
+            <remarks>
+                Used to help create text-wrappable columns for printing on the console.
+            </remarks>
+        </member>
+        <member name="T:Petabridge.Cmd.Util.EndpointParser">
+            <summary>
+                INTERNAL API.
+                Designed to help extract IP address and port from startup arguments
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.EndpointParser.TryParse(System.String,System.Net.EndPoint@)">
+            <summary>
+               Attempt to parse the string into an <see cref="T:System.Net.IPEndPoint" /> or <see cref="T:System.Net.DnsEndPoint" />
+            </summary>
+            <param name="endPoint">The endpoint we'll be using.</param>
+            <param name="ep">
+                An <see cref="T:System.Net.IPEndPoint" /> or <see cref="T:System.Net.DnsEndPoint" /> if endpoint is a valid address.
+                Otherwise <c>null</c>.</param>
+            <returns>
+               <c>true</c> if the parse was successful, <c>false</c> otherwise.
+            </returns>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.EndpointParser.Parse(System.String)">
+            <summary>
+                Parses the string into an <see cref="T:System.Net.IPEndPoint" /> or <see cref="T:System.Net.DnsEndPoint" />
+            </summary>
+            <param name="endPoint">The endpoint we'll be using.</param>
+            <returns>
+                An <see cref="T:System.Net.IPEndPoint" /> or <see cref="T:System.Net.DnsEndPoint" /> if endpoint is a valid address.
+                Otherwise <c>null</c>.
+            </returns>
+        </member>
+        <member name="T:Petabridge.Cmd.Util.FixedSizeStack`1">
+            <summary>
+                Stack with a fixed size number of members - old items get pushed
+                off the stack
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Util.FixedSizeStack`1.DEFAULT_CAPACITY">
+            <summary>
+                Default capacity for fixed size stacks
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Util.FixedSizeStack`1._buffer">
+            <summary>
+                The buffer itself
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.FixedSizeStack`1.CopyTo(`0[],System.Int32,System.Int32)">
+            <summary>
+                Copies the contents of the FixedSizeStack into a new array
+            </summary>
+            <param name="array">The destination array for the copy</param>
+            <param name="index">The starting index for copying in the destination array</param>
+            <param name="count">The number of items to copy from the current buffer (max value = current Size of buffer)</param>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.FixedSizeStack`1.CopyTo(`0[])">
+            <summary>
+                Copies the contents of the FixedSizeStack into a new array
+            </summary>
+            <param name="array">The destination array for the copy</param>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.FixedSizeStack`1.CopyTo(`0[],System.Int32)">
+            <summary>
+                Copies the contents of the FixedSizeStack into a new array
+            </summary>
+            <param name="array">The destination array for the copy</param>
+            <param name="index">The starting index for copying in the destination array</param>
+        </member>
+        <member name="P:Petabridge.Cmd.Util.ICircularBuffer`1.Capacity">
+            <summary>
+                The gets the max capacity of the buffer
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Util.ICircularBuffer`1.Size">
+            <summary>
+                The current size of the buffer.
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.ICircularBuffer`1.Peek">
+            <summary>
+                Peeks at the next message in the buffer
+            </summary>
+            <returns>The object at the start position of the buffer</returns>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.ICircularBuffer`1.Enqueue(`0)">
+            <summary>
+                Adds an object to the end of the circular buffer
+            </summary>
+            <param name="obj">An object of type T</param>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.ICircularBuffer`1.Enqueue(`0[])">
+            <summary>
+                Adds an array of objects to the end of the circular buffer
+            </summary>
+            <param name="objs">An array of objects of type T</param>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.ICircularBuffer`1.Dequeue">
+            <summary>
+                Dequeues an object from the start of the circular buffer
+            </summary>
+            <returns>An object of type T</returns>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.ICircularBuffer`1.Dequeue(System.Int32)">
+            <summary>
+                Dequeues multiple items at once, if available
+            </summary>
+            <param name="count">The maximum number of items to dequeue</param>
+            <returns>An enumerable list of items</returns>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.ICircularBuffer`1.DequeueAll">
+            <summary>
+                Dequeues the entire buffer in one dump
+            </summary>
+            <returns>All of the active contents of a circular buffer</returns>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.ICircularBuffer`1.Clear">
+            <summary>
+                Clears the contents from the buffer
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.ICircularBuffer`1.CopyTo(`0[])">
+            <summary>
+                Copies the contents of the Circular Buffer into a new array
+            </summary>
+            <param name="array">The destination array for the copy</param>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.ICircularBuffer`1.CopyTo(`0[],System.Int32,System.Int32)">
+            <summary>
+                Copies the contents of the Circular Buffer into a new array
+            </summary>
+            <param name="array">The destination array for the copy</param>
+            <param name="index">The starting index for copying in the destination array</param>
+            <param name="count">The number of items to copy from the current buffer (max value = current Size of buffer)</param>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.IFixedSizeStack`1.CopyTo(`0[],System.Int32,System.Int32)">
+            <summary>
+                Copies the contents of the FixedSizeStack into a new array
+            </summary>
+            <param name="array">The destination array for the copy</param>
+            <param name="index">The starting index for copying in the destination array</param>
+            <param name="count">The number of items to copy from the current buffer (max value = current Size of buffer)</param>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.IFixedSizeStack`1.CopyTo(`0[])">
+            <summary>
+                Copies the contents of the FixedSizeStack into a new array
+            </summary>
+            <param name="array">The destination array for the copy</param>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.IFixedSizeStack`1.CopyTo(`0[],System.Int32)">
+            <summary>
+                Copies the contents of the FixedSizeStack into a new array
+            </summary>
+            <param name="array">The destination array for the copy</param>
+            <param name="index">The starting index for copying in the destination array</param>
+        </member>
+        <member name="T:Petabridge.Cmd.Util.Tokenizer">
+            <summary>
+                INTERNAL API
+                Used for parsing command line arguments while preserving quoted strings as single arguments
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Util.Tokenizer.Regex">
+            <summary>
+            Matches singly quoted, doubly quoted, and unquoted strings separated by spaces.
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.Tokenizer.Tokenize(System.String)">
+            <summary>
+                Tokenizes a string and splits it via spaces while stripping trailing and leading quotes.
+            </summary>
+            <param name="raw">The raw input string.</param>
+            <returns>The tokenized output.</returns>
+        </member>
+        <member name="M:Petabridge.Cmd.Util.Tokenizer.TokenizePreserveQuotes(System.String)">
+            <summary>
+                Tokenizes a string and splits it via spaces while preserving quotes
+            </summary>
+            <param name="raw">The raw input string.</param>
+            <returns>The tokenized output.</returns>
+            <remarks>Used primarily by the autocomplete engine.</remarks>
+        </member>
+        <member name="T:Petabridge.Cmd.Validation.CommandValidator">
+            <summary>
+                Validates a given <see cref="T:Petabridge.Cmd.Command" /> against a <see cref="T:Petabridge.Cmd.CommandDefinition" />
+                to see if there's any errors with the structure before passing it up to the server for processing.
+            </summary>
+        </member>
+        <member name="M:Petabridge.Cmd.Validation.CommandValidator.#ctor(Petabridge.Cmd.CommandPalette)">
+            <summary>
+                Creates a new <see cref="T:Petabridge.Cmd.Validation.CommandValidator" /> instance.
+            </summary>
+            <param name="palette">The palette of the command we're going to validate.</param>
+        </member>
+        <member name="P:Petabridge.Cmd.Validation.CommandValidator.Palette">
+            <summary>
+                The palette of the command for which we're going to validate.
+            </summary>
+        </member>
+        <member name="T:Petabridge.Cmd.Validation.ValidationError">
+            <summary>
+                Reports that there was a validation issue with a <see cref="P:Petabridge.Cmd.Validation.ValidationError.Command" />.
+            </summary>
+        </member>
+        <member name="F:Petabridge.Cmd.Validation.ValidationError.NullCmd">
+            <summary>
+                Singleton used for when a null command is given.
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Validation.ValidationError.Module">
+            <summary>
+                The module of the command / argument that failed
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Validation.ValidationError.Command">
+            <summary>
+                The name of the command that failed.
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Validation.ValidationError.Argument">
+            <summary>
+                Optional. The name of the argument that failed.
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Validation.ValidationError.Value">
+            <summary>
+                Optional. The value of the argument that failed.
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Validation.ValidationError.ErrorMessage">
+            <summary>
+                The validation error message.
+            </summary>
+        </member>
+        <member name="P:Petabridge.Cmd.Validation.ValidationError.HelpInfo">
+            <summary>
+                Optional. A help message with information on how to resolve the issue.
+            </summary>
+        </member>
+    </members>
+</doc>

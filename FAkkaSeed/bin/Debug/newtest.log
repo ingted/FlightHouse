@@ -1,0 +1,216 @@
+2020-09-26 08:30:29.2621|INFO|remoting (akka://cluster-system)|Starting remoting
+2020-09-26 08:30:29.4699|INFO|remoting (akka://cluster-system)|Remoting started; listening on addresses : [akka.tcp://cluster-system@10.28.199.142:9000]
+2020-09-26 08:30:29.4769|INFO|remoting (akka://cluster-system)|Remoting now listens on addresses: [akka.tcp://cluster-system@10.28.199.142:9000]
+2020-09-26 08:30:29.4769|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Starting up...
+2020-09-26 08:30:29.4959|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Started up successfully
+2020-09-26 08:30:29.5089|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - No seed-nodes configured, manual cluster join required
+2020-09-26 08:30:29.5089|INFO|Petabridge.Cmd.Host.AkkaCmdListener|petabridge.cmd host bound to [0.0.0.0:9110]
+2020-09-26 08:33:19.7196|INFO|remoting (akka://cluster-system)|Starting remoting
+2020-09-26 08:33:19.8526|INFO|remoting (akka://cluster-system)|Remoting started; listening on addresses : [akka.tcp://cluster-system@10.28.199.142:9000]
+2020-09-26 08:33:19.8676|INFO|remoting (akka://cluster-system)|Remoting now listens on addresses: [akka.tcp://cluster-system@10.28.199.142:9000]
+2020-09-26 08:33:19.8806|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Starting up...
+2020-09-26 08:33:19.9096|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Started up successfully
+2020-09-26 08:33:19.9186|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - No seed-nodes configured, manual cluster join required
+2020-09-26 08:33:19.9186|INFO|Petabridge.Cmd.Host.AkkaCmdListener|petabridge.cmd host bound to [0.0.0.0:9110]
+2020-09-26 08:34:48.9861|INFO|remoting (akka://cluster-system)|Starting remoting
+2020-09-26 08:34:49.1152|INFO|remoting (akka://cluster-system)|Remoting started; listening on addresses : [akka.tcp://cluster-system@10.28.199.142:9000]
+2020-09-26 08:34:49.1292|INFO|remoting (akka://cluster-system)|Remoting now listens on addresses: [akka.tcp://cluster-system@10.28.199.142:9000]
+2020-09-26 08:34:49.1292|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Starting up...
+2020-09-26 08:34:49.1612|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Started up successfully
+2020-09-26 08:34:49.2171|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - No seed-nodes configured, manual cluster join required
+2020-09-26 08:34:49.2521|INFO|Petabridge.Cmd.Host.AkkaCmdListener|petabridge.cmd host bound to [0.0.0.0:9110]
+2020-09-26 08:35:04.3301|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Node [akka.tcp://cluster-system@10.28.199.142:9000] is JOINING itself (with roles [ShardNode,petabridge.cmd,singletonRole]) and forming a new cluster
+2020-09-26 08:35:04.3601|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Leader is moving node [akka.tcp://cluster-system@10.28.199.142:9000] to [Up]
+2020-09-26 08:35:04.3601|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Trying to join seed nodes [akka.tcp://cluster-system@10.28.199.142:9000] when already part of a cluster, ignoring
+2020-09-26 08:36:01.7797|INFO|remoting (akka://cluster-system)|Starting remoting
+2020-09-26 08:36:01.9847|INFO|remoting (akka://cluster-system)|Remoting started; listening on addresses : [akka.tcp://cluster-system@10.28.199.142:9000]
+2020-09-26 08:36:01.9967|INFO|remoting (akka://cluster-system)|Remoting now listens on addresses: [akka.tcp://cluster-system@10.28.199.142:9000]
+2020-09-26 08:36:01.9967|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Starting up...
+2020-09-26 08:36:02.0117|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Started up successfully
+2020-09-26 08:36:02.0117|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - No seed-nodes configured, manual cluster join required
+2020-09-26 08:36:02.0307|INFO|Petabridge.Cmd.Host.AkkaCmdListener|petabridge.cmd host bound to [0.0.0.0:9110]
+2020-09-26 08:36:22.0408|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Node [akka.tcp://cluster-system@10.28.199.142:9000] is JOINING itself (with roles [ShardNode,petabridge.cmd,singletonRole]) and forming a new cluster
+2020-09-26 08:36:22.0778|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Leader is moving node [akka.tcp://cluster-system@10.28.199.142:9000] to [Up]
+2020-09-26 08:36:22.0898|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Trying to join seed nodes [akka.tcp://cluster-system@10.28.199.142:9000] when already part of a cluster, ignoring
+2020-09-26 08:36:22.6728|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Received InitJoin message from [[akka.tcp://cluster-system@10.28.112.112:9000/system/cluster/core/daemon/joinSeedNodeProcess-1#2145105454]] to [akka.tcp://cluster-system@10.28.199.142:9000]
+2020-09-26 08:36:22.6918|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Sending InitJoinNack message from node [akka.tcp://cluster-system@10.28.199.142:9000] to [[akka.tcp://cluster-system@10.28.112.112:9000/system/cluster/core/daemon/joinSeedNodeProcess-1#2145105454]]
+2020-09-26 08:36:22.8148|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Node [akka.tcp://cluster-system@10.28.112.112:9000] is JOINING, roles [ShardNode,petabridge.cmd,singletonRole]
+2020-09-26 08:36:23.1594|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Leader is moving node [akka.tcp://cluster-system@10.28.112.112:9000] to [Up]
+2020-09-26 08:37:03.2199|INFO|Akka.Remote.Transport.DotNetty.TcpServerHandler|Connection was reset by the remote peer. Channel [[::ffff:10.28.199.142]:9000->[::ffff:10.28.112.112]:49961](Id=277847b7)
+2020-09-26 08:37:03.2800|INFO|Akka.Remote.ReliableDeliverySupervisor|Removing receive buffers for [akka.tcp://cluster-system@10.28.199.142:9000]->[akka.tcp://cluster-system@10.28.112.112:9000]
+2020-09-26 08:37:03.4489|INFO|Akka.Remote.RemoteActorRefProvider+RemoteDeadLetterActorRef|Message [Heartbeat] from akka://cluster-system/system/cluster/core/daemon/heartbeatSender to akka://cluster-system/deadLetters was not delivered. [1] dead letters encountered .This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+2020-09-26 08:37:03.5270|INFO|Akka.Remote.RemoteActorRefProvider+RemoteDeadLetterActorRef|Message [Status] from akka://cluster-system/system/distributedPubSubMediator to akka://cluster-system/deadLetters was not delivered. [2] dead letters encountered .This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+2020-09-26 08:37:03.5479|INFO|Akka.Remote.RemoteActorRefProvider+RemoteDeadLetterActorRef|Message [GossipStatus] from akka://cluster-system/system/cluster/core/daemon to akka://cluster-system/deadLetters was not delivered. [3] dead letters encountered .This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+2020-09-26 08:37:04.4575|INFO|Akka.Remote.RemoteActorRefProvider+RemoteDeadLetterActorRef|Message [Heartbeat] from akka://cluster-system/system/cluster/core/daemon/heartbeatSender to akka://cluster-system/deadLetters was not delivered. [4] dead letters encountered .This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+2020-09-26 08:37:04.5375|INFO|Akka.Remote.RemoteActorRefProvider+RemoteDeadLetterActorRef|Message [Status] from akka://cluster-system/system/distributedPubSubMediator to akka://cluster-system/deadLetters was not delivered. [5] dead letters encountered .This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+2020-09-26 08:37:04.5575|INFO|Akka.Remote.RemoteActorRefProvider+RemoteDeadLetterActorRef|Message [GossipStatus] from akka://cluster-system/system/cluster/core/daemon to akka://cluster-system/deadLetters was not delivered. [6] dead letters encountered .This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+2020-09-26 08:37:05.4669|INFO|Akka.Remote.RemoteActorRefProvider+RemoteDeadLetterActorRef|Message [Heartbeat] from akka://cluster-system/system/cluster/core/daemon/heartbeatSender to akka://cluster-system/deadLetters was not delivered. [7] dead letters encountered .This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+2020-09-26 08:37:05.5469|INFO|Akka.Remote.RemoteActorRefProvider+RemoteDeadLetterActorRef|Message [Status] from akka://cluster-system/system/distributedPubSubMediator to akka://cluster-system/deadLetters was not delivered. [8] dead letters encountered .This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+2020-09-26 08:37:05.5669|INFO|Akka.Remote.RemoteActorRefProvider+RemoteDeadLetterActorRef|Message [GossipStatus] from akka://cluster-system/system/cluster/core/daemon to akka://cluster-system/deadLetters was not delivered. [9] dead letters encountered .This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+2020-09-26 08:37:07.6125|WARN|Akka.Cluster.ClusterCoreDaemon|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Marking node(s) as UNREACHABLE [Member(address = akka.tcp://cluster-system@10.28.112.112:9000, Uid=714988904 status = Up, role=[ShardNode,petabridge.cmd,singletonRole], upNumber=2)]. Node roles [ShardNode,petabridge.cmd,singletonRole]
+2020-09-26 08:37:09.5873|WARN|Akka.Remote.EndpointWriter|AssociationError [akka.tcp://cluster-system@10.28.199.142:9000] -> akka.tcp://cluster-system@10.28.112.112:9000: Error [Association failed with akka.tcp://cluster-system@10.28.112.112:9000] []
+2020-09-26 08:37:09.6013|WARN|remoting (akka://cluster-system)|Tried to associate with unreachable remote address [akka.tcp://cluster-system@10.28.112.112:9000]. Address is now gated for 5000 ms, all messages to this address will be delivered to dead letters. Reason: [Association failed with akka.tcp://cluster-system@10.28.112.112:9000] Caused by: [System.AggregateException: One or more errors occurred. ---> Akka.Remote.Transport.InvalidAssociationException: No connection could be made because the target machine actively refused it tcp://cluster-system@10.28.112.112:9000
+   at Akka.Remote.Transport.DotNetty.TcpTransport.<AssociateInternal>d__1.MoveNext() in Z:\SharFTrade\mdc\Akka.Remote\Transport\DotNetty\TcpTransport.cs:line 216
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at Akka.Remote.Transport.DotNetty.DotNettyTransport.<Associate>d__22.MoveNext() in Z:\SharFTrade\mdc\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs:line 231
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at Akka.Remote.Transport.ProtocolStateActor.<>c.<InitializeFSM>b__12_18(Task`1 result) in Z:\SharFTrade\mdc\Akka.Remote\Transport\AkkaProtocolTransport.cs:line 1156
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.Execute()
+---> (Inner Exception #0) Akka.Remote.Transport.InvalidAssociationException: No connection could be made because the target machine actively refused it tcp://cluster-system@10.28.112.112:9000
+   at Akka.Remote.Transport.DotNetty.TcpTransport.<AssociateInternal>d__1.MoveNext() in Z:\SharFTrade\mdc\Akka.Remote\Transport\DotNetty\TcpTransport.cs:line 216
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at Akka.Remote.Transport.DotNetty.DotNettyTransport.<Associate>d__22.MoveNext() in Z:\SharFTrade\mdc\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs:line 231<---
+]
+2020-09-26 08:37:09.6013|INFO|Akka.Remote.ReliableDeliverySupervisor|Removing receive buffers for [akka.tcp://cluster-system@10.28.199.142:9000]->[akka.tcp://cluster-system@10.28.112.112:9000]
+2020-09-26 08:37:15.6553|WARN|Akka.Remote.EndpointWriter|AssociationError [akka.tcp://cluster-system@10.28.199.142:9000] -> akka.tcp://cluster-system@10.28.112.112:9000: Error [Association failed with akka.tcp://cluster-system@10.28.112.112:9000] []
+2020-09-26 08:37:15.6553|WARN|remoting (akka://cluster-system)|Tried to associate with unreachable remote address [akka.tcp://cluster-system@10.28.112.112:9000]. Address is now gated for 5000 ms, all messages to this address will be delivered to dead letters. Reason: [Association failed with akka.tcp://cluster-system@10.28.112.112:9000] Caused by: [System.AggregateException: One or more errors occurred. ---> Akka.Remote.Transport.InvalidAssociationException: No connection could be made because the target machine actively refused it tcp://cluster-system@10.28.112.112:9000
+   at Akka.Remote.Transport.DotNetty.TcpTransport.<AssociateInternal>d__1.MoveNext() in Z:\SharFTrade\mdc\Akka.Remote\Transport\DotNetty\TcpTransport.cs:line 216
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at Akka.Remote.Transport.DotNetty.DotNettyTransport.<Associate>d__22.MoveNext() in Z:\SharFTrade\mdc\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs:line 231
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at Akka.Remote.Transport.ProtocolStateActor.<>c.<InitializeFSM>b__12_18(Task`1 result) in Z:\SharFTrade\mdc\Akka.Remote\Transport\AkkaProtocolTransport.cs:line 1156
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.Execute()
+---> (Inner Exception #0) Akka.Remote.Transport.InvalidAssociationException: No connection could be made because the target machine actively refused it tcp://cluster-system@10.28.112.112:9000
+   at Akka.Remote.Transport.DotNetty.TcpTransport.<AssociateInternal>d__1.MoveNext() in Z:\SharFTrade\mdc\Akka.Remote\Transport\DotNetty\TcpTransport.cs:line 216
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at Akka.Remote.Transport.DotNetty.DotNettyTransport.<Associate>d__22.MoveNext() in Z:\SharFTrade\mdc\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs:line 231<---
+]
+2020-09-26 08:37:15.6553|INFO|Akka.Remote.ReliableDeliverySupervisor|Removing receive buffers for [akka.tcp://cluster-system@10.28.199.142:9000]->[akka.tcp://cluster-system@10.28.112.112:9000]
+2020-09-26 08:37:21.7129|WARN|Akka.Remote.EndpointWriter|AssociationError [akka.tcp://cluster-system@10.28.199.142:9000] -> akka.tcp://cluster-system@10.28.112.112:9000: Error [Association failed with akka.tcp://cluster-system@10.28.112.112:9000] []
+2020-09-26 08:37:21.7410|WARN|remoting (akka://cluster-system)|Tried to associate with unreachable remote address [akka.tcp://cluster-system@10.28.112.112:9000]. Address is now gated for 5000 ms, all messages to this address will be delivered to dead letters. Reason: [Association failed with akka.tcp://cluster-system@10.28.112.112:9000] Caused by: [System.AggregateException: One or more errors occurred. ---> Akka.Remote.Transport.InvalidAssociationException: No connection could be made because the target machine actively refused it tcp://cluster-system@10.28.112.112:9000
+   at Akka.Remote.Transport.DotNetty.TcpTransport.<AssociateInternal>d__1.MoveNext() in Z:\SharFTrade\mdc\Akka.Remote\Transport\DotNetty\TcpTransport.cs:line 216
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at Akka.Remote.Transport.DotNetty.DotNettyTransport.<Associate>d__22.MoveNext() in Z:\SharFTrade\mdc\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs:line 231
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at Akka.Remote.Transport.ProtocolStateActor.<>c.<InitializeFSM>b__12_18(Task`1 result) in Z:\SharFTrade\mdc\Akka.Remote\Transport\AkkaProtocolTransport.cs:line 1156
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.Execute()
+---> (Inner Exception #0) Akka.Remote.Transport.InvalidAssociationException: No connection could be made because the target machine actively refused it tcp://cluster-system@10.28.112.112:9000
+   at Akka.Remote.Transport.DotNetty.TcpTransport.<AssociateInternal>d__1.MoveNext() in Z:\SharFTrade\mdc\Akka.Remote\Transport\DotNetty\TcpTransport.cs:line 216
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at Akka.Remote.Transport.DotNetty.DotNettyTransport.<Associate>d__22.MoveNext() in Z:\SharFTrade\mdc\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs:line 231<---
+]
+2020-09-26 08:37:21.7479|INFO|Akka.Remote.ReliableDeliverySupervisor|Removing receive buffers for [akka.tcp://cluster-system@10.28.199.142:9000]->[akka.tcp://cluster-system@10.28.112.112:9000]
+2020-09-26 08:37:26.7865|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Leader can currently not perform its duties, reachability status: [Reachability([akka.tcp://cluster-system@10.28.199.142:9000 -> UniqueAddress: (akka.tcp://cluster-system@10.28.112.112:9000, 714988904): Unreachable [Unreachable] (1)])], member status: [$akka.tcp://cluster-system@10.28.112.112:9000 $Up seen=$False, $akka.tcp://cluster-system@10.28.199.142:9000 $Up seen=$True]
+2020-09-26 08:37:27.7811|WARN|Akka.Remote.EndpointWriter|AssociationError [akka.tcp://cluster-system@10.28.199.142:9000] -> akka.tcp://cluster-system@10.28.112.112:9000: Error [Association failed with akka.tcp://cluster-system@10.28.112.112:9000] []
+2020-09-26 08:37:27.7920|WARN|remoting (akka://cluster-system)|Tried to associate with unreachable remote address [akka.tcp://cluster-system@10.28.112.112:9000]. Address is now gated for 5000 ms, all messages to this address will be delivered to dead letters. Reason: [Association failed with akka.tcp://cluster-system@10.28.112.112:9000] Caused by: [System.AggregateException: One or more errors occurred. ---> Akka.Remote.Transport.InvalidAssociationException: No connection could be made because the target machine actively refused it tcp://cluster-system@10.28.112.112:9000
+   at Akka.Remote.Transport.DotNetty.TcpTransport.<AssociateInternal>d__1.MoveNext() in Z:\SharFTrade\mdc\Akka.Remote\Transport\DotNetty\TcpTransport.cs:line 216
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at Akka.Remote.Transport.DotNetty.DotNettyTransport.<Associate>d__22.MoveNext() in Z:\SharFTrade\mdc\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs:line 231
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at Akka.Remote.Transport.ProtocolStateActor.<>c.<InitializeFSM>b__12_18(Task`1 result) in Z:\SharFTrade\mdc\Akka.Remote\Transport\AkkaProtocolTransport.cs:line 1156
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.Execute()
+---> (Inner Exception #0) Akka.Remote.Transport.InvalidAssociationException: No connection could be made because the target machine actively refused it tcp://cluster-system@10.28.112.112:9000
+   at Akka.Remote.Transport.DotNetty.TcpTransport.<AssociateInternal>d__1.MoveNext() in Z:\SharFTrade\mdc\Akka.Remote\Transport\DotNetty\TcpTransport.cs:line 216
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at Akka.Remote.Transport.DotNetty.DotNettyTransport.<Associate>d__22.MoveNext() in Z:\SharFTrade\mdc\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs:line 231<---
+]
+2020-09-26 08:37:27.7920|INFO|Akka.Remote.ReliableDeliverySupervisor|Removing receive buffers for [akka.tcp://cluster-system@10.28.199.142:9000]->[akka.tcp://cluster-system@10.28.112.112:9000]
+2020-09-26 08:38:07.1962|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Leader can currently not perform its duties, reachability status: [Reachability([akka.tcp://cluster-system@10.28.199.142:9000 -> UniqueAddress: (akka.tcp://cluster-system@10.28.112.112:9000, 714988904): Unreachable [Unreachable] (1)])], member status: [$akka.tcp://cluster-system@10.28.112.112:9000 $Up seen=$False, $akka.tcp://cluster-system@10.28.199.142:9000 $Up seen=$True]
+2020-09-26 08:38:22.4673|INFO|Akka.Remote.Transport.DotNetty.TcpClientHandler|Connection was reset by the remote peer. Channel [[::ffff:10.28.199.142]:50489->[::ffff:10.28.112.112]:9000](Id=70306b65)
+2020-09-26 08:38:22.4833|INFO|Akka.Remote.ReliableDeliverySupervisor|Removing receive buffers for [akka.tcp://cluster-system@10.28.199.142:9000]->[akka.tcp://cluster-system@10.28.112.112:9000]
+2020-09-26 08:38:29.3242|WARN|Akka.Remote.EndpointWriter|AssociationError [akka.tcp://cluster-system@10.28.199.142:9000] -> akka.tcp://cluster-system@10.28.112.112:9000: Error [Association failed with akka.tcp://cluster-system@10.28.112.112:9000] []
+2020-09-26 08:38:29.3242|WARN|remoting (akka://cluster-system)|Tried to associate with unreachable remote address [akka.tcp://cluster-system@10.28.112.112:9000]. Address is now gated for 5000 ms, all messages to this address will be delivered to dead letters. Reason: [Association failed with akka.tcp://cluster-system@10.28.112.112:9000] Caused by: [System.AggregateException: One or more errors occurred. ---> Akka.Remote.Transport.InvalidAssociationException: No connection could be made because the target machine actively refused it tcp://cluster-system@10.28.112.112:9000
+   at Akka.Remote.Transport.DotNetty.TcpTransport.<AssociateInternal>d__1.MoveNext() in Z:\SharFTrade\mdc\Akka.Remote\Transport\DotNetty\TcpTransport.cs:line 216
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at Akka.Remote.Transport.DotNetty.DotNettyTransport.<Associate>d__22.MoveNext() in Z:\SharFTrade\mdc\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs:line 231
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at Akka.Remote.Transport.ProtocolStateActor.<>c.<InitializeFSM>b__12_18(Task`1 result) in Z:\SharFTrade\mdc\Akka.Remote\Transport\AkkaProtocolTransport.cs:line 1156
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.Execute()
+---> (Inner Exception #0) Akka.Remote.Transport.InvalidAssociationException: No connection could be made because the target machine actively refused it tcp://cluster-system@10.28.112.112:9000
+   at Akka.Remote.Transport.DotNetty.TcpTransport.<AssociateInternal>d__1.MoveNext() in Z:\SharFTrade\mdc\Akka.Remote\Transport\DotNetty\TcpTransport.cs:line 216
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at Akka.Remote.Transport.DotNetty.DotNettyTransport.<Associate>d__22.MoveNext() in Z:\SharFTrade\mdc\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs:line 231<---
+]
+2020-09-26 08:38:29.3473|INFO|Akka.Remote.ReliableDeliverySupervisor|Removing receive buffers for [akka.tcp://cluster-system@10.28.199.142:9000]->[akka.tcp://cluster-system@10.28.112.112:9000]
+2020-09-26 14:51:17.4519|INFO|remoting (akka://cluster-system)|Starting remoting
+2020-09-26 14:51:17.6089|INFO|remoting (akka://cluster-system)|Remoting started; listening on addresses : [akka.tcp://cluster-system@10.28.199.142:9000]
+2020-09-26 14:51:17.6159|INFO|remoting (akka://cluster-system)|Remoting now listens on addresses: [akka.tcp://cluster-system@10.28.199.142:9000]
+2020-09-26 14:51:17.6159|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Starting up...
+2020-09-26 14:51:17.6399|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Started up successfully
+2020-09-26 14:51:17.6489|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - No seed-nodes configured, manual cluster join required
+2020-09-26 14:51:17.6839|INFO|Petabridge.Cmd.Host.AkkaCmdListener|petabridge.cmd host bound to [0.0.0.0:9110]
+2020-09-26 14:51:37.7409|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Node [akka.tcp://cluster-system@10.28.199.142:9000] is JOINING itself (with roles [ShardNode,petabridge.cmd,singletonRole]) and forming a new cluster
+2020-09-26 14:51:37.7689|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Leader is moving node [akka.tcp://cluster-system@10.28.199.142:9000] to [Up]
+2020-09-26 14:51:37.7739|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Trying to join seed nodes [akka.tcp://cluster-system@10.28.199.142:9000] when already part of a cluster, ignoring
+2020-09-26 14:54:05.9448|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Received InitJoin message from [[akka.tcp://cluster-system@10.28.112.112:9000/system/cluster/core/daemon/joinSeedNodeProcess-2#1557904410]] to [akka.tcp://cluster-system@10.28.199.142:9000]
+2020-09-26 14:54:05.9448|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Sending InitJoinNack message from node [akka.tcp://cluster-system@10.28.199.142:9000] to [[akka.tcp://cluster-system@10.28.112.112:9000/system/cluster/core/daemon/joinSeedNodeProcess-2#1557904410]]
+2020-09-26 14:54:05.9448|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Received InitJoin message from [[akka.tcp://cluster-system@10.28.112.112:9000/system/cluster/core/daemon/joinSeedNodeProcess-3#72524646]] to [akka.tcp://cluster-system@10.28.199.142:9000]
+2020-09-26 14:54:05.9607|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Sending InitJoinNack message from node [akka.tcp://cluster-system@10.28.199.142:9000] to [[akka.tcp://cluster-system@10.28.112.112:9000/system/cluster/core/daemon/joinSeedNodeProcess-3#72524646]]
+2020-09-26 14:54:05.9607|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Received InitJoin message from [[akka.tcp://cluster-system@10.28.112.112:9000/system/cluster/core/daemon/joinSeedNodeProcess-1#2001097762]] to [akka.tcp://cluster-system@10.28.199.142:9000]
+2020-09-26 14:54:05.9607|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Sending InitJoinNack message from node [akka.tcp://cluster-system@10.28.199.142:9000] to [[akka.tcp://cluster-system@10.28.112.112:9000/system/cluster/core/daemon/joinSeedNodeProcess-1#2001097762]]
+2020-09-26 14:54:06.0638|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Node [akka.tcp://cluster-system@10.28.112.112:9000] is JOINING, roles [ShardNode,petabridge.cmd,singletonRole]
+2020-09-26 14:54:06.2897|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Leader is moving node [akka.tcp://cluster-system@10.28.112.112:9000] to [Up]
+2020-09-26 14:54:57.8115|INFO|Akka.Remote.Transport.DotNetty.TcpServerHandler|Connection was reset by the remote peer. Channel [[::ffff:10.28.199.142]:9000->[::ffff:10.28.112.112]:50094](Id=4d6f48fe)
+2020-09-26 14:54:57.8766|INFO|Akka.Remote.ReliableDeliverySupervisor|Removing receive buffers for [akka.tcp://cluster-system@10.28.199.142:9000]->[akka.tcp://cluster-system@10.28.112.112:9000]
+2020-09-26 14:54:57.8785|INFO|Akka.Actor.LocalActorRef|Message [AckIdleCheckTimer] from akka://cluster-system/system/endpointManager/reliableEndpointWriter-akka.tcp%3A%2F%2Fcluster-system%4010.28.112.112%3A9000-1/endpointWriter to akka://cluster-system/system/endpointManager/reliableEndpointWriter-akka.tcp%3A%2F%2Fcluster-system%4010.28.112.112%3A9000-1/endpointWriter was not delivered. [1] dead letters encountered .This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+2020-09-26 14:54:58.7240|INFO|Akka.Remote.RemoteActorRefProvider+RemoteDeadLetterActorRef|Message [Heartbeat] from akka://cluster-system/system/cluster/core/daemon/heartbeatSender to akka://cluster-system/deadLetters was not delivered. [2] dead letters encountered .This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+2020-09-26 14:54:58.8041|INFO|Akka.Remote.RemoteActorRefProvider+RemoteDeadLetterActorRef|Message [GossipStatus] from akka://cluster-system/system/cluster/core/daemon to akka://cluster-system/deadLetters was not delivered. [3] dead letters encountered .This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+2020-09-26 14:54:58.8241|INFO|Akka.Remote.RemoteActorRefProvider+RemoteDeadLetterActorRef|Message [Status] from akka://cluster-system/system/distributedPubSubMediator to akka://cluster-system/deadLetters was not delivered. [4] dead letters encountered .This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+2020-09-26 14:54:59.7333|INFO|Akka.Remote.RemoteActorRefProvider+RemoteDeadLetterActorRef|Message [Heartbeat] from akka://cluster-system/system/cluster/core/daemon/heartbeatSender to akka://cluster-system/deadLetters was not delivered. [5] dead letters encountered .This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+2020-09-26 14:54:59.8133|INFO|Akka.Remote.RemoteActorRefProvider+RemoteDeadLetterActorRef|Message [GossipStatus] from akka://cluster-system/system/cluster/core/daemon to akka://cluster-system/deadLetters was not delivered. [6] dead letters encountered .This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+2020-09-26 14:54:59.8332|INFO|Akka.Remote.RemoteActorRefProvider+RemoteDeadLetterActorRef|Message [Status] from akka://cluster-system/system/distributedPubSubMediator to akka://cluster-system/deadLetters was not delivered. [7] dead letters encountered .This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+2020-09-26 14:55:00.7429|INFO|Akka.Remote.RemoteActorRefProvider+RemoteDeadLetterActorRef|Message [Heartbeat] from akka://cluster-system/system/cluster/core/daemon/heartbeatSender to akka://cluster-system/deadLetters was not delivered. [8] dead letters encountered .This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+2020-09-26 14:55:00.8239|INFO|Akka.Remote.RemoteActorRefProvider+RemoteDeadLetterActorRef|Message [GossipStatus] from akka://cluster-system/system/cluster/core/daemon to akka://cluster-system/deadLetters was not delivered. [9] dead letters encountered .This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+2020-09-26 14:55:02.8680|WARN|Akka.Cluster.ClusterCoreDaemon|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Marking node(s) as UNREACHABLE [Member(address = akka.tcp://cluster-system@10.28.112.112:9000, Uid=2121822221 status = Up, role=[ShardNode,petabridge.cmd,singletonRole], upNumber=2)]. Node roles [ShardNode,petabridge.cmd,singletonRole]
+2020-09-26 14:55:22.0340|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Leader can currently not perform its duties, reachability status: [Reachability([akka.tcp://cluster-system@10.28.199.142:9000 -> UniqueAddress: (akka.tcp://cluster-system@10.28.112.112:9000, 2121822221): Unreachable [Unreachable] (1)])], member status: [$akka.tcp://cluster-system@10.28.112.112:9000 $Up seen=$False, $akka.tcp://cluster-system@10.28.199.142:9000 $Up seen=$True]
+2020-09-26 14:56:02.4325|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Leader can currently not perform its duties, reachability status: [Reachability([akka.tcp://cluster-system@10.28.199.142:9000 -> UniqueAddress: (akka.tcp://cluster-system@10.28.112.112:9000, 2121822221): Unreachable [Unreachable] (1)])], member status: [$akka.tcp://cluster-system@10.28.112.112:9000 $Up seen=$False, $akka.tcp://cluster-system@10.28.199.142:9000 $Up seen=$True]
+2020-09-26 14:56:02.5625|INFO|Akka.Remote.Transport.DotNetty.TcpClientHandler|Connection was reset by the remote peer. Channel [[::ffff:10.28.199.142]:51021->[::ffff:10.28.112.112]:9000](Id=0a9073d3)
+2020-09-26 14:56:02.5695|INFO|Akka.Remote.ReliableDeliverySupervisor|Removing receive buffers for [akka.tcp://cluster-system@10.28.199.142:9000]->[akka.tcp://cluster-system@10.28.112.112:9000]
+2020-09-26 14:57:03.0309|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Leader can currently not perform its duties, reachability status: [Reachability([akka.tcp://cluster-system@10.28.199.142:9000 -> UniqueAddress: (akka.tcp://cluster-system@10.28.112.112:9000, 2121822221): Unreachable [Unreachable] (1)])], member status: [$akka.tcp://cluster-system@10.28.112.112:9000 $Up seen=$False, $akka.tcp://cluster-system@10.28.199.142:9000 $Up seen=$True]
+2020-09-26 14:58:03.6305|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Leader can currently not perform its duties, reachability status: [Reachability([akka.tcp://cluster-system@10.28.199.142:9000 -> UniqueAddress: (akka.tcp://cluster-system@10.28.112.112:9000, 2121822221): Unreachable [Unreachable] (1)])], member status: [$akka.tcp://cluster-system@10.28.112.112:9000 $Up seen=$False, $akka.tcp://cluster-system@10.28.199.142:9000 $Up seen=$True]
+2020-09-26 14:59:04.2291|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Leader can currently not perform its duties, reachability status: [Reachability([akka.tcp://cluster-system@10.28.199.142:9000 -> UniqueAddress: (akka.tcp://cluster-system@10.28.112.112:9000, 2121822221): Unreachable [Unreachable] (1)])], member status: [$akka.tcp://cluster-system@10.28.112.112:9000 $Up seen=$False, $akka.tcp://cluster-system@10.28.199.142:9000 $Up seen=$True]
+2020-09-26 15:22:42.4578|INFO|remoting (akka://cluster-system)|Starting remoting
+2020-09-26 15:22:42.6258|INFO|remoting (akka://cluster-system)|Remoting started; listening on addresses : [akka.tcp://cluster-system@10.28.199.142:9000]
+2020-09-26 15:22:42.6338|INFO|remoting (akka://cluster-system)|Remoting now listens on addresses: [akka.tcp://cluster-system@10.28.199.142:9000]
+2020-09-26 15:22:42.6338|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Starting up...
+2020-09-26 15:22:42.6458|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Started up successfully
+2020-09-26 15:22:42.6458|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - No seed-nodes configured, manual cluster join required
+2020-09-26 15:22:42.6858|INFO|Petabridge.Cmd.Host.AkkaCmdListener|petabridge.cmd host bound to [0.0.0.0:9110]
+2020-09-26 15:22:57.7598|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Node [akka.tcp://cluster-system@10.28.199.142:9000] is JOINING itself (with roles [ShardNode,petabridge.cmd,singletonRole]) and forming a new cluster
+2020-09-26 15:22:57.7928|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Leader is moving node [akka.tcp://cluster-system@10.28.199.142:9000] to [Up]
+2020-09-26 15:22:57.7928|INFO|Cluster (akka://cluster-system)|Cluster Node [akka.tcp://cluster-system@10.28.199.142:9000] - Trying to join seed nodes [akka.tcp://cluster-system@10.28.199.142:9000] when already part of a cluster, ignoring
+2020-09-26 17:54:28.2202|INFO|remoting (akka://cluster-system)|Starting remoting
+2020-09-26 17:57:28.9484|INFO|remoting (akka://cluster-system)|Starting remoting
+2020-09-26 17:58:10.8435|INFO|remoting (akka://cluster-system)|Starting remoting
+2020-09-26 17:58:38.8581|INFO|remoting (akka://cluster-system)|Starting remoting
+2020-09-26 20:34:39.6517|INFO|remoting (akka://cluster-system)|Starting remoting
