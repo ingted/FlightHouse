@@ -3,7 +3,7 @@
 A F# based Akka.Net multiple node seeding tool.
 
 At each node you want to deploy a seed node, just configure the "majoritynodecount" number in app.config, e.g. 3 (of 5 seed nodes).
-They will auto elect a leader with P2P favor, and auto vote until the vote of every node received meets the majoritynodecount, all the 5 nodes will invoke joinseednode to form the Akka cluster.
+They will auto elect a leader with P2P flavor, and auto vote until the vote of every node received meets the majoritynodecount, all the 5 nodes will invoke joinseednode to form the Akka cluster.
 
 # P2PNET patch
 
